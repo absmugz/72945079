@@ -1,10 +1,32 @@
 <?php include("includes/header.php"); ?>
     <div class="row">
     <div class="col-md-4">
+    
+    <?php /*-----retrieving data from course table-----*/
+
+$sql = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result = mysql_query($sql);
+
+if (!$result) {
+    echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+    exit;
+}
+
+if (mysql_num_rows($result) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
+?>
+
       <select class="selectpicker">
-        <option>Mustard</option>
-        <option>Ketchup</option>
-        <option>Relish</option>
+      <?php
+        while ($row = mysql_fetch_assoc($result)){
+?>
+        <option value="<?php echo $row['course_id']?>"><?php echo $row['course_name']?></option>
+    <?php
+}
+?>
       </select>
     </div>
   </div>

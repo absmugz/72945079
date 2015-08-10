@@ -17,7 +17,7 @@
         <tbody>
         <?php /*-----retrieving data from course table-----*/
 
-$sql = "SELECT * FROM course ORDER BY course_id DESC";
+$sql = "SELECT * FROM course ORDER BY course_id ASC";
 
 $result = mysql_query($sql);
 

@@ -7,15 +7,35 @@
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Courses</strong></div>
             <div class="col-sm-8">
-             <div class="check-radio-top"><label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox1" value="option1">Course A
+<?php /*-----retrieving data from course table-----*/
+
+$sql = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result = mysql_query($sql);
+
+if (!$result) {
+    echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+    exit;
+}
+
+if (mysql_num_rows($result) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
+?>
+
+
+             <div class="check-radio-top">
+             <?php
+        while ($row = mysql_fetch_assoc($result)){
+?>
+             <label class="checkbox-inline">
+<?php echo "<input type='checkbox' id='{$row['course_id']}' value='{$row['course_id']}'>" . $row['course_name']; ?>
 </label>
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox2" value="option2">Course B
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox3" value="option3">Course C
-</label></div>
+       <?php
+}
+?>
+</div>
 
             </div>
           </div>
