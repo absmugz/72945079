@@ -1,10 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+/*------includes for connection to database-----*/
+include('includes/config.php');
+
+/*------includes for functions-----*/
+include('includes/functions.php');
+
+?>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Starting page</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>Student registration system</title>
 </head>
 
+<div id="mainwrapper">
+
+
+
+
+
 <body>
+| <a href="student_reg.php">Register a student</a> | <a href="course_man.php">Manage courses</a> | <a href="student_man.php">Manage students</a> | <a href="list.php">View registrations</a>
+
+
+</div>
+
 </body>
+
+
 </html>
