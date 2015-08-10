@@ -27,6 +27,40 @@ include('includes/functions.php');
   <div class="row">
     <div class="col-md-12">| <a href="student_reg.php">Register a student</a> | <a href="course_man.php">Manage courses</a> | <a href="student_man.php">Manage students</a> | <a href="list.php">View registrations</a></div>
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <select class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <caption>
+        list of students registered for a specific course
+        </caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student Name</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Absolom mugwagwa</td>
+            <td><button type="button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
