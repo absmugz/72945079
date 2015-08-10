@@ -24,4 +24,5 @@ include('includes/functions.php');
     <![endif]-->
 </head>
 <body>
+<?php include("includes/navigation.php"); ?>
 <div class="container">

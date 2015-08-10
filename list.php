@@ -1,5 +1,4 @@
 <?php include("includes/header.php"); ?>
-<?php include("includes/navigation.php"); ?>
     <div class="row">
     <div class="col-md-4">
       <select class="selectpicker">

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-static-top">
       <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
           <button aria-expanded="false" data-target="#bs-example-navbar-collapse-8" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
             <span class="sr-only">Toggle navigation</span>
@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.php" class="navbar-brand">Student registration</a>
+          <a href="index.php" class="navbar-brand">Student registration system</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
