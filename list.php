@@ -15,6 +15,7 @@ include('includes/functions.php');
 <title>Student registration system</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap-select.min.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -29,12 +30,10 @@ include('includes/functions.php');
   </div>
   <div class="row">
     <div class="col-md-4">
-      <select class="form-control">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+            <select class="selectpicker">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
       </select>
     </div>
   </div>
@@ -66,5 +65,9 @@ include('includes/functions.php');
 <script src="js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
+<!-- Include select box styling -->
+<script src="js/bootstrap-select.min.js"></script>
+<!-- Include custom js -->
+<script src="js/custom.js"></script>
 </body>
 </html>
