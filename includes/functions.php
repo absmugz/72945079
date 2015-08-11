@@ -72,15 +72,20 @@ $studentTable ="student";
 	}
 // Insert Data from Table
 
+
+// Register Student
+
 if(isset($_POST['register'])){
-
-if(insertData($con,$studentTable, $studentData)) {
-
-echo "New record created successfully. Last inserted ID is: " . $last_id;
 	
+$id = insertData($con,$studentTable, $studentData);
+
+if($id) {
+echo "New record created successfully. Last inserted ID is: " . $id;	
 }
 
+// Register Student ends here
 
+// Register course
 
 }
 
