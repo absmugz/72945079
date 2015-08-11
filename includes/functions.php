@@ -1,8 +1,8 @@
 <?php
 /*------includes for dbmysqlection to database-----*/
-include('config.php');
+include('includes/config.php');
 
-// Check dbmysqlection
+/* Check dbmysqlection
 if (!$dbmysql) {
     die("dbmysqlection failed: " . mysql_dbmysqlect_error());
 }
@@ -23,7 +23,69 @@ if (mysql_query($sqlcourse)) {
     echo "Error: " . $sql . "<br>" . mysql_error($dbmysql);
 }
 
-mysql_close($dbmysql);
+mysql_close($dbmysql);*/
+
+$sname = $_POST['surname'];
+$initials = $_POST['initials'];
+$name = $_POST['name'];
+
+
+$form_data = array(
+    'surname' => $sname,
+    'initials' => $initials,
+    'name' => $name
+);
+
+
+$studentData = array("student_sname"=>$sname,"student_initials"=>$initials,"student_fname"=>$name);
+$studentTable ="student";
+
+// Insert Data within table by accepting TableName and Table column => Data as associative array
+	function insertData($connection, $tblname, array $val_cols){
+
+		$keysString = implode(", ", array_keys($val_cols));
+
+		// print key and value for the array
+		$i=0;
+		foreach($val_cols as $key=>$value) {
+			$StValue[$i] = "'".$value."'";
+		    $i++;
+		}
+
+		$StValues = implode(", ",$StValue);
+		
+		if (mysqli_connect_errno()) {
+		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		}
+
+		if(mysqli_query($connection,"INSERT INTO $tblname ($keysString) VALUES ($StValues)"))
+		{
+			echo "Successfully Inserted data<br>";
+			//echo "New record has id: " . mysqli_insert_id($connection);
+			$last_id = mysqli_insert_id($connection);
+		}
+		else{
+			echo "Data not Inserted";
+		}
+		
+		return $last_id;
+	}
+// Insert Data from Table
+
+if(isset($_POST['register'])){
+
+if(insertData($con,$studentTable, $studentData)) {
+
+echo "New record created successfully. Last inserted ID is: " . $last_id;
+	
+}
+
+
+
+}
+
+
+
 ?> 
 
 

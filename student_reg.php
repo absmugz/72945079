@@ -1,33 +1,43 @@
 <?php include("includes/header.php"); ?>
+
+
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <form class="form-horizontal">
+      <form class="form-horizontal" name="registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <div class="form-group">
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Courses</strong></div>
             <div class="col-sm-8">
-<?php /*-----retrieving data from course table-----*/
+<?php 
 
-$sql = "SELECT * FROM course ORDER BY course_id ASC";
+/*-----retrieving data from course table-----*/
 
-$result = mysql_query($sql);
+// Check dbmysqlection
+
+//consultation:
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+//execute the query.
+
+$result = mysqli_query($con, $query); 
 
 if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
 }
 
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
     echo "No courses found, nothing to print.";
     exit;
 }
 ?>
 
 
-             <div class="check-radio-top">
-             <?php
-        while ($row = mysql_fetch_assoc($result)){
+<div class="check-radio-top">
+<?php
+        while($row = mysqli_fetch_array($result)){
 ?>
              <label class="checkbox-inline">
 <?php echo "<input type='checkbox' id='{$row['course_id']}' value='{$row['course_id']}'>" . $row['course_name']; ?>
@@ -43,19 +53,19 @@ if (mysql_num_rows($result) == 0) {
         <div class="form-group">
           <label for="surname" class="col-sm-4 control-label">Surname</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="surname" placeholder="Surname">
+            <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname">
           </div>
         </div>
         <div class="form-group">
           <label for="initials" class="col-sm-4 control-label">Initials</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="initials" placeholder="Initials">
+            <input type="text" class="form-control" id="initials" name="initials" placeholder="Initials">
           </div>
         </div>
         <div class="form-group">
           <label for="name" class="col-sm-4 control-label">Full First Name</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="name" placeholder="Full First Name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Full First Name">
           </div>
         </div>
         <div class="form-group">
@@ -128,7 +138,7 @@ if (mysql_num_rows($result) == 0) {
         <div class="form-group">
         <div class="col-sm-4"></div>
           <div class="col-sm-8">
-            <button type="submit" class="btn btn-primary">Register Student</button>
+            <button type="submit" name='register' value='Submit' class="btn btn-primary">Register Student</button>
           </div>
         </div>
       </form>
