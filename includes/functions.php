@@ -40,8 +40,9 @@ $form_data = array(
 $studentData = array("student_sname"=>$sname,"student_initials"=>$initials,"student_fname"=>$name);
 $studentTable ="student";
 
-// Insert Data within table by accepting TableName and Table column => Data as associative array
-	function insertData($connection, $tblname, array $val_cols){
+// Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted
+
+	function insertDataGetId($connection, $tblname, array $val_cols){
 
 		$keysString = implode(", ", array_keys($val_cols));
 
@@ -70,20 +71,49 @@ $studentTable ="student";
 		
 		return $last_id;
 	}
-// Insert Data from Table
+// Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted
 
+// Insert Data within table by accepting TableName and Table column => Data as associative array
 
+	function insertData($connection, $tblname, array $val_cols){
+
+		$keysString = implode(", ", array_keys($val_cols));
+
+		// print key and value for the array
+		$i=0;
+		foreach($val_cols as $key=>$value) {
+			$StValue[$i] = "'".$value."'";
+		    $i++;
+		}
+
+		$StValues = implode(", ",$StValue);
+		
+		if (mysqli_connect_errno()) {
+		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		}
+
+		if(mysqli_query($connection,"INSERT INTO $tblname ($keysString) VALUES ($StValues)"))
+		{
+			echo "Successfully Inserted data<br>";
+		}
+		else{
+			echo "Data not Inserted";
+		}
+	}
+// Insert Data within table by accepting TableName and Table column => Data as associative array
 // Register Student
 
 if(isset($_POST['register'])){
 	
-$id = insertData($con,$studentTable, $studentData);
+$id = insertDataGetId($con,$studentTable, $studentData);
 
 if($id) {
 echo "New record created successfully. Last inserted ID is: " . $id;	
 }
 
 // Register Student ends here
+
+// Register course
 
 // Register course
 

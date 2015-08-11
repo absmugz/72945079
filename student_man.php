@@ -17,23 +17,23 @@
         <tbody>
         <?php /*-----retrieving data from course table-----*/
 
-$sql = "SELECT * FROM student ORDER BY student_id ASC";
 
-$result = mysql_query($sql);
+$query = "SELECT * FROM student ORDER BY student_id ASC";
+
+$result = mysqli_query($con, $query);
 
 if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
 }
 
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
     echo "No students found, nothing to print.";
     exit;
 }
 ?>
         <?php
-while ($row = mysql_fetch_assoc($result))
-{
+ while($row = mysqli_fetch_array($result)){
 ?>
           <tr>
             <th scope="row"><?php echo $row['student_id'] ?></th>
