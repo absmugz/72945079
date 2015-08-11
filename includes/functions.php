@@ -25,16 +25,12 @@ if (mysql_query($sqlcourse)) {
 
 mysql_close($dbmysql);*/
 
+
+$courses = $_POST['courses'];
 $sname = $_POST['surname'];
 $initials = $_POST['initials'];
 $name = $_POST['name'];
 
-
-$form_data = array(
-    'surname' => $sname,
-    'initials' => $initials,
-    'name' => $name
-);
 
 
 $studentData = array("student_sname"=>$sname,"student_initials"=>$initials,"student_fname"=>$name);
@@ -104,12 +100,27 @@ $studentTable ="student";
 // Register Student
 
 if(isset($_POST['register'])){
+
+// Register Student
 	
 $id = insertDataGetId($con,$studentTable, $studentData);
 
+// Register Student ends here
+
+// Register Student courses
+
 if($id) {
 echo "New record created successfully. Last inserted ID is: " . $id;	
+
+foreach ($courses as $_boxValue)
+                {
+                    echo "Box #{$_boxValue} was selected!\n";
 }
+
+
+}
+
+// Register Student courses
 
 // Register Student ends here
 

@@ -40,7 +40,7 @@ if (mysqli_num_rows($result) == 0) {
         while($row = mysqli_fetch_array($result)){
 ?>
              <label class="checkbox-inline">
-<?php echo "<input type='checkbox' id='{$row['course_id']}' value='{$row['course_id']}'>" . $row['course_name']; ?>
+<?php echo "<input type='checkbox' name='courses[]' id='{$row['course_id']}' value='{$row['course_id']}'>" . $row['course_name']; ?>
 </label>
        <?php
 }
