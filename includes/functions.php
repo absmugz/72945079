@@ -156,10 +156,58 @@ if(mysqli_query($con,$student_course))
 
 // Register course
 
+// Filter course_student and show students in a certain course table
+}
+
+if(isset($_POST['filter'])){
+
+
+$selected_val = $_POST['courseselect'];  // Storing Selected Value In Variable
+
+if($selected_val == "nothing"){
+	
+echo "You have not selected a course to filter students"; // Displaying Selected Value
+
+} else {
+
+echo "You have selected :" .$selected_val;  // Displaying Selected Value
+
+//var_dump($_POST);die();
+
+//echo $_POST["courseselect"];die();
+
+//echo "test"; die();
+//$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
+
+$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
+
+$result = mysqli_query($con, $query);
+
+
+//var_dump($result);
+if (!$result) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    exit;
+}
+
+if (mysqli_num_rows($result) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
+
+while($row = mysqli_fetch_array($result)){
+	echo $row['student_fname'] . '<br>';
+}
+
 }
 
 
 
+
+
+}
+
+// Filter course_student and show students in a certain course table
 ?> 
 
 

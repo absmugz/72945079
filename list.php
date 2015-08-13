@@ -1,4 +1,9 @@
 <?php include("includes/header.php"); ?>
+ <form class="form-horizontal" name="filter" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+ 
+  <button type="submit" name='filter' value='Submit' class="btn btn-primary">filter</button>
+
+  
     <div class="row">
     <div class="col-md-4">
     
@@ -19,7 +24,8 @@ if (mysqli_num_rows($result) == 0) {
 }
 ?>
 
-      <select class="selectpicker">
+      <select name="courseselect" class="selectpicker">
+      <option value="nothing" selected="selected">Select course to show students</option>
       <?php
         while($row = mysqli_fetch_array($result)){
 ?>
@@ -53,4 +59,5 @@ if (mysqli_num_rows($result) == 0) {
       </table>
     </div>
   </div>
+</form>
 <?php include("includes/footer.php"); ?>
