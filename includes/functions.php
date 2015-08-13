@@ -27,6 +27,7 @@ mysql_close($dbmysql);*/
 
 
 $courses = $_POST['courses'];
+$chckdCourses = (array_values($courses));
 $sname = $_POST['surname'];
 $initials = $_POST['initials'];
 $name = $_POST['name'];
@@ -112,12 +113,24 @@ $id = insertDataGetId($con,$studentTable, $studentData);
 if($id) {
 echo "New record created successfully. Last inserted ID is: " . $id;	
 
-foreach ($courses as $_boxValue)
-                {
-                    echo "Box #{$_boxValue} was selected!\n";
+
+//print_r($chckdCourses);
+
+for($i=0;$i<count($chckdCourses);$i++) {
+echo 'the student id is' . $id . '<br>';
+echo 'the course id is' . $chckdCourses[$i] . '<br>';
+
+//$student_course = "INSERT INTO course_student(student_id, course_id)VALUES('$id','$chckdCourses[$i]')";
+
+
+//inserting data order
+
+//$sql2 = "INSERT INTO tbl_QuestionSelected (`QuestionID`) VALUES (".$ids_list.")";
+//Run the query 
+
+
 }
-
-
+	
 }
 
 // Register Student courses
