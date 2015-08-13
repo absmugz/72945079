@@ -2,6 +2,7 @@
 /*------includes for dbmysqlection to database-----*/
 include('includes/config.php');
 
+//var_dump($con);die();
 /* Check dbmysqlection
 if (!$dbmysql) {
     die("dbmysqlection failed: " . mysql_dbmysqlect_error());
@@ -117,16 +118,30 @@ echo "New record created successfully. Last inserted ID is: " . $id;
 //print_r($chckdCourses);
 
 for($i=0;$i<count($chckdCourses);$i++) {
+	
 echo 'the student id is' . $id . '<br>';
 echo 'the course id is' . $chckdCourses[$i] . '<br>';
 
 //$student_course = "INSERT INTO course_student(student_id, course_id)VALUES('$id','$chckdCourses[$i]')";
 
+//inserting course_student data
 
-//inserting data order
+//create variable to insert course_student data
 
-//$sql2 = "INSERT INTO tbl_QuestionSelected (`QuestionID`) VALUES (".$ids_list.")";
-//Run the query 
+$student_course = "INSERT INTO course_student (student_id, course_id) VALUES ($id, $chckdCourses[$i])";
+
+//Run the query to insert course_student data
+
+if(mysqli_query($con,$student_course))
+		{
+			echo "Successfully Inserted data <br>";
+		}
+		else{
+			echo "Data not Inserted";
+			//echo "Data not Inserted" . mysqli_error($con);die();
+		}
+
+
 
 
 }
