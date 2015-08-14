@@ -161,7 +161,6 @@ if(mysqli_query($con,$student_course))
 
 if(isset($_POST['filter'])){
 
-
 $selected_val = $_POST['courseselect'];  // Storing Selected Value In Variable
 
 if($selected_val == "nothing"){
@@ -179,31 +178,38 @@ echo "You have selected :" .$selected_val;  // Displaying Selected Value
 //echo "test"; die();
 //$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
 
-$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
+//$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
 
-$result = mysqli_query($con, $query);
+$query = "SELECT student.student_fname, student_sname
+                FROM student, course_student
+                WHERE student.student_id = course_student.student_id 
+                AND $selected_val = course_student.course_id";
+				
+$Course_StudentResult = mysqli_query($con, $query);
 
 
 //var_dump($result);
-if (!$result) {
+
+/*
+if (!$Course_StudentResult) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
 }
 
-if (mysqli_num_rows($result) == 0) {
+if (mysqli_num_rows($Course_StudentResult) == 0) {
     echo "No courses found, nothing to print.";
     exit;
 }
 
-while($row = mysqli_fetch_array($result)){
+
+while($row = mysqli_fetch_array($Course_StudentResult)){
 	echo $row['student_fname'] . '<br>';
 }
 
 }
+*/
 
-
-
-
+}
 
 }
 
