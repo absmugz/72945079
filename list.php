@@ -4,11 +4,11 @@
 <div class="row">
     <div class="col-md-6">
     
-<?php /*-----retrieving data from course table-----*/
+<?php
 
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-$result = mysqli_query($con, $query);
+/*-----retrieving data from course table-----*/
+$courseQuery = "SELECT * FROM course ORDER BY course_id ASC";
+$result = mysqli_query($con, $courseQuery);
 
 if (!$result) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
@@ -22,7 +22,7 @@ if (mysqli_num_rows($result) == 0) {
 ?>
 
       <select name="courseselect" class="selectpicker">
-      <option value="nothing" selected="selected">Select course to show students</option>
+      <option value="nothing" selected>Select course to show students</option>
       <?php
         while($row = mysqli_fetch_array($result)){
 ?>
@@ -49,12 +49,12 @@ if (mysqli_num_rows($result) == 0) {
         <tbody>
 <?php /*-----retrieving data from course_table table-----*/
 
-if (!$Course_StudentResult) {
+if (!$result) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
 }
 
-if (mysqli_num_rows($Course_StudentResult) == 0) {
+if (mysqli_num_rows($result) == 0) {
     echo "No students found, nothing to print.";
     exit;
 }
