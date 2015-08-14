@@ -81,10 +81,5 @@ while($row = mysqli_fetch_array($Course_StudentResult)){
     </div>
   </div>
 
-
-<?php
-
- 
-?>
 <?php include("includes/footer.php"); ?>
 
