@@ -111,16 +111,17 @@ $id = insertDataGetId($con,$studentTable, $studentData);
 
 // Register Student courses
 
-if($id) {
-echo "New record created successfully. Last inserted ID is: " . $id;	
+// Register and get id back to use in course_table
 
+if($id) {
+//echo "New record created successfully. Last inserted ID is: " . $id;	
 
 //print_r($chckdCourses);
 
 for($i=0;$i<count($chckdCourses);$i++) {
 	
-echo 'the student id is' . $id . '<br>';
-echo 'the course id is' . $chckdCourses[$i] . '<br>';
+//echo 'the student id is' . $id . '<br>';
+//echo 'the course id is' . $chckdCourses[$i] . '<br>';
 
 //$student_course = "INSERT INTO course_student(student_id, course_id)VALUES('$id','$chckdCourses[$i]')";
 
@@ -165,11 +166,13 @@ $selected_val = $_POST['courseselect'];  // Storing Selected Value In Variable
 
 if($selected_val == "nothing"){
 	
-echo "You have not selected a course to filter students"; // Displaying Selected Value
+//echo "You have not selected a course to filter students"; // Displaying Selected Value
+$message =  "You have not selected a course to filter students"; // Displaying Selected Value
+$runQuery = false;
 
 } else {
 
-echo "You have selected :" .$selected_val;  // Displaying Selected Value
+//echo "You have selected :" .$selected_val;  // Displaying Selected Value
 
 //var_dump($_POST);die();
 

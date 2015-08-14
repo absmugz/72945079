@@ -47,7 +47,11 @@ if (mysqli_num_rows($result) == 0) {
           </tr>
         </thead>
         <tbody>
+        
 <?php /*-----retrieving data from course_table table-----*/
+
+echo $message;
+
 
 if (!$result) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
