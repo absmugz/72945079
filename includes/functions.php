@@ -217,6 +217,36 @@ while($row = mysqli_fetch_array($Course_StudentResult)){
 }
 
 // Filter course_student and show students in a certain course table
+
+/*-----deleting data from student table-----*/
+if (isset($_GET['student_delete'])) {
+	
+$query='DELETE FROM student WHERE student_id = "'.$_GET['student_delete'].'"';
+if(mysqli_query($con,$query))
+{
+			echo "Successfully deleted Student <br>";
+}else{
+			echo "Student not Inserted";
+			//echo "Data not Inserted" . mysqli_error($con);die();
+}
+
+}
+
+
+/*-----deleting data from course table-----*/
+if (isset($_GET['course_delete'])) {
+$query='DELETE FROM course WHERE course_id = "'.$_GET['course_delete'].'"';
+
+if(mysqli_query($con,$query))
+{
+			echo "Successfully deleted course <br>";
+}else{
+			echo "course not Inserted";
+			//echo "Data not Inserted" . mysqli_error($con);die();
+}
+
+}
+
 ?> 
 
 

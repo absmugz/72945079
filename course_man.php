@@ -32,16 +32,16 @@ if (mysqli_num_rows($result) == 0) {
     exit;
 }
 ?>
-        <?php
+<?php
         while($row = mysqli_fetch_array($result)){
 ?>
           <tr>
             <th scope="row"><?php echo $row['course_id'] ?></th>
             <td><?php echo $row['course_name'] ?></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?edit_id='.$row['course_id']?>" class="btn btn-primary">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> </a></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?delete_id='.$row['course_id']?>" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?course_edit='.$row['course_id']?>" class="btn btn-primary">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> </a></td>
+            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?course_delete='.$row['course_id']?>" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
           </tr>
-           <?php
+<?php
 }
 ?>
         </tbody>
