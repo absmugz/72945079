@@ -4,11 +4,12 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <form class="form-horizontal" name="registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<?php echo $StudentSucceesMessage ?>
+<form class="form-horizontal" name="registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <div class="form-group">
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Courses</strong></div>
-            <div class="col-sm-8">
+            <div class="col-sm-5">
 <?php 
 
 /*-----retrieving data from course table-----*/
@@ -47,43 +48,47 @@ if (mysqli_num_rows($result) == 0) {
 ?>
 </div>
 
-            </div>
+            </div> <div class="col-sm-3"><span class="error"><?php echo $coursesError; ?></span></div>
           </div>
         </div>
         <div class="form-group">
           <label for="surname" class="col-sm-4 control-label">Surname</label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname">
           </div>
+           <div class="col-sm-3"><span class="error"><?php echo $surnameError; ?></div>
         </div>
         <div class="form-group">
           <label for="initials" class="col-sm-4 control-label">Initials</label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <input type="text" class="form-control" id="initials" name="initials" placeholder="Initials">
           </div>
+          <div class="col-sm-3"></span></div>
         </div>
         <div class="form-group">
           <label for="name" class="col-sm-4 control-label">Full First Name</label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <input type="text" class="form-control" id="name" name="name" placeholder="Full First Name">
           </div>
+          <div class="col-sm-3"><span class="error"><?php echo $nameError; ?></span></div>
         </div>
         <div class="form-group">
           <label for="title" class="col-sm-4 control-label">Title</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="title" placeholder="Title">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
           </div>
+          <div class="col-sm-3"></div>
         </div>
         <div class="form-group">
           <label for="dob" class="col-sm-4 control-label">Date of Birth</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="dob" placeholder="Date of Birth">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="dob"  name="dob" placeholder="Date of Birth">
           </div>
         </div>
         <div class="form-group">
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Gender</strong></div>
-            <div class="col-sm-8">
+            <div class="col-sm-5">
              <div class="check-radio-top"> <label class="radio-inline">
                 <input type="radio" name="gender" id="inlineRadio1" value="option1">
                 Male </label>
@@ -91,53 +96,55 @@ if (mysqli_num_rows($result) == 0) {
                 <input type="radio" name="gender" id="inlineRadio2" value="option2">
                 Female </label></div>
             </div>
+            <div class="col-sm-3"><span class="error"><?php echo $genderError;?></span></div>
           </div>
         </div>
         <div class="form-group">
           <label for="Language" class="col-sm-4 control-label">Language for correspondence</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="Language" placeholder="Language">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="Language"  name="language" placeholder="Language">
           </div>
         </div>
         <div class="form-group">
           <label for="identity_number" class="col-sm-4 control-label">Identity Number</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="identity_number" placeholder="Identity Number">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="identity_number" name="identity_number" placeholder="Identity Number">
           </div>
         </div>
         <div class="form-group">
           <label for="home_number" class="col-sm-4 control-label">Home Telephone Code + Number</label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <input type="text" class="form-control" id="home_number" placeholder="Home Telephone Code + Number">
           </div>
         </div>
         <div class="form-group">
           <label for="work_number" class="col-sm-4 control-label">Work Telephone Code + Number</label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <input type="text" class="form-control" id="work_number" placeholder="Work Telephone Code + Number">
           </div>
         </div>
         <div class="form-group">
           <label for="cell_number" class="col-sm-4 control-label">Cell Phone Number</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="cell_number" placeholder="Cell Phone Number">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="cell_number" name="cell_number" placeholder="Cell Phone Number">
           </div>
         </div>
         <div class="form-group">
           <label for="Email" class="col-sm-4 control-label">Email</label>
-          <div class="col-sm-8">
-            <input type="email" class="form-control" id="Email" placeholder="Email">
+          <div class="col-sm-5">
+            <input type="email" class="form-control" id="Email" name="email" placeholder="Email">
           </div>
+          <div class="col-sm-3"><span class="error"><?php echo $emailError; ?></span></div>
         </div>
         <div class="form-group">
           <label for="postal_address" class="col-sm-4 control-label">Postal Address</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="postal_address" placeholder="Postal Address">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="postal_address" name="address" placeholder="Postal Address">
           </div>
         </div>
         <div class="form-group">
         <div class="col-sm-4"></div>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <button type="submit" name='register' value='Submit' class="btn btn-primary">Register Student</button>
           </div>
         </div>

@@ -4,3 +4,7 @@
 .check-radio-top {
     margin-top: -7px;
 }
+
+span.error {
+	color:#FF0000;
+}

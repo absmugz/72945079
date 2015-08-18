@@ -1,109 +1,177 @@
 <?php
 /*------includes for dbmysqlection to database-----*/
+
 include('includes/config.php');
 
-//var_dump($con);die();
-/* Check dbmysqlection
-if (!$dbmysql) {
-    die("dbmysqlection failed: " . mysql_dbmysqlect_error());
-}
+/*------includes for dbmysqlection to database-----*/
 
-$sql = "INSERT INTO student (student_sname, student_fname, student_email)
-VALUES ('John', 'Doe', 'john@example.com')";
+/*------Initialize variables-----*/
 
-if (mysql_query($sql)) {
-    $last_id = mysql_insert_id($dbmysql);
-    echo "New record created successfully. Last inserted ID is: " . $last_id;
+/*------Course variables-----*/
+$coursesError = '';
+$courses = array();
+/*------Course variables-----*/
 
-$sqlcourse = "INSERT INTO course_student (student_id, course_id)
-VALUES ('$last_id', '1')";
-if (mysql_query($sqlcourse)) {
+/*------Student variables-----*/
 
-}
-} else {
-    echo "Error: " . $sql . "<br>" . mysql_error($dbmysql);
-}
+$surname = '';
+$initials = '';
+$name = '';
+$title = '';
+$dob = '';
+$gender = '';
+$language = '';
+$identity_number = '';
+$address = '';
+$phonenumber = '';
+$cell_number = '';
+$email = '';
 
-mysql_close($dbmysql);*/
+/*------Student variables-----*/
+
+/*------Error variables-----*/
+
+/*------Student variables-----*/
+
+$surnameError = '';
+$initialsError = '';
+$nameError = '';
+$titleError = '';
+$dobError = '';
+$genderError = '';
+$languageError = '';
+$identity_numberError = '';
+$addressError = '';
+$phonenumberError = '';
+$cell_numberError = '';
+$emailError ="";
+/*------Student variables-----*/
+
+/*------Error variables-----*/
 
 
-$courses = $_POST['courses'];
-$chckdCourses = (array_values($courses));
-$sname = $_POST['surname'];
-$initials = $_POST['initials'];
-$name = $_POST['name'];
+/*------Initialize variables-----*/
 
 
-
-$studentData = array("student_sname"=>$sname,"student_initials"=>$initials,"student_fname"=>$name);
-$studentTable ="student";
-
-// Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted
-
-	function insertDataGetId($connection, $tblname, array $val_cols){
-
-		$keysString = implode(", ", array_keys($val_cols));
-
-		// print key and value for the array
-		$i=0;
-		foreach($val_cols as $key=>$value) {
-			$StValue[$i] = "'".$value."'";
-		    $i++;
-		}
-
-		$StValues = implode(", ",$StValue);
-		
-		if (mysqli_connect_errno()) {
-		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
-
-		if(mysqli_query($connection,"INSERT INTO $tblname ($keysString) VALUES ($StValues)"))
-		{
-			echo "Successfully Inserted data<br>";
-			//echo "New record has id: " . mysqli_insert_id($connection);
-			$last_id = mysqli_insert_id($connection);
-		}
-		else{
-			echo "Data not Inserted";
-		}
-		
-		return $last_id;
-	}
-// Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted
-
-// Insert Data within table by accepting TableName and Table column => Data as associative array
-
-	function insertData($connection, $tblname, array $val_cols){
-
-		$keysString = implode(", ", array_keys($val_cols));
-
-		// print key and value for the array
-		$i=0;
-		foreach($val_cols as $key=>$value) {
-			$StValue[$i] = "'".$value."'";
-		    $i++;
-		}
-
-		$StValues = implode(", ",$StValue);
-		
-		if (mysqli_connect_errno()) {
-		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
-
-		if(mysqli_query($connection,"INSERT INTO $tblname ($keysString) VALUES ($StValues)"))
-		{
-			echo "Successfully Inserted data<br>";
-		}
-		else{
-			echo "Data not Inserted";
-		}
-	}
-// Insert Data within table by accepting TableName and Table column => Data as associative array
-// Register Student
+/*-----Insert Data into student table-----*/
 
 if(isset($_POST['register'])){
 
+/*-----student form data----*/
+
+/*------Course data-----*/
+$courses = $_POST['courses'];
+/*------Course data-----*/
+
+$surname = $_POST['surname'];
+$initials = $_POST['initials'];
+$name = $_POST['name'];
+$title = $_POST['title'];
+$dob = $_POST['dob'];
+$gender = $_POST['gender'];
+$language = $_POST['language'];
+$identity_number = $_POST['identity_number'];
+$address = $_POST['address'];
+$address = $_POST['address'];
+$phonenumber = $_POST['phonenumber'];
+$cell_number = $_POST['cell_number'];
+$email = $_POST['email'];
+
+
+/*-----student form data-----*/
+	
+/*-----student form validation-----*/
+
+$error = false;
+
+/*-----course form validation-----*/
+
+if(empty($_POST['courses']) || count($_POST['courses']) < 1)
+		{
+			$coursesError = "Please select at least 1 course";
+			$error=true;
+            $courses = array();
+		}
+else{
+$courses = $_POST['courses'];
+}
+
+/*-----course form validation-----*/
+
+/*-----surname validation-----*/
+
+if (empty($_POST["surname"])) {
+$surnameError = "Surname is required";
+$error=true;
+} else {
+$surname = test_input($_POST["surname"]);
+// check name only contains letters and whitespace
+if (!preg_match("/^[a-zA-Z ]*$/",$surname)) {
+$surnameError = "Only letters and white space allowed";
+}
+}
+
+/*-----surname validation-----*/
+
+/*-----name validation-----*/
+
+if (empty($_POST["name"])) {
+$nameError = "Name is required";
+$error=true;
+} else {
+$name = test_input($_POST["name"]);
+// check name only contains letters and whitespace
+if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+$nameError = "Only letters and white space allowed";
+}
+}
+
+/*-----name validation-----*/
+
+/*-----gender validation-----*/
+
+if (empty($_POST["gender"])) {
+$genderError = "Gender is required";
+$error=true;
+} else {
+$gender = test_input($_POST["gender"]);
+}
+
+/*-----gender validation-----*/
+
+
+/*-----email validation-----*/
+
+if (empty($_POST["email"])) {
+$emailError = "Email is required";
+$error=true;
+} else {
+$email = test_input($_POST["email"]);
+// check if e-mail address syntax is valid or not
+if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) {
+$emailError = "Invalid email format";
+}
+}
+/*-----email validation-----*/
+
+/*-----student form validation-----*/
+
+
+/*-----if statement to insert data-----*/
+if(!$error) {
+	
+var_dump($courses) .'<br>';
+echo $surname .'<br>';
+echo $name .'<br>';
+echo $gender .'<br>';
+echo $email .'<br>';
+
+$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$name .' ' . $surname .' have been successfully created.</div>';
+
 // Register Student
+
+$studentData = array("student_sname"=>$surname,"student_initials"=>$initials,"student_fname"=>$name);
+$studentTable ="student";
 	
 $id = insertDataGetId($con,$studentTable, $studentData);
 
@@ -114,25 +182,8 @@ $id = insertDataGetId($con,$studentTable, $studentData);
 // Register and get id back to use in course_table
 
 if($id) {
-//echo "New record created successfully. Last inserted ID is: " . $id;	
-
-//print_r($chckdCourses);
-
 for($i=0;$i<count($chckdCourses);$i++) {
-	
-//echo 'the student id is' . $id . '<br>';
-//echo 'the course id is' . $chckdCourses[$i] . '<br>';
-
-//$student_course = "INSERT INTO course_student(student_id, course_id)VALUES('$id','$chckdCourses[$i]')";
-
-//inserting course_student data
-
-//create variable to insert course_student data
-
 $student_course = "INSERT INTO course_student (student_id, course_id) VALUES ($id, $chckdCourses[$i])";
-
-//Run the query to insert course_student data
-
 if(mysqli_query($con,$student_course))
 		{
 			echo "Successfully Inserted data <br>";
@@ -140,48 +191,37 @@ if(mysqli_query($con,$student_course))
 		else{
 			echo "Data not Inserted";
 			//echo "Data not Inserted" . mysqli_error($con);die();
-		}
-
-
-
-
+		} 
+		} }
 }
-	
+/*-----else insert data-----*/
+
+
+/*-----end of if register if statement-----*/
 }
+/*-----end of if register if statement-----*/
 
-// Register Student courses
 
-// Register Student ends here
 
-// Register course
 
-// Register course
 
-// Filter course_student and show students in a certain course table
-}
+
+
+
+/*-----Insert Data into student table-----*/
+
+/*-----Filter course_student and show students in a certain course table-----*/
 
 if(isset($_POST['filter'])){
 
-$selected_val = $_POST['courseselect'];  // Storing Selected Value In Variable
+$selected_val = $_POST['courseselect'];
 
 if($selected_val == "nothing"){
 	
-//echo "You have not selected a course to filter students"; // Displaying Selected Value
-$message =  "You have not selected a course to filter students"; // Displaying Selected Value
+$message =  "You have not selected a course to filter students"; 
 $runQuery = false;
 
 } else {
-
-//echo "You have selected :" .$selected_val;  // Displaying Selected Value
-
-//var_dump($_POST);die();
-
-//echo $_POST["courseselect"];die();
-
-//echo "test"; die();
-//$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
-
-//$query = "SELECT student.student_fname, student_sname FROM student, course, course_student WHERE student.student_id = course_student.student_id and course.course_id = course_student.course_id";
 
 $query = "SELECT student.student_fname, student_sname
                 FROM student, course_student
@@ -190,35 +230,14 @@ $query = "SELECT student.student_fname, student_sname
 				
 $Course_StudentResult = mysqli_query($con, $query);
 
-
-//var_dump($result);
-
-/*
-if (!$Course_StudentResult) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
-}
-
-if (mysqli_num_rows($Course_StudentResult) == 0) {
-    echo "No courses found, nothing to print.";
-    exit;
-}
-
-
-while($row = mysqli_fetch_array($Course_StudentResult)){
-	echo $row['student_fname'] . '<br>';
-}
-
-}
-*/
-
 }
 
 }
 
-// Filter course_student and show students in a certain course table
+/*-----Filter course_student and show students in a certain course table-----*/
 
 /*-----deleting data from student table-----*/
+
 if (isset($_GET['student_delete'])) {
 	
 $query='DELETE FROM student WHERE student_id = "'.$_GET['student_delete'].'"';
@@ -234,6 +253,7 @@ if(mysqli_query($con,$query))
 
 
 /*-----deleting data from course table-----*/
+
 if (isset($_GET['course_delete'])) {
 $query='DELETE FROM course WHERE course_id = "'.$_GET['course_delete'].'"';
 
@@ -246,6 +266,52 @@ if(mysqli_query($con,$query))
 }
 
 }
+
+
+/*------functions-----*/
+
+/*------validation function-----*/
+
+function test_input($data) {
+$data = trim($data);
+$data = stripslashes($data);
+$data = htmlspecialchars($data);
+return $data;
+}
+
+/*------validation function-----*/
+
+/*------Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted function-----*/
+
+function insertDataGetId($connection, $tblname, array $val_cols){
+		$keysString = implode(", ", array_keys($val_cols));
+		$i=0;
+		foreach($val_cols as $key=>$value) {
+			$StValue[$i] = "'".$value."'";
+		    $i++;
+		}
+
+		$StValues = implode(", ",$StValue);
+		
+		if (mysqli_connect_errno()) {
+		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		}
+
+		if(mysqli_query($connection,"INSERT INTO $tblname ($keysString) VALUES ($StValues)"))
+		{
+			echo "Successfully Inserted data<br>";
+			$last_id = mysqli_insert_id($connection);
+		}
+		else{
+			echo "Data not Inserted";
+		}
+		
+		return $last_id;
+}
+	
+/*------Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted function-----*/
+
+/*------functions-----*/
 
 ?> 
 
