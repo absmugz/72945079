@@ -304,12 +304,32 @@ function insertDataGetId($connection, $tblname, array $val_cols){
 		}
 		else{
 			echo "Data not Inserted";
-		}
-		
-		return $last_id;
+		}return $last_id;
 }
 	
 /*------Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted function-----*/
+
+/*------Course checkboxes-----*/
+
+function get_checkboxes_chk($connection){
+$str='';
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result = mysqli_query($connection, $query); 
+
+//var_dump($result);die();
+
+while($row = mysqli_fetch_array($result)){
+	
+$str.='<br/>'.$row['course_name'].'<input type="checkbox" value="'.$row['course_id'].'" name="courses[]"/>';
+
+}
+
+return $str;
+
+}
+
+/*------Course checkboxes-----*/
 
 /*------functions-----*/
 

@@ -48,15 +48,20 @@ if (mysqli_num_rows($result) == 0) {
 ?>
 </div>
 
+<div class="check-radio-top">
+<?php echo get_checkboxes_chk($con); ?>
+</div>
+
+
             </div> <div class="col-sm-3"><span class="error"><?php echo $coursesError; ?></span></div>
           </div>
         </div>
         <div class="form-group">
           <label for="surname" class="col-sm-4 control-label">Surname</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname">
+            <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $surname; ?>" placeholder="Surname">
           </div>
-           <div class="col-sm-3"><span class="error"><?php echo $surnameError; ?></div>
+           <div class="col-sm-3"><span class="error"><?php echo empty($surnameError) ? "" : $surnameError; ?></div>
         </div>
         <div class="form-group">
           <label for="initials" class="col-sm-4 control-label">Initials</label>
@@ -68,9 +73,9 @@ if (mysqli_num_rows($result) == 0) {
         <div class="form-group">
           <label for="name" class="col-sm-4 control-label">Full First Name</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Full First Name">
+            <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" placeholder="Full First Name">
           </div>
-          <div class="col-sm-3"><span class="error"><?php echo $nameError; ?></span></div>
+          <div class="col-sm-3"><span class="error"><?php echo empty($nameError) ? "" : $nameError; ?></span></div>
         </div>
         <div class="form-group">
           <label for="title" class="col-sm-4 control-label">Title</label>
@@ -132,9 +137,9 @@ if (mysqli_num_rows($result) == 0) {
         <div class="form-group">
           <label for="Email" class="col-sm-4 control-label">Email</label>
           <div class="col-sm-5">
-            <input type="email" class="form-control" id="Email" name="email" placeholder="Email">
+            <input type="email" class="form-control" id="Email" name="email" value="<?php echo $email; ?>" placeholder="Email">
           </div>
-          <div class="col-sm-3"><span class="error"><?php echo $emailError; ?></span></div>
+          <div class="col-sm-3"><span class="error"><?php echo empty($emailError) ? "" : $emailError; ?></span></div>
         </div>
         <div class="form-group">
           <label for="postal_address" class="col-sm-4 control-label">Postal Address</label>
