@@ -7,6 +7,10 @@ include('includes/config.php');
 
 /*------Initialize variables-----*/
 
+$message='';
+$StudentSucceesMessage='';
+$Course_StudentResult='';
+
 /*------Course variables-----*/
 $coursesError = '';
 $courses = array();
