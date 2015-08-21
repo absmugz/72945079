@@ -87,13 +87,14 @@ $email = $_POST['email'];
 /*-----student form validation-----*/
 
 $error = false;
+$isChecked = false;
 
 /*-----course form validation-----*/
 
 if(empty($_POST['courses']) || count($_POST['courses']) < 1)
 		{
 			$coursesError = "Please select at least 1 course";
-			$error=true;
+			$isChecked = true;
             $courses = array();
 		}
 else{

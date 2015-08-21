@@ -38,22 +38,26 @@ if (mysqli_num_rows($result) == 0) {
 
 <div class="check-radio-top">
 <?php
-        while($row = mysqli_fetch_array($result)){
+
+
+while($row = mysqli_fetch_array($result)){
+ 
+    // Easier to use than array
+    $id = $row['course_id'];
+    $name = $row['course_name'];
 ?>
-             <label class="checkbox-inline">
-<?php echo "<input type='checkbox' name='courses[]' id='{$row['course_id']}' value='{$row['course_id']}'>" . $row['course_name']; ?>
+<label class="checkbox-inline">
+ <input type='checkbox' 
+        name='courses[]' 
+        value="<?php echo $id; ?>" 
+        <?php echo in_array($id, $courses) ? " checked " : ""; ?> >
+        <?php echo $name; ?>
 </label>
        <?php
 }
 ?>
 </div>
-
-<div class="check-radio-top">
-<?php echo get_checkboxes_chk($con); ?>
-</div>
-
-
-            </div> <div class="col-sm-3"><span class="error"><?php echo $coursesError; ?></span></div>
+</div> <div class="col-sm-3"><span class="error"><?php echo $coursesError; ?></span></div>
           </div>
         </div>
         <div class="form-group">
