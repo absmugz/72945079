@@ -6,6 +6,8 @@ include('includes/config.php');
 /*------includes for dbmysqlection to database-----*/
 
 /*------Initialize variables-----*/
+$male_status = 'unchecked';
+$female_status = 'unchecked';
 
 $message='';
 $StudentSucceesMessage='';
@@ -140,6 +142,12 @@ $genderError = "Gender is required";
 $error=true;
 } else {
 $gender = test_input($_POST["gender"]);
+}
+if ($gender == 'male') {
+$male_status = 'checked';
+}
+else if ($gender == 'female') {
+$female_status = 'checked';
 }
 
 /*-----gender validation-----*/

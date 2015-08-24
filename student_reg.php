@@ -99,10 +99,10 @@ while($row = mysqli_fetch_array($result)){
             <div class="col-sm-4 text-right"><strong>Gender</strong></div>
             <div class="col-sm-5">
              <div class="check-radio-top"> <label class="radio-inline">
-                <input type="radio" name="gender" id="inlineRadio1" value="option1">
+               <Input type='radio' name='gender' value='male' <?PHP print $male_status; ?>>
                 Male </label>
               <label class="radio-inline">
-                <input type="radio" name="gender" id="inlineRadio2" value="option2">
+               <Input type='radio' name='gender' value='female' <?PHP print $female_status; ?>>
                 Female </label></div>
             </div>
             <div class="col-sm-3"><span class="error"><?php echo $genderError;?></span></div>
