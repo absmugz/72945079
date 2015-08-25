@@ -172,21 +172,61 @@ $emailError = "Invalid email format";
 
 /*-----if statement to insert data-----*/
 if(!$error) {
-	
+/*	
 var_dump($courses) .'<br>';
 echo $surname .'<br>';
 echo $name .'<br>';
 echo $gender .'<br>';
-echo $email .'<br>';
-
-$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$name .' ' . $surname .' have been successfully created.</div>';
+echo $email .'<br>';*/
 
 // Register Student
 
-$studentData = array("student_sname"=>$surname,"student_initials"=>$initials,"student_fname"=>$name);
+/* $studentData = array("student_sname"=>$surname,"student_initials"=>$initials,"student_fname"=>$name);
 $studentTable ="student";
 	
-$id = insertDataGetId($con,$studentTable, $studentData);
+$id = insertDataGetId($con,$studentTable, $studentData);*/
+
+if ($_POST['student_id']>0)
+
+	{
+
+		/*-----updating data into the database-----*/
+
+		$query='UPDATE student SET
+       student_sname="'.$surname.'",
+       student_fname="'.$name.'",
+       student_gender="'.$title.'",
+       student_email="'.$maidensurname.'"
+       WHERE student_id="'.$_POST['student_id'].'"
+
+     ';
+
+
+	}
+	else
+	{
+
+
+/*-----inserting data into the database-----*/
+$query='INSERT INTO student(student_sname,student_fname,student_gender,student_email
+       )VALUES(
+       "'.$surname.'",
+       "'.$name.'",
+       "'.$gender.'",
+       "'.$email.'"
+       )';
+	}
+
+
+if(mysqli_query($con,$query))
+{
+			
+			$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$name .' ' . $surname .' have been successfully created.</div>';
+}else{
+			$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student not Inserted.</div>';
+			//echo "Data not Inserted" . mysqli_error($con);die();
+}
+
 
 // Register Student ends here
 
@@ -194,6 +234,7 @@ $id = insertDataGetId($con,$studentTable, $studentData);
 
 // Register and get id back to use in course_table
 
+/*
 if($id) {
 for($i=0;$i<count($chckdCourses);$i++) {
 $student_course = "INSERT INTO course_student (student_id, course_id) VALUES ($id, $chckdCourses[$i])";
@@ -205,10 +246,12 @@ if(mysqli_query($con,$student_course))
 			echo "Data not Inserted";
 			//echo "Data not Inserted" . mysqli_error($con);die();
 		} 
-		} }
-}
+		} }*/
+		
 /*-----else insert data-----*/
 
+}
+/*-----else insert data-----*/
 
 /*-----end of if register if statement-----*/
 }
