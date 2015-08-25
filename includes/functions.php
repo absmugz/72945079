@@ -292,6 +292,15 @@ $Course_StudentResult = mysqli_query($con, $query);
 
 /*-----Filter course_student and show students in a certain course table-----*/
 
+/*-----editing data from student table-----*/
+if (isset($_GET['student_edit'])) {	
+$query='SELECT * FROM student WHERE student_id = "'.$_GET['student_edit'].'"';
+$result = mysqli_query($con, $query); 
+$row = mysqli_fetch_array($result);
+var_dump($row);die();
+}
+/*-----editing data from student table-----*/
+
 /*-----deleting data from student table-----*/
 
 if (isset($_GET['student_delete'])) {
@@ -306,7 +315,16 @@ if(mysqli_query($con,$query))
 }
 
 }
+/*-----deleting data from student table-----*/
 
+/*-----editing data from course table-----*/
+if (isset($_GET['course_edit'])) {	
+$query='SELECT * FROM course WHERE course_id = "'.$_GET['course_edit'].'"';
+$result = mysqli_query($con, $query); 
+$row = mysqli_fetch_array($result);
+var_dump($row);die();
+}
+/*-----editing data from course table-----*/
 
 /*-----deleting data from course table-----*/
 
@@ -322,7 +340,7 @@ if(mysqli_query($con,$query))
 }
 
 }
-
+/*-----deleting data from course table-----*/
 
 /*------functions-----*/
 

@@ -6,6 +6,7 @@
     <div class="col-md-8">
 <?php echo $StudentSucceesMessage ?>
 <form class="form-horizontal" name="registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+  <input type="hidden" name="student_id" value="<?php $row['student_id'];?>">
       <div class="form-group">
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Courses</strong></div>
