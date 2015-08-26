@@ -312,12 +312,20 @@ $Course_StudentResult = mysqli_query($con, $query);
 /*-----Filter course_student and show students in a certain course table-----*/
 
 /*-----editing data from student table-----*/
-if (isset($_GET['student_edit'])) {	
-$query='SELECT * FROM student WHERE student_id = "'.$_GET['student_edit'].'"';
+if (isset($_GET['student_edit'])) {
+$student_id_edit = $_GET['student_edit'];
+$query = "SELECT * FROM student, course_student, course
+          WHERE student.student_id = $student_id_edit 
+          AND $student_id_edit = course_student.student_id";
+		  
+//$query='SELECT * FROM student WHERE student_id = "'.$_GET['student_edit'].'"';
 $result = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result)){ 
 
+print_r($row['course_id']);die();
+
+$courses = $row['courses'];
 
 $student_id = $row['student_id'];
 $surname = $row['student_sname'];
