@@ -6,7 +6,7 @@
     <div class="col-md-8">
 <?php echo $StudentSucceesMessage ?>
 <form class="form-horizontal" name="registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-  <input type="hidden" name="student_id" value="<?php $row['student_id'];?>">
+ <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
       <div class="form-group">
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Courses</strong></div>
@@ -78,7 +78,7 @@ while($row = mysqli_fetch_array($result)){
         <div class="form-group">
           <label for="name" class="col-sm-4 control-label">Full First Name</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" placeholder="Full First Name">
+            <input type="text" class="form-control" id="name" name="student_name" value="<?php echo $student_name; ?>" placeholder="Full First Name">
           </div>
           <div class="col-sm-3"><span class="error"><?php echo empty($nameError) ? "" : $nameError; ?></span></div>
         </div>

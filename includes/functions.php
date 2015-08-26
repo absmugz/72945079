@@ -19,10 +19,10 @@ $courses = array();
 /*------Course variables-----*/
 
 /*------Student variables-----*/
-
+$student_id = '';
 $surname = '';
 $initials = '';
-$name = '';
+$student_name = '';
 $title = '';
 $dob = '';
 $gender = '';
@@ -71,7 +71,7 @@ $courses = $_POST['courses'];
 
 $surname = $_POST['surname'];
 $initials = $_POST['initials'];
-$name = $_POST['name'];
+$student_name = $_POST['name'];
 $title = $_POST['title'];
 $dob = $_POST['dob'];
 $gender = $_POST['gender'];
@@ -122,11 +122,11 @@ $surnameError = "Only letters and white space allowed";
 
 /*-----name validation-----*/
 
-if (empty($_POST["name"])) {
+if (empty($_POST["student_name"])) {
 $nameError = "Name is required";
 $error=true;
 } else {
-$name = test_input($_POST["name"]);
+$name = test_input($_POST["student_name"]);
 // check name only contains letters and whitespace
 if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
 $nameError = "Only letters and white space allowed";
@@ -194,9 +194,9 @@ if ($_POST['student_id']>0)
 
 		$query='UPDATE student SET
        student_sname="'.$surname.'",
-       student_fname="'.$name.'",
+       student_fname="'.$student_name.'",
        student_gender="'.$title.'",
-       student_email="'.$maidensurname.'"
+       student_email="'.$email.'"
        WHERE student_id="'.$_POST['student_id'].'"
 
      ';
@@ -211,7 +211,7 @@ if ($_POST['student_id']>0)
 $query='INSERT INTO student(student_sname,student_fname,student_gender,student_email
        )VALUES(
        "'.$surname.'",
-       "'.$name.'",
+       "'.$student_name.'",
        "'.$gender.'",
        "'.$email.'"
        )';
@@ -221,7 +221,7 @@ $query='INSERT INTO student(student_sname,student_fname,student_gender,student_e
 if(mysqli_query($con,$query))
 {
 			
-			$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$name .' ' . $surname .' have been successfully created.</div>';
+			$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$student_name .' ' . $surname .' have been successfully created.</div>';
 }else{
 			$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student not Inserted.</div>';
 			//echo "Data not Inserted" . mysqli_error($con);die();
@@ -295,9 +295,31 @@ $Course_StudentResult = mysqli_query($con, $query);
 /*-----editing data from student table-----*/
 if (isset($_GET['student_edit'])) {	
 $query='SELECT * FROM student WHERE student_id = "'.$_GET['student_edit'].'"';
-$result = mysqli_query($con, $query); 
-$row = mysqli_fetch_array($result);
-var_dump($row);die();
+$result = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_array($result)){ 
+
+
+$student_id = $row['student_id'];
+$surname = $row['student_sname'];
+$student_name = $row['student_fname'];
+$gender = $row['student_gender'];
+$email = $row['student_email'];
+/*$title = $row['title'];
+$initials = $row['initials'];
+$dob = $row['dob'];
+$gender = $row['gender'];
+$language = $row['language'];
+$identity_number = $row['identity_number'];
+$address = $row['address'];
+$address = $row['address'];
+$phonenumber = $row['phonenumber'];
+$cell_number = $row['cell_number'];
+$email = $row['email'];*/
+
+}
+//$row = mysqli_fetch_array($result);
+//var_dump($row);die();
 }
 /*-----editing data from student table-----*/
 
