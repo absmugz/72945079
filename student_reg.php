@@ -124,19 +124,19 @@ while($row = mysqli_fetch_array($result)){
         <div class="form-group">
           <label for="home_number" class="col-sm-4 control-label">Home Telephone Code + Number</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="home_number" placeholder="Home Telephone Code + Number">
+            <input type="text" class="form-control" name="student_telh" id="student_telh" value="<?php echo $student_telh; ?>" placeholder="Home Telephone Code + Number">
           </div>
         </div>
         <div class="form-group">
           <label for="work_number" class="col-sm-4 control-label">Work Telephone Code + Number</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="work_number" placeholder="Work Telephone Code + Number">
+            <input type="text" class="form-control" name="student_telw" id="student_telw" value="<?php echo $student_telw; ?>" placeholder="Work Telephone Code + Number">
           </div>
         </div>
         <div class="form-group">
           <label for="cell_number" class="col-sm-4 control-label">Cell Phone Number</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" id="cell_number" name="cell_number" placeholder="Cell Phone Number">
+            <input type="text" class="form-control" name="student_cell" id="student_cell" value="<?php echo $student_cell; ?>" placeholder="Cell Phone Number">
           </div>
         </div>
         <div class="form-group">

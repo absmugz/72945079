@@ -29,8 +29,9 @@ $gender = '';
 $language = '';
 $identity_number = '';
 $address = '';
-$phonenumber = '';
-$cell_number = '';
+$student_telh = '';
+$student_telw = '';
+$student_cell = '';
 $email = '';
 
 /*------Student variables-----*/
@@ -48,7 +49,7 @@ $genderError = '';
 $languageError = '';
 $identity_numberError = '';
 $addressError = '';
-$phonenumberError = '';
+$student_telhError = '';
 $cell_numberError = '';
 $emailError ="";
 /*------Student variables-----*/
@@ -69,9 +70,10 @@ if(isset($_POST['register'])){
 $courses = $_POST['courses'];
 /*------Course data-----*/
 
+$student_id = $_POST['student_id'];
 $surname = $_POST['surname'];
 $initials = $_POST['initials'];
-$student_name = $_POST['name'];
+$student_name = $_POST['student_name'];
 $title = $_POST['title'];
 $dob = $_POST['dob'];
 $gender = $_POST['gender'];
@@ -79,8 +81,9 @@ $language = $_POST['language'];
 $identity_number = $_POST['identity_number'];
 $address = $_POST['address'];
 $address = $_POST['address'];
-$phonenumber = $_POST['phonenumber'];
-$cell_number = $_POST['cell_number'];
+$student_telh = $_POST['student_telh'];
+$student_telw = $_POST['student_telw'];
+$student_cell = $_POST['student_cell'];
 $email = $_POST['email'];
 
 
@@ -186,28 +189,38 @@ $studentTable ="student";
 	
 $id = insertDataGetId($con,$studentTable, $studentData);*/
 
-if ($_POST['student_id']>0)
+if ($student_id>0){
 
-	{
+/*-----updating data into the database-----*/
 
-		/*-----updating data into the database-----*/
+/*-----query to update data into the database-----*/
 
 		$query='UPDATE student SET
        student_sname="'.$surname.'",
        student_fname="'.$student_name.'",
        student_gender="'.$title.'",
        student_email="'.$email.'"
-       WHERE student_id="'.$_POST['student_id'].'"
+       WHERE student_id="'.$student_id.'"
+ ';
+ 
+ /*-----query to update data into the database-----*/
 
-     ';
+/*-----insert data into the database-----*/
 
+if(mysqli_query($con,$query))
+{			
+$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$student_name .' ' . $surname .' have been successfully updated.</div>';
+}else{
+$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student details have not been updated, please try again.</div>';
+}
+/*-----insert data into the database-----*/
 
-	}
-	else
-	{
+/*-----updating if ends here-----*/
+}
+/*-----updating if ends here-----*/
+else{
+/*-----query to insert data into the database-----*/
 
-
-/*-----inserting data into the database-----*/
 $query='INSERT INTO student(student_sname,student_fname,student_gender,student_email
        )VALUES(
        "'.$surname.'",
@@ -215,17 +228,23 @@ $query='INSERT INTO student(student_sname,student_fname,student_gender,student_e
        "'.$gender.'",
        "'.$email.'"
        )';
-	}
 
+/*-----query to insert data into the database-----*/
+
+/*-----insert data into the database-----*/
 
 if(mysqli_query($con,$query))
-{
-			
-			$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$student_name .' ' . $surname .' have been successfully created.</div>';
+{			
+$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$student_name .' ' . $surname .' have been successfully created.</div>';
 }else{
-			$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student not Inserted.</div>';
+$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student details have not been created, please try again.</div>';
 			//echo "Data not Inserted" . mysqli_error($con);die();
 }
+/*-----insert data into the database-----*/
+
+/*-----else ends here -----*/
+}
+/*-----else ends here -----*/
 
 
 // Register Student ends here
