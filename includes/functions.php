@@ -359,16 +359,18 @@ $email = $row['email'];*/
  //$query = "SELECT * FROM course_student
  //         WHERE course_student.student_id = $student_id_edit";
 		  
- $query = "SELECT course_student.course_id, course.course_name
+$query = "SELECT course_student.course_id, course_student.student_id, course.course_name, course.course_id
 FROM course_student
 INNER JOIN course
 ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
 		  
-		  $result_course_name = mysqli_query($con, $query);
+$result_course_name = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result_course_name)){ 
 var_dump($row);
+$id = $row['course_id'];
+$name = $row['course_name'];
 }
 
 }
