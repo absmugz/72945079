@@ -314,18 +314,28 @@ $Course_StudentResult = mysqli_query($con, $query);
 /*-----editing data from student table-----*/
 if (isset($_GET['student_edit'])) {
 $student_id_edit = $_GET['student_edit'];
-$query = "SELECT * FROM student, course_student, course
+
+/*$query = "SELECT * FROM student, course_student, course
           WHERE student.student_id = $student_id_edit 
           AND $student_id_edit = course_student.student_id";
+
+		  $query = "SELECT * FROM student
+		  INNER JOIN course_student
+		  ON student.student_id=course_student.student_id
+		  WHERE student.student_id = $student_id_edit;"; */
 		  
+		  $query = "SELECT * FROM student
+          WHERE student.student_id = $student_id_edit";
+		  
+		  
+		  		  
 //$query='SELECT * FROM student WHERE student_id = "'.$_GET['student_edit'].'"';
 $result = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result)){ 
-
-print_r($row['course_id']);die();
-
-$courses = $row['courses'];
+var_dump($row);
+//print_r($row['course_id']);die();
+//$courses = $row['courses'];
 
 $student_id = $row['student_id'];
 $surname = $row['student_sname'];
@@ -345,8 +355,16 @@ $cell_number = $row['cell_number'];
 $email = $row['email'];*/
 
 }
-//$row = mysqli_fetch_array($result);
-//var_dump($row);die();
+
+ $query = "SELECT * FROM course_student
+          WHERE course_student.student_id = $student_id_edit";
+		  
+		  $result_course_name = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_array($result_course_name)){ 
+var_dump($row);
+}
+
 }
 /*-----editing data from student table-----*/
 
