@@ -11,37 +11,14 @@
           <div class="row">
             <div class="col-sm-4 text-right"><strong>Courses</strong></div>
             <div class="col-sm-5">
-<?php 
 
-/*-----retrieving data from course table-----*/
-
-// Check dbmysqlection
-
-//consultation:
-
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-//execute the query.
-
-$result = mysqli_query($con, $query); 
-
-if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
-}
-
-if (mysqli_num_rows($result) == 0) {
-    echo "No courses found, nothing to print.";
-    exit;
-}
-?>
 
 
 <div class="check-radio-top">
 <?php
 
 
-while($row = mysqli_fetch_array($result)){
+while($row = mysqli_fetch_array($result_course)){
  
     // Easier to use than array
     $id = $row['course_id'];
@@ -51,7 +28,7 @@ while($row = mysqli_fetch_array($result)){
  <input type='checkbox' 
         name='courses[]' 
         value="<?php echo $id; ?>" 
-        <?php echo in_array($id, $courses) ? " checked " : ""; ?> >
+       <?php echo in_array($id, $courses) ? " checked " : ""; ?> >
         <?php echo $name; ?>
 </label>
        <?php

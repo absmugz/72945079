@@ -5,6 +5,7 @@ include('includes/config.php');
 
 /*------includes for dbmysqlection to database-----*/
 
+
 /*------Initialize variables-----*/
 $male_status = 'unchecked';
 $female_status = 'unchecked';
@@ -59,6 +60,21 @@ $emailError ="";
 
 /*------Initialize variables-----*/
 
+/*-----retrieving data from course table-----*/
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+$result_course = mysqli_query($con, $query);
+if (!$result_course) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    exit;
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
+
+/*-----retrieving data from course table-----*/
 
 /*-----Insert Data into student table-----*/
 
@@ -365,14 +381,7 @@ INNER JOIN course
 ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
 		  
-$result_course_name = mysqli_query($con, $query);
-
-while($row = mysqli_fetch_array($result_course_name)){ 
-var_dump($row);
-$id = $row['course_id'];
-$name = $row['course_name'];
-}
-
+$result_course = mysqli_query($con, $query);
 }
 /*-----editing data from student table-----*/
 
