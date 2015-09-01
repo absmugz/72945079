@@ -17,6 +17,8 @@ $Course_StudentResult='';
 /*------Course variables-----*/
 $coursesError = '';
 $courses = array();
+/*-----setting variables for course form data-----*/
+$coursename= '';
 /*------Course variables-----*/
 
 /*------Student variables-----*/
@@ -402,12 +404,52 @@ if(mysqli_query($con,$query))
 /*-----deleting data from student table-----*/
 
 /*-----editing data from course table-----*/
-if (isset($_GET['course_edit'])) {	
+
+/*if (isset($_GET['course_edit'])) {	
 $query='SELECT * FROM course WHERE course_id = "'.$_GET['course_edit'].'"';
 $result = mysqli_query($con, $query); 
 $row = mysqli_fetch_array($result);
 var_dump($row);die();
+}*/
+
+/*-----checking if course button has been clicked and adding form data-----*/
+
+
+if (isset($_POST['submitcourse']))
+{
+/*-----setting variables for course form data-----*/
+$coursename=$_POST['coursename'];
+
+if ($_POST['item_id']>0)
+{
+/*-----update data into the database-----*/
+$querycourse='UPDATE course SET
+course_name = "'.$coursename.'"
+WHERE course_id = "'.$_POST['item_id'].'"
+';
+
+}else{
+		/*-----inserting data into the database-----*/
+$querycourse='INSERT INTO course(course_name
+       )VALUES(
+       "'.$coursename.'"
+         )';
 }
+
+		 
+ if(mysqli_query($con,$querycourse)){
+		echo mysql_error();
+}
+
+
+
+
+/*-----to avoid records from duplicating after insertion-----*/
+
+}
+
+
+
 /*-----editing data from course table-----*/
 
 /*-----deleting data from course table-----*/

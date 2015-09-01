@@ -1,5 +1,58 @@
 <?php include("includes/header.php"); ?>
 
+
+<?php
+
+if(isset($_GET['add']) || isset($_GET['course_edit']))
+
+	{
+
+	/*------set default values-----*/
+	$item_id=0;
+	$editcoursename='';
+	
+if (isset($_GET['course_edit'])) {	
+$query='SELECT * FROM course WHERE course_id = "'.$_GET['course_edit'].'"';
+$result = mysqli_query($con, $query); 
+$row = mysqli_fetch_array($result);
+$item_id=$row['course_id'];
+$editcoursename=$row['course_name'];
+}
+
+?>
+
+
+<!--forms is below-->
+
+<form name="addcourse" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<INPUT TYPE = "hidden" VALUE ="<?PHP echo $item_id ; ?>" NAME = "item_id">
+
+<table width="589" border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td width="91">Course name :</td>
+    <td width="478"><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><INPUT TYPE = "Submit" Name = "submitcourse" VALUE = "add course"></td>
+  </tr>
+
+</table>
+
+</form>
+
+
+<?php
+}
+else
+{
+?>
+<a href="<?php $_SERVER['PHP_SELF'] ?>?add=1">Add a new course</a><br />
+
+<?php
+}/*------end main if-----*/
+?>
+
   <div class="row">
     <div class="col-md-12">
       <table class="table">
