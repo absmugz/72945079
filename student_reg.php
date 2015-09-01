@@ -16,23 +16,24 @@
 
 <div class="check-radio-top">
 <?php
-
-
 while($row = mysqli_fetch_array($result_course)){
  
     // Easier to use than array
     $id = $row['course_id'];
     $name = $row['course_name'];
+	
+
 ?>
 <label class="checkbox-inline">
  <input type='checkbox' 
         name='courses[]' 
         value="<?php echo $id; ?>" 
-       <?php echo in_array($id, $courses) ? " checked " : ""; ?> >
-        <?php echo $name; ?>
+<?php echo in_array($id, $courses) ? " checked " : ""; ?> >
+<?php echo $name; ?>
 </label>
        <?php
 }
+
 ?>
 </div>
 </div> <div class="col-sm-3"><span class="error"><?php echo $coursesError; ?></span></div>

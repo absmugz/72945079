@@ -251,13 +251,23 @@ $query='INSERT INTO student(student_sname,student_fname,student_gender,student_e
 
 /*-----insert data into the database-----*/
 
-if(mysqli_query($con,$query))
-{			
-$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$student_name .' ' . $surname .' have been successfully created.</div>';
-}else{
-$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student details have not been created, please try again.</div>';
-			//echo "Data not Inserted" . mysqli_error($con);die();
+if (mysqli_query($con, $query)) {
+    $last_id = mysqli_insert_id($con);
+    echo "New record created successfully. Last inserted ID is: " . $last_id;
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($con);
 }
+
+
+foreach ($courses as $course_id) {
+   $query="INSERT INTO course_student(student_id, course_id)
+                 VALUES($last_id, $course_id)";
+   mysqli_query($con, $query);
+}
+
+
+
+mysqli_close($con);
 /*-----insert data into the database-----*/
 
 /*-----else ends here -----*/
@@ -351,10 +361,9 @@ $student_id_edit = $_GET['student_edit'];
 $result = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result)){ 
-var_dump($row);
+//var_dump($row);
 //print_r($row['course_id']);die();
 //$courses = $row['courses'];
-
 $student_id = $row['student_id'];
 $surname = $row['student_sname'];
 $student_name = $row['student_fname'];
@@ -384,6 +393,7 @@ ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
 		  
 $result_course = mysqli_query($con, $query);
+
 }
 /*-----editing data from student table-----*/
 
@@ -480,56 +490,6 @@ return $data;
 }
 
 /*------validation function-----*/
-
-/*------Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted function-----*/
-
-function insertDataGetId($connection, $tblname, array $val_cols){
-		$keysString = implode(", ", array_keys($val_cols));
-		$i=0;
-		foreach($val_cols as $key=>$value) {
-			$StValue[$i] = "'".$value."'";
-		    $i++;
-		}
-
-		$StValues = implode(", ",$StValue);
-		
-		if (mysqli_connect_errno()) {
-		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
-
-		if(mysqli_query($connection,"INSERT INTO $tblname ($keysString) VALUES ($StValues)"))
-		{
-			echo "Successfully Inserted data<br>";
-			$last_id = mysqli_insert_id($connection);
-		}
-		else{
-			echo "Data not Inserted";
-		}return $last_id;
-}
-	
-/*------Insert Data within table by accepting TableName and Table column => Data as associative array and get id of inserted function-----*/
-
-/*------Course checkboxes-----*/
-
-function get_checkboxes_chk($connection){
-$str='';
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-$result = mysqli_query($connection, $query); 
-
-//var_dump($result);die();
-
-while($row = mysqli_fetch_array($result)){
-	
-$str.='<br/>'.$row['course_name'].'<input type="checkbox" value="'.$row['course_id'].'" name="courses[]"/>';
-
-}
-
-return $str;
-
-}
-
-/*------Course checkboxes-----*/
 
 /*------functions-----*/
 
