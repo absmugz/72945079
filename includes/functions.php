@@ -76,6 +76,11 @@ if (mysqli_num_rows($result_course) == 0) {
     exit;
 }
 
+while($row = mysqli_fetch_array($result_course)){
+    $id = $row['course_id'];
+    $name = $row['course_name'];
+}
+
 
 
 /*-----retrieving data from course table-----*/
@@ -393,8 +398,17 @@ FROM course_student
 INNER JOIN course
 ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
-		  
+
 $result_course = mysqli_query($con, $query);
+if (!$result_course) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    exit;
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
 
 }
 /*-----editing data from student table-----*/
