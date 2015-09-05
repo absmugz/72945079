@@ -76,6 +76,8 @@ if (mysqli_num_rows($result_course) == 0) {
     exit;
 }
 
+
+
 /*-----retrieving data from course table-----*/
 
 /*-----Insert Data into student table-----*/
