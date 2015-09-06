@@ -10,6 +10,7 @@ include('includes/config.php');
 $male_status = 'unchecked';
 $female_status = 'unchecked';
 
+$runQuery ='';
 $message='';
 $StudentSucceesMessage='';
 $Course_StudentResult='';
@@ -316,16 +317,17 @@ if(mysqli_query($con,$student_course))
 /*-----Filter course_student and show students in a certain course table-----*/
 
 if(isset($_POST['filter'])){
-
+$runQuery = true;
 $selected_val = $_POST['courseselect'];
 
 if($selected_val == "nothing"){
+   $message =  "You have not selected a course to filter students"; // Displaying Selected Value
+   $runQuery = false;
+}
+
+
+if ($runQuery) {
 	
-$message =  "You have not selected a course to filter students"; 
-$runQuery = false;
-
-} else {
-
 $query = "SELECT student.student_fname, student_sname
                 FROM student, course_student
                 WHERE student.student_id = course_student.student_id 
@@ -333,6 +335,10 @@ $query = "SELECT student.student_fname, student_sname
 				
 $Course_StudentResult = mysqli_query($con, $query);
 
+}
+else
+{
+   echo $message;
 }
 
 }
