@@ -10,11 +10,21 @@
 <strong>Courses</strong>
 <br>
 
+<?php
+while($row = mysqli_fetch_array($result_course)){
+    $id = $row['course_id'];
+    $name = $row['course_name'];
+?>
+
  <input type='checkbox' 
         name='courses[]' 
         value="<?php echo $id; ?>" 
-<?php echo in_array($id, $courses) ? " checked " : ""; ?> >
+ <?php if (in_array($id, $courses)){ echo "checked"; }?>/>
+
+
+ 
 <?php echo $name; ?>
+<?php } ?>
 
 <span class="error"> * <?php echo $coursesError;?></span>
 <br>

@@ -76,13 +76,6 @@ if (mysqli_num_rows($result_course) == 0) {
     exit;
 }
 
-while($row = mysqli_fetch_array($result_course)){
-    $id = $row['course_id'];
-    $name = $row['course_name'];
-}
-
-
-
 /*-----retrieving data from course table-----*/
 
 /*-----Insert Data into student table-----*/
