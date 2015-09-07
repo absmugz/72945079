@@ -327,19 +327,30 @@ if($selected_val == "nothing"){
 
 
 if ($runQuery) {
-	
+
+
 $query = "SELECT student.student_fname, student_sname
                 FROM student, course_student
                 WHERE student.student_id = course_student.student_id 
                 AND $selected_val = course_student.course_id";
 				
 $Course_StudentResult = mysqli_query($con, $query);
+if (!$Course_StudentResult) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    exit;
+}
+
+if (mysqli_num_rows($Course_StudentResult) == 0) {
+    echo "No students found, nothing to print.";
+    exit;
+}
+
+
+				
+
 
 }
-else
-{
-   echo $message;
-}
+
 
 }
 
