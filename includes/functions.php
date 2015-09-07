@@ -315,9 +315,9 @@ if(mysqli_query($con,$student_course))
 /*-----Insert Data into student table-----*/
 
 /*-----Filter course_student and show students in a certain course table-----*/
-
-if(isset($_POST['filter'])){
 $runQuery = true;
+if(isset($_POST['filter'])){
+
 $selected_val = $_POST['courseselect'];
 
 if($selected_val == "nothing"){
