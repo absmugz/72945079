@@ -15,19 +15,37 @@
 <input class="submit" name="filter" type="submit" value="Show students in course">
 </form>
 
-      <table>
+        
 
-        <thead>
+ <?php
+ 
+echo '<div>' . $message . '</div>';
+ 
+if($runQuery){
+
+
+if (!$Course_StudentResult) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    exit;
+}
+
+if (mysqli_num_rows($Course_StudentResult) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
+
+
+
+echo '<table>
+<thead>
           <tr>
             <th>#</th>
             <th>Student Name</th>
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
-        
-
- <?php
+ <tbody>';
+		
 while($row = mysqli_fetch_array($Course_StudentResult)){
 ?>
           <tr>
@@ -37,6 +55,7 @@ while($row = mysqli_fetch_array($Course_StudentResult)){
             <td><a href="<?php echo $_SERVER['PHP_SELF'].'?delete_id='.$row['student_id']?>">Delete</a></td>
           </tr>
           <?php
+}
 }
 ?>
         </tbody>
