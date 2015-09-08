@@ -342,7 +342,7 @@ $Course_StudentResult = mysqli_query($con, $query);
 }
 else
 {
-   echo $message;
+  $message;
 }
 
 }

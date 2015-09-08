@@ -25,12 +25,12 @@ if($runQuery){
 
 
 if (!$Course_StudentResult) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+     echo '<div>' . "Could not successfully run query ($sql) from DB: " . mysqli_error($con) . '</div>';
     exit;
 }
 
 if (mysqli_num_rows($Course_StudentResult) == 0) {
-    echo "No students found in the selected course, nothing to print.";
+    echo '<div>' . "No students found in the selected course, nothing to print." . '</div>';
     exit;
 }
 
