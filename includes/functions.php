@@ -328,6 +328,8 @@ if($selected_val == "nothing"){
 
 
 if ($runQuery) {
+	
+	
 
 $query = "SELECT student.student_fname, student_sname
                 FROM student, course_student
@@ -335,6 +337,7 @@ $query = "SELECT student.student_fname, student_sname
                 AND $selected_val = course_student.course_id";
 				
 $Course_StudentResult = mysqli_query($con, $query);
+
 
 }
 else

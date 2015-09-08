@@ -30,7 +30,7 @@ if (!$Course_StudentResult) {
 }
 
 if (mysqli_num_rows($Course_StudentResult) == 0) {
-    echo "No courses found, nothing to print.";
+    echo "No students found in the selected course, nothing to print.";
     exit;
 }
 
