@@ -12,6 +12,10 @@
 
 <?php
 while($row = mysqli_fetch_array($result_course)){
+	
+if(isset($_GET['student_edit'])) { 
+$courses[] = $row['course_id'];
+}
     $id = $row['course_id'];
     $name = $row['course_name'];
 ?>
@@ -25,6 +29,8 @@ while($row = mysqli_fetch_array($result_course)){
  
 <?php echo $name; ?>
 <?php } ?>
+
+
 
 <span class="error"> * <?php echo $coursesError;?></span>
 <br>

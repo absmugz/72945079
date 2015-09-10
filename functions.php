@@ -65,22 +65,14 @@ $emailError ="";
 
 /*-----retrieving data from course table-----*/
 
-$query = "SELECT * FROM course ORDER BY course_id ASC";
 
+$query = "SELECT * FROM course ORDER BY course_id ASC"; 
 $result_course = mysqli_query($con, $query);
-// Fetch all
-//var_dump(mysqli_fetch_all($result_course));die();
+$courses = mysqli_fetch_all($result_course,MYSQLI_ASSOC);
+
+//var_dump($courses);die();
 
 
-if (!$result_course) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
-}
-
-if (mysqli_num_rows($result_course) == 0) {
-    echo "No courses found, nothing to print.";
-    exit;
-}
 
 /*-----retrieving data from course table-----*/
 
@@ -408,6 +400,8 @@ ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
 
 $result_course = mysqli_query($con, $query);
+$courses = mysqli_fetch_all($result_course,MYSQLI_ASSOC);
+
 if (!$result_course) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
