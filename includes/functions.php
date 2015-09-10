@@ -65,8 +65,26 @@ $emailError ="";
 
 /*-----retrieving data from course table-----*/
 
+
 $query = "SELECT * FROM course ORDER BY course_id ASC";
+ 
+$result = mysqli_query($con, $query);
+// Fetch all
+/* associative array */
+
+
+$courses = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+var_dump($courses);die();
+
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
 $result_course = mysqli_query($con, $query);
+// Fetch all
+//var_dump(mysqli_fetch_all($result_course));die();
+
+
 if (!$result_course) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
