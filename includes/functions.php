@@ -233,9 +233,9 @@ if ($student_id>0){
 
 if(mysqli_query($con,$query))
 {			
-$StudentSucceesMessage = '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong> Thank you. Student records for '.' ' .$student_name .' ' . $surname .' have been successfully updated.</div>';
+$message = "Success! Thank you. Student records for " . $student_name . " " . $surname . " have been successfully updated";
 }else{
-$StudentSucceesMessage = '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error! </strong>Student details have not been updated, please try again.</div>';
+$message = "Error! Student details for " . $student_name . " " . $surname . " have not been updated, please try again!";
 }
 /*-----insert data into the database-----*/
 
@@ -259,9 +259,10 @@ $query='INSERT INTO student(student_sname,student_fname,student_gender,student_e
 
 if (mysqli_query($con, $query)) {
     $last_id = mysqli_insert_id($con);
-    echo "New record created successfully. Last inserted ID is: " . $last_id;
+    $message = "New student record for " . $student_name . " " . $surname . " has bee created successfully!";
+	 //$message = "New student record for" . $student_name . " " . $surname . " has bee created successfully. Last inserted ID is: " . $last_id;
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($con);
+   $message = "Error: " . $sql . "<br>" . mysqli_error($con);
 }
 
 

@@ -1,6 +1,9 @@
 <?php include("includes/header.php"); ?>
 
 <div class="form_div">
+
+<?php echo '<div>' . $message . '</div>'; ?>
+
 <form name="registration" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 <span class="error">* required field.</span>
 <br>

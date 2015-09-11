@@ -7,15 +7,11 @@
     $id = $row['course_id'];
     $name = $row['course_name'];
 ?>
-        <option value="<?php echo $id; ?>" <?php if($id == $_POST['courseselect']) echo 'selected'; ?>><?php echo $name; ?></option>
-        
-        
+        <option value="<?php echo $id; ?>" <?php if($id == $_POST['courseselect']) echo 'selected'; ?>><?php echo $name; ?></option>  
     <?php
 }
 ?>
-
-
-      </select>
+ </select>
 <input class="submit" name="filter" type="submit" value="Show students in course">
 </form>
 
