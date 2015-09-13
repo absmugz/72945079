@@ -1,54 +1,47 @@
 <?php include("includes/header.php"); ?>
-<form class="form-horizontal" name="filter" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-<div class="row">
-<div class="col-md-6">
-    
+<?php echo '<div>' . $message . '</div>';
+if($runQuery){
+
+
+if (!$Course_StudentResult) {
+     echo '<div>' . "Could not successfully run query ($sql) from DB: " . mysqli_error($con) . '</div>';
+    exit;
+}
+
+if (mysqli_num_rows($Course_StudentResult) == 0) {
+    echo '<div>' . "No students found in the selected course, nothing to print." . '</div>';
+    exit;
+}
+}
+
+?>
+<form name="filter" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">   
+<select name="courseselect">
+<option value="nothing" selected>Select course to send mail to students</option>
 <?php
-
-/*-----retrieving data from course table-----*/
-$courseQuery = "SELECT * FROM course ORDER BY course_id ASC";
-$result = mysqli_query($con, $courseQuery);
-
-if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
-}
-
-if (mysqli_num_rows($result) == 0) {
-    echo "No courses found, nothing to print.";
-    exit;
+while($row = mysqli_fetch_array($result_course)){
+			
+$courseselect = $_POST['courseselect'];
+$id = $row['course_id'];
+$name = $row['course_name'];
+?>
+<option value="<?php echo $id; ?>" <?php if($id == $courseselect) echo 'selected'; ?>><?php echo $name; ?></option>  
+<?php
 }
 ?>
+ </select>
+<br>
+ Subject :
+<br>
+<input class="input" name="subject" value="<?php echo $subject_mail; ?>">
+<br>
+Message : 
+<br>
+<textarea name="message" rows="5" cols="40"><?php echo $subject_message;?></textarea>
+<br>
+<input class="submit" name="sendmail" type="submit" value="Send mail">
+</form>
 
-      <select name="courseselect" class="selectpicker">
-      <option value="nothing" selected>Select course to show students</option>
-      <?php
-        while($row = mysqli_fetch_array($result)){
-?>
-        <option value="<?php echo $row['course_id']?>"><?php echo $row['course_name']?></option>
-    <?php
-}
-?>
-      </select>
-    </div>
-  </div>
- <div class="row">
-<div class="col-md-6">
-  <div class="form-group">
-    <label for="subject" class="col-sm-2 control-label">Subject</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="subject" placeholder="Subject">
-    </div>
-  </div>
-  
-  <textarea class="form-control" rows="3"></textarea>
 
-  
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" name='sendmail' value='Submit' class="btn btn-primary">send mail</button>
-    </div>
-  </div>
-
-  </form> </div></div>
+ 
 <?php include("includes/footer.php"); ?>

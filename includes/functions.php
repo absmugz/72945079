@@ -40,6 +40,13 @@ $email = '';
 
 /*------Student variables-----*/
 
+/*------send mail variables-----*/
+
+$subject_mail = '';
+$subject_message = '';
+
+/*------send mail variables-----*/
+
 /*------Error variables-----*/
 
 /*------Student variables-----*/
@@ -354,6 +361,41 @@ else
 }
 
 /*-----Filter course_student and show students in a certain course table-----*/
+
+/*-----send mail to students-----*/
+
+if(isset($_POST['sendmail'])){
+
+$runQuery = true;
+$selected_val = $_POST['courseselect'];
+
+if($selected_val == "nothing"){
+   $message =  "You have not selected a course to send mail to students"; // Displaying Selected Value
+   $runQuery = false;
+}
+
+
+if ($runQuery) {
+	
+	
+
+$query = "SELECT student.student_fname, student_sname
+                FROM student, course_student
+                WHERE student.student_id = course_student.student_id 
+                AND $selected_val = course_student.course_id";
+				
+$Course_StudentResult = mysqli_query($con, $query);
+
+
+}
+else
+{
+  $message;
+}
+
+}
+
+/*-----send mail to students-----*/
 
 /*-----editing data from student table-----*/
 if (isset($_GET['student_edit'])) {
