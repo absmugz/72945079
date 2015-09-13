@@ -43,7 +43,12 @@ $email = '';
 /*------send mail variables-----*/
 
 $subject_mail = '';
-$subject_message = '';
+$message_mail = '';
+
+/*------send error variables-----*/
+
+$subject_mailError  = '';
+$message_mailError  = '';
 
 /*------send mail variables-----*/
 
@@ -366,6 +371,32 @@ else
 
 if(isset($_POST['sendmail'])){
 
+$error = false;
+$subject_mail = $_POST["subject"];
+$message_mail = $_POST["message"];
+
+/*-----subject validation-----*/
+
+if (empty($_POST["subject"])) {
+$subject_mailError = "Subject is required";
+$error=true;
+} else {
+$subject_mail = test_input($_POST["subject"]);
+}
+
+/*-----subject validation-----*/
+
+/*-----message validation-----*/
+
+if (empty($_POST["message"])) {
+$message_mailError = "Message is required";
+$error=true;
+} else {
+$message_mail = test_input($_POST["message"]);
+}
+
+/*-----message validation-----*/
+
 $runQuery = true;
 $selected_val = $_POST['courseselect'];
 
@@ -376,16 +407,30 @@ if($selected_val == "nothing"){
 
 
 if ($runQuery) {
-	
-	
 
-$query = "SELECT student.student_fname, student_sname
+$query = "SELECT student.student_fname, student_sname, student_email
                 FROM student, course_student
                 WHERE student.student_id = course_student.student_id 
                 AND $selected_val = course_student.course_id";
 				
 $Course_StudentResult = mysqli_query($con, $query);
 
+if(!$error) {
+	
+while($row = mysqli_fetch_array($Course_StudentResult)){
+var_dump($row['student_email']);
+
+$to = $row['student_email'];
+$subject = $subject_mail;
+$txt = $message_mail;
+
+mail($to,$subject,$txt);
+
+}
+
+$message = "The email has been successful sent to students";
+
+}
 
 }
 else
