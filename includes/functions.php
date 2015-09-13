@@ -369,6 +369,22 @@ else
 
 /*-----send mail to students-----*/
 
+/*-----send mail to students from localhost-----*/
+
+require("phpmailer/PHPMailerAutoload.php"); // path to the PHPMailer class
+ 
+$mail = new PHPMailer();  
+ 
+$mail->IsSMTP();  // telling the class to use SMTP
+$mail->Mailer = "smtp";
+$mail->Host = "ssl://smtp.gmail.com";
+$mail->Port = 465;
+$mail->SMTPAuth = true; // turn on SMTP authentication
+$mail->Username = "absmugz09@gmail.com"; // SMTP username
+$mail->Password = "makabongwe@01"; // SMTP password 
+
+/*-----send mail to students from localhost-----*/
+
 if(isset($_POST['sendmail'])){
 
 $error = false;
@@ -424,7 +440,20 @@ $to = $row['student_email'];
 $subject = $subject_mail;
 $txt = $message_mail;
 
-mail($to,$subject,$txt);
+$mail->From = "absmugz09@gmail.com";
+$mail->AddAddress($to);  
+ 
+$mail->Subject  = $subject;
+$mail->Body     = $txt;
+$mail->WordWrap = 50;  
+ 
+if(!$mail->Send()) {
+echo 'Message was not sent.';
+echo 'Mailer error: ' . $mail->ErrorInfo;
+} else {
+echo 'Message has been sent.';
+}
+
 
 }
 
