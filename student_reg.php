@@ -55,7 +55,7 @@ $titleOptions = array("Mr", "Mrs", "Miss", "Ms", "Dr", "Prof","Rev");
  
 foreach($titleOptions as $item){
 ?>
-<option value="<?php echo $item; ?>" <?php if (in_array($titleOptions, $title)){ echo "selected"; }?>><?php echo $item; ?></option>  
+<option value="<?php echo $item; ?>" <?php $title == $item ? print "selected" : ""; ?>><?php echo $item; ?></option>  
 <?php
 }
 ?>
