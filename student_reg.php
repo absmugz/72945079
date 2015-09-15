@@ -44,6 +44,11 @@ Surname:
 <input class="input" name="surname" value="<?php echo $surname; ?>">
 <span class="error"> * <?php echo empty($surnameError) ? "" : $surnameError; ?></span>
 <br>
+Initials:
+<br>
+<input class="input" name="initials" value="<?php echo $initials; ?>">
+<span class="error"> * <?php echo empty($initialsError) ? "" : $initialsError; ?></span>
+<br>
 Full First Name:
 <br>
 <input class="input" name="student_name" value="<?php echo $student_name; ?>">
@@ -51,8 +56,8 @@ Full First Name:
 <br>
 Gender:
 <br>
-<input class="radio" name="gender" type="radio" value="female">Female
-<input class="radio" name="gender" type="radio" value="male">Male
+<Input type = 'Radio' Name ='gender' value= 'female'<?PHP print $female_status; ?>>Female
+<Input type = 'Radio' Name ='gender' value= 'male' <?PHP print $male_status; ?>>Male
 <span class="error"> * <?php echo $genderError;?></span>
 <br>
 E-mail:

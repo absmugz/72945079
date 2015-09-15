@@ -108,7 +108,7 @@ $courses = $_POST['courses'];
 
 $student_id = $_POST['student_id'];
 $surname = $_POST['surname'];
-$initials = $_POST['initials'];
+$initials = $_POST["initials"];
 $student_name = $_POST['student_name'];
 $title = $_POST['title'];
 $dob = $_POST['dob'];
@@ -159,6 +159,22 @@ $surnameError = "Only letters and white space allowed";
 
 /*-----surname validation-----*/
 
+/*-----intials validation-----*/
+
+if (empty($_POST["initials"])) {
+$initialsError = "Intials is required";
+$error=true;
+} else {
+$initials = test_input($_POST["initials"]);
+// check name only contains letters and whitespace
+if (!preg_match("/^[a-zA-Z]*$/",$initials)) {
+$initialsError = "Only letters allowed";
+}
+}
+
+
+/*-----intials validation-----*/
+
 /*-----name validation-----*/
 
 if (empty($_POST["student_name"])) {
@@ -182,6 +198,7 @@ $error=true;
 } else {
 $gender = test_input($_POST["gender"]);
 }
+
 if ($gender == 'male') {
 $male_status = 'checked';
 }
@@ -233,8 +250,9 @@ if ($student_id>0){
 
 		$query='UPDATE student SET
        student_sname="'.$surname.'",
+	   student_initials="'.$initials.'",
        student_fname="'.$student_name.'",
-       student_gender="'.$title.'",
+       student_gender="'.$gender.'",
        student_email="'.$email.'"
        WHERE student_id="'.$student_id.'"
  ';
@@ -257,9 +275,10 @@ $message = "Error! Student details for " . $student_name . " " . $surname . " ha
 else{
 /*-----query to insert data into the database-----*/
 
-$query='INSERT INTO student(student_sname,student_fname,student_gender,student_email
+$query='INSERT INTO student(student_sname,student_initials,student_fname,student_gender,student_email
        )VALUES(
        "'.$surname.'",
+	   "'.$initials.'",
        "'.$student_name.'",
        "'.$gender.'",
        "'.$email.'"
@@ -493,7 +512,7 @@ $student_id_edit = $_GET['student_edit'];
 $result = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result)){ 
-//var_dump($row);
+//var_dump($row);die();
 //print_r($row['course_id']);die();
 //$courses = $row['courses'];
 $student_id = $row['student_id'];
@@ -512,8 +531,16 @@ $address = $row['address'];
 $phonenumber = $row['phonenumber'];
 $cell_number = $row['cell_number'];
 $email = $row['email'];*/
+if ($gender == 'male') {
+$male_status = 'checked';
+}
+else if ($gender == 'female') {
+$female_status = 'checked';
+}
 
 }
+
+
 
  //$query = "SELECT * FROM course_student
  //         WHERE course_student.student_id = $student_id_edit";
