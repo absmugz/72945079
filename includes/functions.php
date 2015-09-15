@@ -251,6 +251,7 @@ if ($student_id>0){
 		$query='UPDATE student SET
        student_sname="'.$surname.'",
 	   student_initials="'.$initials.'",
+	   student_title="'.$title.'",
        student_fname="'.$student_name.'",
        student_gender="'.$gender.'",
        student_email="'.$email.'"
@@ -275,10 +276,11 @@ $message = "Error! Student details for " . $student_name . " " . $surname . " ha
 else{
 /*-----query to insert data into the database-----*/
 
-$query='INSERT INTO student(student_sname,student_initials,student_fname,student_gender,student_email
+$query='INSERT INTO student(student_sname,student_initials,student_title,student_fname,student_gender,student_email
        )VALUES(
        "'.$surname.'",
 	   "'.$initials.'",
+	   "'.$title.'",
        "'.$student_name.'",
        "'.$gender.'",
        "'.$email.'"
@@ -517,11 +519,12 @@ while($row = mysqli_fetch_array($result)){
 //$courses = $row['courses'];
 $student_id = $row['student_id'];
 $surname = $row['student_sname'];
+$initials = $row['student_initials'];
+$title = $row['title'];
 $student_name = $row['student_fname'];
 $gender = $row['student_gender'];
 $email = $row['student_email'];
 /*$title = $row['title'];
-$initials = $row['initials'];
 $dob = $row['dob'];
 $gender = $row['gender'];
 $language = $row['language'];

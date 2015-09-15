@@ -39,15 +39,32 @@ $courses[] = $row['course_id'];
 <br>
 <hr/>
 <br>
-Surname:
-<br>
-<input class="input" name="surname" value="<?php echo $surname; ?>">
-<span class="error"> * <?php echo empty($surnameError) ? "" : $surnameError; ?></span>
-<br>
 Initials:
 <br>
 <input class="input" name="initials" value="<?php echo $initials; ?>">
 <span class="error"> * <?php echo empty($initialsError) ? "" : $initialsError; ?></span>
+<br>
+Title:
+<br> 
+<select name="title">
+<option selected="selected">Choose one</option>
+<?php
+$titleOptions = array("Mr", "Mrs", "Miss", "Ms", "Dr", "Prof","Rev");
+
+foreach($titleOptions as $item){
+?>
+<option value="<?php echo $item; ?>" <?php if($item == $title) echo 'selected'; ?>><?php echo $item; ?></option>  
+<?php
+}
+?>
+</select>
+
+<span class="error"> * <?php echo empty($titleError) ? "" : $titleError; ?></span>
+<br>
+Surname:
+<br>
+<input class="input" name="surname" value="<?php echo $surname; ?>">
+<span class="error"> * <?php echo empty($surnameError) ? "" : $surnameError; ?></span>
 <br>
 Full First Name:
 <br>
