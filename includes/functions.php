@@ -66,7 +66,8 @@ $languageError = '';
 $identity_numberError = '';
 $addressError = '';
 $student_telhError = '';
-$cell_numberError = '';
+$student_telwError = '';
+$student_cellError = '';
 $emailError ="";
 /*------Student variables-----*/
 
@@ -115,7 +116,6 @@ $dob = $_POST['dob'];
 $gender = $_POST['gender'];
 $language = $_POST['language'];
 $identity_number = $_POST['identity_number'];
-$address = $_POST['address'];
 $address = $_POST['address'];
 $student_telh = $_POST['student_telh'];
 $student_telw = $_POST['student_telw'];
@@ -274,7 +274,12 @@ if ($student_id>0){
        student_fname="'.$student_name.'",
        student_gender="'.$gender.'",
        student_email="'.$email.'",
-	   student_lang="'.$language.'"
+	   student_lang="'.$language.'",
+	   student_id_no="'.$identity_number.'",
+	   student_telh="'.$student_telh.'",
+	   student_telw="'.$student_telw.'",
+	   student_cell="'.$student_cell.'",
+	   student_address="'.$address.'"
        WHERE student_id="'.$student_id.'"
  ';
  
@@ -296,7 +301,7 @@ $message = "Error! Student details for " . $student_name . " " . $surname . " ha
 else{
 /*-----query to insert data into the database-----*/
 
-$query='INSERT INTO student(student_sname,student_initials,student_title,student_fname,student_gender,student_email,student_lang
+$query='INSERT INTO student(student_sname,student_initials,student_title,student_fname,student_gender,student_email,student_lang,student_id_no,student_telh,student_telw,student_cell,student_address
        )VALUES(
        "'.$surname.'",
 	   "'.$initials.'",
@@ -304,7 +309,12 @@ $query='INSERT INTO student(student_sname,student_initials,student_title,student
        "'.$student_name.'",
        "'.$gender.'",
        "'.$email.'",
-	   "'.$language.'"
+	   "'.$language.'",
+	   "'.$identity_number.'",
+	   "'.$student_telh.'",
+       "'.$student_telw.'",
+	   "'.$student_cell.'",
+	   "'.$address.'"
        )';
 
 /*-----query to insert data into the database-----*/
@@ -546,15 +556,10 @@ $student_name = $row['student_fname'];
 $gender = $row['student_gender'];
 $email = $row['student_email'];
 $language = $row['student_lang'];
-/*$title = $row['title'];
-$dob = $row['dob'];
-$gender = $row['gender'];
-$identity_number = $row['identity_number'];
-$address = $row['address'];
-$address = $row['address'];
-$phonenumber = $row['phonenumber'];
-$cell_number = $row['cell_number'];
-$email = $row['email'];*/
+$identity_number = $_POST['student_id_no'];
+$student_telh = $_POST['student_telh'];
+$student_telw = $_POST['student_telw'];
+$student_cell = $_POST['student_cell'];
 if ($gender == 'male') {
 $male_status = 'checked';
 }

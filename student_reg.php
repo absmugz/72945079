@@ -95,6 +95,31 @@ foreach($languageOptions as $item){
 </select>
 <span class="error"> * <?php echo empty($languageError) ? "" : $languageError; ?></span>
 <br>
+Id number:
+<br>
+<input class="input" name="identity_number" value="<?php echo $identity_number; ?>">
+<span class="error"> * <?php echo empty($identity_numberError) ? "" : $identity_numberError; ?></span>
+<br>
+student tel home:
+<br>
+<input class="input" name="student_telh" value="<?php echo $student_telh; ?>">
+<span class="error"> * <?php echo empty($student_telhError) ? "" : $student_telhError; ?></span>
+<br>
+student tel work:
+<br>
+<input class="input" name="student_telw" value="<?php echo $student_telw; ?>">
+<span class="error"> * <?php echo empty($student_telwError) ? "" : $student_telwError; ?></span>
+<br>
+student tel cell:
+<br>
+<input class="input" name="student_cell" value="<?php echo $student_cell; ?>">
+<span class="error"> * <?php echo empty($student_cellError) ? "" : $student_cellError; ?></span>
+<br>
+Address:
+<br>
+<input class="input" name="address" value="<?php echo $address; ?>">
+<span class="error"> * <?php echo empty($addressError) ? "" : $addressError; ?></span>
+<br>
 <input class="submit" name="register" type="submit" value="Register Student">
 </form>
 </div>
