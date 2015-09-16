@@ -50,9 +50,6 @@ Title:
 <option selected="selected">Choose one</option>
 <?php
 $titleOptions = array("Mr", "Mrs", "Miss", "Ms", "Dr", "Prof","Rev");
-
-
- 
 foreach($titleOptions as $item){
 ?>
 <option value="<?php echo $item; ?>" <?php $title == $item ? print "selected" : ""; ?>><?php echo $item; ?></option>  
@@ -60,7 +57,6 @@ foreach($titleOptions as $item){
 }
 ?>
 </select>
-
 <span class="error"> * <?php echo empty($titleError) ? "" : $titleError; ?></span>
 <br>
 Surname:
@@ -83,6 +79,21 @@ E-mail:
 <br>
 <input class="input" type="text" name="email" value="<?php echo $email; ?>">
 <span class="error">* <?php echo empty($emailError) ? "" : $emailError; ?></span>
+<br>
+Language:
+<br> 
+<select name="language">
+<option selected="selected">Choose your language</option>
+<?php
+$languageOptions = array("English", "Afrikaans", "Xhosa", "Zulu", "Ndebele", "Venda","Tswana");
+foreach($languageOptions as $item){
+?>
+<option value="<?php echo $item; ?>" <?php $language == $item ? print "selected" : ""; ?>><?php echo $item; ?></option>  
+<?php
+}
+?>
+</select>
+<span class="error"> * <?php echo empty($languageError) ? "" : $languageError; ?></span>
 <br>
 <input class="submit" name="register" type="submit" value="Register Student">
 </form>

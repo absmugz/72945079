@@ -254,7 +254,8 @@ if ($student_id>0){
 	   student_title="'.$title.'",
        student_fname="'.$student_name.'",
        student_gender="'.$gender.'",
-       student_email="'.$email.'"
+       student_email="'.$email.'",
+	   student_lang="'.$language.'"
        WHERE student_id="'.$student_id.'"
  ';
  
@@ -276,14 +277,15 @@ $message = "Error! Student details for " . $student_name . " " . $surname . " ha
 else{
 /*-----query to insert data into the database-----*/
 
-$query='INSERT INTO student(student_sname,student_initials,student_title,student_fname,student_gender,student_email
+$query='INSERT INTO student(student_sname,student_initials,student_title,student_fname,student_gender,student_email,student_lang
        )VALUES(
        "'.$surname.'",
 	   "'.$initials.'",
 	   "'.$title.'",
        "'.$student_name.'",
        "'.$gender.'",
-       "'.$email.'"
+       "'.$email.'",
+	   "'.$language.'"
        )';
 
 /*-----query to insert data into the database-----*/
@@ -524,10 +526,10 @@ $title = $row['student_title'];
 $student_name = $row['student_fname'];
 $gender = $row['student_gender'];
 $email = $row['student_email'];
+$language = $row['student_lang'];
 /*$title = $row['title'];
 $dob = $row['dob'];
 $gender = $row['gender'];
-$language = $row['language'];
 $identity_number = $row['identity_number'];
 $address = $row['address'];
 $address = $row['address'];
