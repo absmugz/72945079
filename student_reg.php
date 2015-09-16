@@ -47,7 +47,7 @@ Initials:
 Title:
 <br> 
 <select name="title">
-<option selected="selected">Choose one</option>
+<option value="" selected="selected">Select your title</option>
 <?php
 $titleOptions = array("Mr", "Mrs", "Miss", "Ms", "Dr", "Prof","Rev");
 foreach($titleOptions as $item){
@@ -83,7 +83,7 @@ E-mail:
 Language:
 <br> 
 <select name="language">
-<option selected="selected">Choose your language</option>
+<option value="" selected="selected">Select your language</option>
 <?php
 $languageOptions = array("English", "Afrikaans", "Xhosa", "Zulu", "Ndebele", "Venda","Tswana");
 foreach($languageOptions as $item){

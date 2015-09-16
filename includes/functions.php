@@ -206,7 +206,26 @@ else if ($gender == 'female') {
 $female_status = 'checked';
 }
 
-/*-----gender validation-----*/
+/*-----title validation-----*/
+if (empty($_POST["title"])) {
+$titleError = "Title is required";
+$error=true;
+} else {
+$title = test_input($_POST["title"]);
+}
+
+/*-----title validation-----*/
+
+
+/*-----language validation-----*/
+if (empty($_POST["language"])) {
+$languageError = "Language is required";
+$error=true;
+} else {
+$language = test_input($_POST["language"]);
+}
+
+/*-----language validation-----*/
 
 
 /*-----email validation-----*/
