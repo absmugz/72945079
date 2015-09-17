@@ -556,10 +556,12 @@ $student_name = $row['student_fname'];
 $gender = $row['student_gender'];
 $email = $row['student_email'];
 $language = $row['student_lang'];
-$identity_number = $_POST['student_id_no'];
-$student_telh = $_POST['student_telh'];
-$student_telw = $_POST['student_telw'];
-$student_cell = $_POST['student_cell'];
+$identity_number = $row['student_id_no'];
+$student_telh = $row['student_telh'];
+$student_telw = $row['student_telw'];
+$student_cell = $row['student_cell'];
+$address = $row['student_address'];
+
 if ($gender == 'male') {
 $male_status = 'checked';
 }
@@ -570,23 +572,49 @@ $female_status = 'checked';
 }
 
 
-
+$query = "SELECT * FROM course ORDER BY course_id ASC";
  //$query = "SELECT * FROM course_student
  //         WHERE course_student.student_id = $student_id_edit";
 		  
+/**
 $query = "SELECT course_student.course_id, course_student.student_id, course.course_name, course.course_id
 FROM course_student
 INNER JOIN course
 ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
+**/
 
 $result_course = mysqli_query($con, $query);
+
 if (!$result_course) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
     exit;
 }
 
 if (mysqli_num_rows($result_course) == 0) {
+    echo "No courses found, nothing to print.";
+    exit;
+}
+
+$query = "SELECT course_student.course_id, course_student.student_id, course.course_name, course.course_id
+FROM course_student
+INNER JOIN course
+ON course_student.course_id=course.course_id
+WHERE course_student.student_id = $student_id_edit";
+
+
+$registered_result_course = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_array($registered_result_course)){
+	$registered_courses[] = $row['course_id'];
+}
+
+if (!$registered_result_course) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    exit;
+}
+
+if (mysqli_num_rows($registered_result_course) == 0) {
     echo "No courses found, nothing to print.";
     exit;
 }

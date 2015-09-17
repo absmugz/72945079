@@ -14,19 +14,17 @@
 <br>
 
 <?php
+
+
 while($row = mysqli_fetch_array($result_course)){
-	
-if(isset($_GET['student_edit'])) { 
-$courses[] = $row['course_id'];
-}
-    $id = $row['course_id'];
+$id = $row['course_id'];
     $name = $row['course_name'];
 ?>
 
  <input type='checkbox' 
         name='courses[]' 
         value="<?php echo $id; ?>" 
- <?php if (in_array($id, $courses)){ echo "checked"; }?>/>
+ <?php if (in_array($id, $registered_courses)){ echo "checked"; }?>/>
 
 
  
