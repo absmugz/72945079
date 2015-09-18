@@ -653,14 +653,20 @@ $querycourse='INSERT INTO course(course_name
 /*-----deleting data from course table-----*/
 
 if (isset($_GET['course_delete'])) {
-$query='DELETE FROM course WHERE course_id = "'.$_GET['course_delete'].'"';
+//$query='DELETE FROM course WHERE course_id = "'.$_GET['course_delete'].'"';
+
+$delete_course = $_GET['course_delete'];
+
+
+
+$query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
 
 if(mysqli_query($con,$query))
 {
 			echo "Successfully deleted course <br>";
 }else{
-			echo "course not deleted";
-			//echo "Data not Inserted" . mysqli_error($con);die();
+			//echo "course not deleted";
+			echo "Data not Inserted" . mysqli_error($con);die();
 }
 
 }
