@@ -69,6 +69,7 @@ $student_telhError = '';
 $student_telwError = '';
 $student_cellError = '';
 $emailError ="";
+
 /*------Student variables-----*/
 
 /*------Error variables-----*/
@@ -83,7 +84,6 @@ $query = "SELECT * FROM course ORDER BY course_id ASC";
 $result_course = mysqli_query($con, $query);
 // Fetch all
 //var_dump(mysqli_fetch_all($result_course));die();
-
 
 if (!$result_course) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
@@ -247,23 +247,29 @@ $emailError = "Invalid email format";
 
 /*-----if statement to insert data-----*/
 if(!$error) {
-/*	
-var_dump($courses) .'<br>';
-echo $surname .'<br>';
-echo $name .'<br>';
-echo $gender .'<br>';
-echo $email .'<br>';*/
-
-// Register Student
-
-/* $studentData = array("student_sname"=>$surname,"student_initials"=>$initials,"student_fname"=>$name);
-$studentTable ="student";
-	
-$id = insertDataGetId($con,$studentTable, $studentData);*/
 
 if ($student_id>0){
 
 /*-----updating data into the database-----*/
+
+/*-----editing and deleting student courses data in the database-----*/
+
+/*-----deleting the old selected courses -----*/
+
+$query = "DELETE FROM course_student
+                  WHERE student_id = $student_id";
+mysqli_query($con,$query);
+
+/*-----deleting the old selected courses -----*/
+
+/*-----inserting the new selected courses -----*/
+
+foreach ($courses as $course_id) {
+   $query="INSERT INTO course_student(student_id, course_id)
+                 VALUES($student_id, $course_id)";
+   mysqli_query($con, $query);
+}
+/*-----editing and deleting student courses data in the database-----*/
 
 /*-----query to update data into the database-----*/
 
@@ -285,7 +291,7 @@ if ($student_id>0){
  
  /*-----query to update data into the database-----*/
 
-/*-----insert data into the database-----*/
+/*-----editing student data into the database-----*/
 
 if(mysqli_query($con,$query))
 {			
@@ -293,7 +299,12 @@ $message = "Success! Thank you. Student records for " . $student_name . " " . $s
 }else{
 $message = "Error! Student details for " . $student_name . " " . $surname . " have not been updated, please try again!";
 }
-/*-----insert data into the database-----*/
+
+mysqli_close($con);
+
+/*-----editing student data into the database-----*/
+
+/*-----editing data into the database-----*/
 
 /*-----updating if ends here-----*/
 }
@@ -329,14 +340,11 @@ if (mysqli_query($con, $query)) {
    $message = "Error: " . $sql . "<br>" . mysqli_error($con);
 }
 
-
 foreach ($courses as $course_id) {
    $query="INSERT INTO course_student(student_id, course_id)
                  VALUES($last_id, $course_id)";
    mysqli_query($con, $query);
 }
-
-
 
 mysqli_close($con);
 /*-----insert data into the database-----*/
@@ -344,27 +352,6 @@ mysqli_close($con);
 /*-----else ends here -----*/
 }
 /*-----else ends here -----*/
-
-
-// Register Student ends here
-
-// Register Student courses
-
-// Register and get id back to use in course_table
-
-/*
-if($id) {
-for($i=0;$i<count($chckdCourses);$i++) {
-$student_course = "INSERT INTO course_student (student_id, course_id) VALUES ($id, $chckdCourses[$i])";
-if(mysqli_query($con,$student_course))
-		{
-			echo "Successfully Inserted data <br>";
-		}
-		else{
-			echo "Data not Inserted";
-			//echo "Data not Inserted" . mysqli_error($con);die();
-		} 
-		} }*/
 		
 /*-----else insert data-----*/
 
@@ -374,13 +361,6 @@ if(mysqli_query($con,$student_course))
 /*-----end of if register if statement-----*/
 }
 /*-----end of if register if statement-----*/
-
-
-
-
-
-
-
 
 /*-----Insert Data into student table-----*/
 
@@ -469,7 +449,7 @@ $runQuery = true;
 $selected_val = $_POST['courseselect'];
 
 if($selected_val == "nothing"){
-   $message =  "You have not selected a course to send mail to students"; // Displaying Selected Value
+   $message =  "You have not selected a course to send mail to students"; 
    $runQuery = false;
 }
 
@@ -525,29 +505,16 @@ else
 
 /*-----editing data from student table-----*/
 if (isset($_GET['student_edit'])) {
+
 $student_id_edit = $_GET['student_edit'];
+		  
+$query = "SELECT * FROM student
+WHERE student.student_id = $student_id_edit";
 
-/*$query = "SELECT * FROM student, course_student, course
-          WHERE student.student_id = $student_id_edit 
-          AND $student_id_edit = course_student.student_id";
-
-		  $query = "SELECT * FROM student
-		  INNER JOIN course_student
-		  ON student.student_id=course_student.student_id
-		  WHERE student.student_id = $student_id_edit;"; */
-		  
-		  $query = "SELECT * FROM student
-          WHERE student.student_id = $student_id_edit";
-		  
-		  
-		  		  
-//$query='SELECT * FROM student WHERE student_id = "'.$_GET['student_edit'].'"';
 $result = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result)){ 
-//var_dump($row);die();
-//print_r($row['course_id']);die();
-//$courses = $row['courses'];
+
 $student_id = $row['student_id'];
 $surname = $row['student_sname'];
 $initials = $row['student_initials'];
@@ -573,16 +540,6 @@ $female_status = 'checked';
 
 
 $query = "SELECT * FROM course ORDER BY course_id ASC";
- //$query = "SELECT * FROM course_student
- //         WHERE course_student.student_id = $student_id_edit";
-		  
-/**
-$query = "SELECT course_student.course_id, course_student.student_id, course.course_name, course.course_id
-FROM course_student
-INNER JOIN course
-ON course_student.course_id=course.course_id
-WHERE course_student.student_id = $student_id_edit";
-**/
 
 $result_course = mysqli_query($con, $query);
 
@@ -602,7 +559,6 @@ INNER JOIN course
 ON course_student.course_id=course.course_id
 WHERE course_student.student_id = $student_id_edit";
 
-
 $registered_result_course = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($registered_result_course)){
@@ -618,6 +574,13 @@ if (mysqli_num_rows($registered_result_course) == 0) {
     echo "No courses found, nothing to print.";
     exit;
 }
+
+/*-----errors and updating student, deleting courses and inserting new courses-----*/
+
+
+
+
+/*-----errors and updating student, deleting courses and inserting new courses-----*/
 
 }
 /*-----editing data from student table-----*/
