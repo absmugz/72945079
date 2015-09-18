@@ -639,14 +639,9 @@ $querycourse='INSERT INTO course(course_name
 		echo mysql_error();
 }
 
-
-
-
 /*-----to avoid records from duplicating after insertion-----*/
 
 }
-
-
 
 /*-----editing data from course table-----*/
 
@@ -655,9 +650,11 @@ $querycourse='INSERT INTO course(course_name
 if (isset($_GET['course_delete'])) {
 //$query='DELETE FROM course WHERE course_id = "'.$_GET['course_delete'].'"';
 
+//$delete_course = $_GET['course_delete'];
+
+//$query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
+
 $delete_course = $_GET['course_delete'];
-
-
 
 $query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
 
