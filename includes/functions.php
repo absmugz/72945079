@@ -250,7 +250,7 @@ if(!$error) {
 
 if ($student_id>0){
 
-/*-----updating data into the database-----*/
+/*-----updating student and course data into the database-----*/
 
 /*-----editing and deleting student courses data in the database-----*/
 
@@ -659,7 +659,7 @@ if(mysqli_query($con,$query))
 {
 			echo "Successfully deleted course <br>";
 }else{
-			echo "course not Inserted";
+			echo "course not deleted";
 			//echo "Data not Inserted" . mysqli_error($con);die();
 }
 
