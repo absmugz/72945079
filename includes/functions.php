@@ -562,7 +562,7 @@ WHERE course_student.student_id = $student_id_edit";
 $registered_result_course = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($registered_result_course)){
-	$registered_courses[] = $row['course_id'];
+	$courses[] = $row['course_id'];
 }
 
 if (!$registered_result_course) {

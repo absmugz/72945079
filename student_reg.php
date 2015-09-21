@@ -24,7 +24,7 @@ $id = $row['course_id'];
  <input type='checkbox' 
         name='courses[]' 
         value="<?php echo $id; ?>" 
- <?php if (in_array($id, $registered_courses)){ echo "checked"; }?>/>
+ <?php echo in_array($id, $courses) ? 'checked="checked" ' : ' '; ?>/>
 
 
  
