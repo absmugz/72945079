@@ -681,7 +681,7 @@ if (mysqli_query($con, $query )) {
     echo "Error deleting record: " . mysqli_error($con);
 }
 
-mysqli_close($con); 
+//mysqli_close($con); 
 
 }
 
@@ -711,7 +711,7 @@ if (mysqli_multi_query($con, $query)) {
     echo "Error deleting record: " . mysqli_error($con);
 }
 
-mysqli_close($con);
+//mysqli_close($con);
 
 }
 
