@@ -32,6 +32,7 @@ if (mysqli_num_rows($result) == 0) {
     exit;
 }
 ?>
+<?php echo '<div>' . $student_delete . '</div>'; ?>
 <?php
  while($row = mysqli_fetch_array($result)){
 ?>

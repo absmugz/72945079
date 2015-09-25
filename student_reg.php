@@ -11,6 +11,7 @@
 <br>
 <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
 <strong>Courses</strong>
+<?php echo '<div>' . $course_message . '</div>'; ?>
 <br>
 
 <?php
