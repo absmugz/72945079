@@ -40,25 +40,35 @@ $editcoursename=$row['course_name'];
 </table>
 
 </form>
-
-
 <?php
 }
 else
 {
 ?>
 <a href="<?php $_SERVER['PHP_SELF'] ?>?add=1">Add a new course</a><br />
-
-
-
 <?php
 }/*------end main if-----*/
+?>
 
+<?php /*-----retrieving data from course table-----*/
 
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result = mysqli_query($con, $query);
+
+if (!$result) {
+    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    //exit;
+}
+
+if (mysqli_num_rows($result) == 0) {
+    echo "No courses found, nothing to print.";
+    //exit;
+}
 ?>
 
 
-      <table>
+<table>
         <thead>
           <tr>
             <th>#</th>
@@ -68,22 +78,7 @@ else
           </tr>
         </thead>
         <tbody>
-<?php /*-----retrieving data from course table-----*/
 
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-$result = mysqli_query($con, $query);
-
-if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
-}
-
-if (mysqli_num_rows($result) == 0) {
-    echo "No courses found, nothing to print.";
-    exit;
-}
-?>
 <?php
         while($row = mysqli_fetch_array($result)){
 ?>

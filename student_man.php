@@ -1,11 +1,6 @@
 <?php include("includes/header.php"); ?>
- <div class="row">
-    <div class="col-md-12">
-      <table class="table">
-
-        <caption>
-        <a class="btn btn-success" href="student_reg.php" role="button">Add a new student <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
-        </caption>
+ <a href="student_reg.php">Add a new student</a><br>
+      <table>
         <thead>
           <tr>
             <th>#</th>
@@ -15,38 +10,21 @@
           </tr>
         </thead>
         <tbody>
-        <?php /*-----retrieving data from course table-----*/
-
-
-$query = "SELECT * FROM student ORDER BY student_id ASC";
-
-$result = mysqli_query($con, $query);
-
-if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
-}
-
-if (mysqli_num_rows($result) == 0) {
-    echo "No students found, nothing to print.";
-    exit;
-}
-?>
-<?php echo '<div>' . $student_delete . '</div>'; ?>
+ 
+<?php echo '<div>' . $student_display_message . '</div>'; ?>
 <?php
  while($row = mysqli_fetch_array($result)){
 ?>
           <tr>
             <th scope="row"><?php echo $row['student_id'] ?></th>
             <td><?php echo $row['student_fname'] . " " . $row['student_sname']?></td>
-            <td><a href="<?php echo "student_reg.php?student_edit=".$row['student_id']; ?>" class="btn btn-primary">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> </a></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?student_delete='.$row['student_id']?>" class="btn btn-danger">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+            <td><a href="<?php echo "student_reg.php?student_edit=".$row['student_id']; ?>">Edit</a></td>
+            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?student_delete='.$row['student_id']?>">Delete</a></td>
           </tr>
           <?php
 }
 ?>
         </tbody>
       </table>
-    </div>
-  </div>
+
   <?php include("includes/footer.php"); ?>
