@@ -87,12 +87,12 @@ $result_course = mysqli_query($con, $query);
 
 if (!$result_course) {
     echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    exit;
+    //exit;
 }
 
 if (mysqli_num_rows($result_course) == 0) {
     echo "No courses found, nothing to print.";
-    exit;
+   // exit;
 }
 
 /*-----retrieving data from course table-----*/
@@ -346,7 +346,7 @@ foreach ($courses as $course_id) {
    mysqli_query($con, $query);
 }
 
-mysqli_close($con);
+//mysqli_close($con);
 /*-----insert data into the database-----*/
 
 /*-----else ends here -----*/
