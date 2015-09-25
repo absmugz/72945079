@@ -702,7 +702,7 @@ $delete_course = $_GET['delete'];
 $query = "DELETE FROM course
 WHERE course_id=$delete_course"; 
 
-$query .=  "DELETE FROM course_student
+$query.=";"."DELETE FROM course_student
 WHERE course_id=$delete_course"; 
 
 if (mysqli_multi_query($con, $query)) {
@@ -710,8 +710,6 @@ if (mysqli_multi_query($con, $query)) {
 } else {
     echo "Error deleting record: " . mysqli_error($con);
 }
-
-//mysqli_close($con);
 
 }
 
