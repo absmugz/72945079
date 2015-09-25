@@ -49,8 +49,12 @@ else
 ?>
 <a href="<?php $_SERVER['PHP_SELF'] ?>?add=1">Add a new course</a><br />
 
+
+
 <?php
 }/*------end main if-----*/
+
+
 ?>
 
 

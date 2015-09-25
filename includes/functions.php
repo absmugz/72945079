@@ -656,17 +656,67 @@ if (isset($_GET['course_delete'])) {
 
 $delete_course = $_GET['course_delete'];
 
-$query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
+//$query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
 
-if(mysqli_query($con,$query))
+$query = "SELECT COUNT(course_id) FROM course_student
+WHERE course_id=$delete_course"; 
+
+if($result = mysqli_query($con, $query))
 {
-			echo "Successfully deleted course <br>";
+			//echo "Successfully deleted course <br>";
+			$row = mysqli_fetch_array($result);
+            //var_dump($row["COUNT(course_id)"]);die();
+			if ($row["COUNT(course_id)"] > 0) {
+				
+				echo '<a href="">Archive</a><br>';
+				echo '<a href="' . $_SERVER['PHP_SELF'] . '?delete=' . $delete_course . ' "'.$delete_course.'"">Delete</a>';
+
+} else {
+					
+
+$query = "DELETE FROM course WHERE course_id=$delete_course"; 
+if (mysqli_query($con, $query )) {
+    echo "Record deleted successfully";
+} else {
+    echo "Error deleting record: " . mysqli_error($con);
+}
+
+mysqli_close($con); 
+
+}
+
 }else{
 			//echo "course not deleted";
 			echo "Data not Inserted" . mysqli_error($con);die();
 }
 
 }
+
+/*-----deleting course function-----*/
+
+	
+if (isset($_GET['delete'])) {
+
+$delete_course = $_GET['delete'];
+
+$query = "DELETE FROM course
+WHERE course_id=$delete_course"; 
+
+$query .=  "DELETE FROM course_student
+WHERE course_id=$delete_course"; 
+
+if (mysqli_multi_query($con, $query)) {
+    echo "Record deleted successfully";
+} else {
+    echo "Error deleting record: " . mysqli_error($con);
+}
+
+mysqli_close($con);
+
+}
+
+/*-----deleting course function-----*/
+
 /*-----deleting data from course table-----*/
 
 /*------functions-----*/
