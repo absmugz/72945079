@@ -147,6 +147,13 @@ $error = false;
 $isChecked = false;
 
 /*-----course form validation-----*/
+//var_dump(count($result_course));die();
+if(count($_POST['courses']) >  0 )
+		{
+			$coursesError = "Please select at least 1 course";
+			$isChecked = true;
+                        $courses = array();
+		}
 
 if(empty($_POST['courses']) || count($_POST['courses']) < 1)
 		{
@@ -262,7 +269,7 @@ $emailError = "Invalid email format";
 
 
 /*-----if statement to insert data-----*/
-if(!$error) {
+if(!$error && !$isChecked) {
 
 if ($student_id>0){
 
@@ -519,6 +526,28 @@ else
 
 /*-----send mail to students-----*/
 
+/*----- student delete -----*/
+
+if (isset($_GET['student_delete'])) { 
+ $student_id_delete = $_GET['student_delete'];
+ echo $student_id_delete;
+ 
+ $query = "DELETE FROM student
+WHERE student.student_id=$student_id_delete"; 
+
+$query.=";"."DELETE FROM course_student
+WHERE course_student.student_id=$student_id_delete"; 
+
+if (mysqli_multi_query($con, $query)) {
+    $course_student_delete = "Student deleted successfully";
+} else {
+    $course_student_delete = "Error deleting record: " . mysqli_error($con);
+}
+
+}
+
+/*----- student delete -----*/
+
 /*-----editing data from student table-----*/
 if (isset($_GET['student_edit'])) {
 
@@ -603,18 +632,7 @@ if (mysqli_num_rows($registered_result_course) == 0) {
 
 /*-----deleting data from student table-----*/
 
-if (isset($_GET['student_delete'])) {
-	
-$query='DELETE FROM student WHERE student_id = "'.$_GET['student_delete'].'"';
-if(mysqli_query($con,$query))
-{
-			$course_student_delete = "Successfully deleted Student <br>";
-}else{
-			$course_student_delete = "Data not deleted" . mysqli_error($con);die();
-			//echo "Data not Inserted" . mysqli_error($con);die();
-}
 
-}
 /*-----deleting data from student table-----*/
 
 /*-----editing data from course table-----*/
@@ -686,6 +704,7 @@ if($result = mysqli_query($con, $query))
 				
 				echo '<a href="">Archive</a><br>';
 				echo '<a href="' . $_SERVER['PHP_SELF'] . '?delete=' . $delete_course . ' "'.$delete_course.'"">Delete</a>';
+				
 
 } else {
 					
@@ -697,13 +716,13 @@ if (mysqli_query($con, $query )) {
     $course_student_delete =  "Error deleting record: " . mysqli_error($con);
 }
 
-//mysqli_close($con); 
+
 
 }
 
 }else{
 			//echo "course not deleted";
-			$course_student_delete = "Data not deleted" . mysqli_error($con);die();
+			$course_student_delete = "Data not deleted" . mysqli_error($con);
 }
 
 }
@@ -725,6 +744,22 @@ if (mysqli_multi_query($con, $query)) {
     $course_delete = "Record deleted successfully";
 } else {
     $course_delete = "Error deleting record: " . mysqli_error($con);
+}
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+// Fetch all
+//var_dump(mysqli_fetch_all($result_course));die();
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    //exit;
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+   // exit;
 }
 
 }

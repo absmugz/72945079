@@ -19,7 +19,7 @@
             <th scope="row"><?php echo $row['student_id'] ?></th>
             <td><?php echo $row['student_fname'] . " " . $row['student_sname']?></td>
             <td><a href="<?php echo "student_reg.php?student_edit=".$row['student_id']; ?>">Edit</a></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?student_delete='.$row['student_id']?>">Delete</a></td>
+             <td><a href="<?php echo $_SERVER['PHP_SELF'].'?student_delete='.$row['student_id']?>">Delete</a></td>
           </tr>
           <?php
 }
