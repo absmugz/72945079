@@ -14,24 +14,6 @@ $student_display_message = "";
 $course_student_delete = "";
 $student_success_message = "";
 
-/*----- COURSE CRUD STARTS HERE -----*/
-
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-$result_course = mysqli_query($con, $query);
-
-if (!$result_course) {
-    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-}
-
-/*-----retrieving data from course table-----*/
-
-if (mysqli_num_rows($result_course) == 0) {
-    $course_message = "No courses found, nothing to print.";
-}
-
-/*----- COURSE CRUD ENDS HERE -----*/
-
 /*----- STUDENT CRUD STARTS HERE -----*/
 
 /*------Student variables-----*/
@@ -444,6 +426,148 @@ if (mysqli_num_rows($result_student) == 0) {
 /*----- student delete -----*/
 
 /*----- STUDENT CRUD ENDS HERE -----*/
+
+/*----- COURSE CRUD STARTS HERE -----*/
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+}
+
+/*-----retrieving data from course table-----*/
+
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+}
+
+/*-----checking if course button has been clicked and adding form data-----*/
+
+
+if (isset($_POST['submitcourse']))
+{
+/*-----setting variables for course form data-----*/
+$coursename=$_POST['coursename'];
+
+if ($_POST['item_id']>0)
+{
+/*-----update data into the database-----*/
+$querycourse='UPDATE course SET
+course_name = "'.$coursename.'"
+WHERE course_id = "'.$_POST['item_id'].'"
+';
+
+}else{
+		/*-----inserting data into the database-----*/
+$querycourse='INSERT INTO course(course_name
+       )VALUES(
+       "'.$coursename.'"
+         )';
+}
+
+		 
+ if(mysqli_query($con,$querycourse)){
+		echo mysql_error();
+}
+
+/*-----to avoid records from duplicating after insertion-----*/
+
+}
+
+/*-----editing data from course table-----*/
+
+/*-----deleting data from course table-----*/
+
+if (isset($_GET['course_delete'])) {
+//$query='DELETE FROM course WHERE course_id = "'.$_GET['course_delete'].'"';
+
+//$delete_course = $_GET['course_delete'];
+
+//$query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
+
+$delete_course = $_GET['course_delete'];
+
+//$query = "DELETE FROM course where course_id NOT IN (SELECT course_student.course_id FROM course_student)";
+
+$query = "SELECT COUNT(course_id) FROM course_student
+WHERE course_id=$delete_course"; 
+
+if($result = mysqli_query($con, $query))
+{
+			//echo "Successfully deleted course <br>";
+			$row = mysqli_fetch_array($result);
+            //var_dump($row["COUNT(course_id)"]);die();
+			if ($row["COUNT(course_id)"] > 0) {
+				
+				echo '<a href="">Archive</a><br>';
+				echo '<a href="' . $_SERVER['PHP_SELF'] . '?delete=' . $delete_course . ' "'.$delete_course.'"">Delete</a>';
+				
+
+} else {
+					
+
+$query = "DELETE FROM course WHERE course_id=$delete_course"; 
+if (mysqli_query($con, $query )) {
+    $course_student_delete = "Record deleted successfully";
+} else {
+    $course_student_delete =  "Error deleting record: " . mysqli_error($con);
+}
+
+
+
+}
+
+}else{
+			//echo "course not deleted";
+			$course_student_delete = "Data not deleted" . mysqli_error($con);
+}
+
+}
+
+/*-----deleting course function-----*/
+
+	
+if (isset($_GET['delete'])) {
+
+$delete_course = $_GET['delete'];
+
+$query = "DELETE FROM course
+WHERE course_id=$delete_course"; 
+
+$query.=";"."DELETE FROM course_student
+WHERE course_id=$delete_course"; 
+
+if (mysqli_multi_query($con, $query)) {
+    $course_delete = "Record deleted successfully";
+} else {
+    $course_delete = "Error deleting record: " . mysqli_error($con);
+}
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+// Fetch all
+//var_dump(mysqli_fetch_all($result_course));die();
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+    //exit;
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+   // exit;
+}
+
+}
+
+/*-----deleting course function-----*/
+
+/*-----deleting data from course table-----*/
+
+/*----- COURSE CRUD ENDS HERE -----*/
 
 /*------functions-----*/
 
