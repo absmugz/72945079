@@ -405,9 +405,15 @@ if ($delet_student_from_db) {
 	
     $course_student_delete = "Student deleted successfully";
 	
-	$query = "SELECT * FROM student ORDER BY student_id ASC";
- 
+} else {
+    $course_student_delete = "Error deleting record: " . mysqli_error($con);
+}
+
+$query = "SELECT * FROM student ORDER BY student_id ASC";
+
 $result_student = mysqli_query($con, $query);
+
+var_dump(mysqli_num_rows($result_student));die();
  
 if (!$result_student) {
     $student_display_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
@@ -415,10 +421,6 @@ if (!$result_student) {
  
 if (mysqli_num_rows($result_student) == 0) {
     $student_display_message = "No students found, nothing to print.";
-}
-	
-} else {
-    $course_student_delete = "Error deleting record: " . mysqli_error($con);
 }
 
 }
@@ -493,8 +495,8 @@ $delete_course = $_GET['course_delete'];
 
 $query = "SELECT COUNT(course_id) FROM course_student
 WHERE course_id=$delete_course"; 
-
-if($result = mysqli_query($con, $query))
+$result = mysqli_query($con, $query);
+if($result)
 {
 			//echo "Successfully deleted course <br>";
 			$row = mysqli_fetch_array($result);
@@ -510,9 +512,9 @@ if($result = mysqli_query($con, $query))
 
 $query = "DELETE FROM course WHERE course_id=$delete_course"; 
 if (mysqli_query($con, $query )) {
-    $course_student_delete = "Record deleted successfully";
+    $course_delete = "Record deleted successfully";
 } else {
-    $course_student_delete =  "Error deleting record: " . mysqli_error($con);
+    $course_delete =  "Error deleting record: " . mysqli_error($con);
 }
 
 
@@ -521,7 +523,7 @@ if (mysqli_query($con, $query )) {
 
 }else{
 			//echo "course not deleted";
-			$course_student_delete = "Data not deleted" . mysqli_error($con);
+			$course_delete = "Data not deleted" . mysqli_error($con);
 }
 
 }
