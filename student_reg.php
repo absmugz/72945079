@@ -70,8 +70,8 @@ Full First Name:
 <br>
 Gender:
 <br>
-<Input type = 'Radio' Name ='gender' value= 'female'<?PHP print $female_status; ?>>Female
-<Input type = 'Radio' Name ='gender' value= 'male' <?PHP print $male_status; ?>>Male
+<input type="radio" name="gender" value="female" <?php echo ($gender=='female') ? 'checked' : '' ?>>Female
+<input type="radio" name="gender" value="male" <?php echo ($gender=='male') ? 'checked' : '' ?>>Male
 <span class="error"> * <?php echo $genderError;?></span>
 <br>
 E-mail:

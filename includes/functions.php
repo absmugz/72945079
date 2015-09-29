@@ -5,10 +5,7 @@ include('includes/config.php');
 
 /*------includes for dbmysqlection to database-----*/
 
-
 /*------Initialize variables-----*/
-$male_status = 'unchecked';
-$female_status = 'unchecked';
 
 $runQuery ='';
 $message='';
@@ -220,13 +217,6 @@ $genderError = "Gender is required";
 $error=true;
 } else {
 $gender = test_input($_POST["gender"]);
-}
-
-if ($gender == 'male') {
-$male_status = 'checked';
-}
-else if ($gender == 'female') {
-$female_status = 'checked';
 }
 
 /*-----title validation-----*/
@@ -573,13 +563,6 @@ $student_telh = $row['student_telh'];
 $student_telw = $row['student_telw'];
 $student_cell = $row['student_cell'];
 $address = $row['student_address'];
-
-if ($gender == 'male') {
-$male_status = 'checked';
-}
-else if ($gender == 'female') {
-$female_status = 'checked';
-}
 
 }
 
