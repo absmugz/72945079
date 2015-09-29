@@ -13,7 +13,7 @@
  
 <?php echo '<div>' . $student_display_message . '</div>'; ?>
 <?php
- while($row = mysqli_fetch_array($result)){
+ while($row = mysqli_fetch_array($result_student)){
 ?>
           <tr>
             <th scope="row"><?php echo $row['student_id'] ?></th>

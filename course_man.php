@@ -49,25 +49,7 @@ else
 <?php
 }/*------end main if-----*/
 ?>
-
-<?php /*-----retrieving data from course table-----*/
-
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-$result = mysqli_query($con, $query);
-
-if (!$result) {
-    echo "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-    //exit;
-}
-
-if (mysqli_num_rows($result) == 0) {
-    echo "No courses found, nothing to print.";
-    //exit;
-}
-?>
-
-
+<?php echo '<div>' . $course_message . '</div>'; ?>
 <table>
         <thead>
           <tr>
@@ -80,7 +62,7 @@ if (mysqli_num_rows($result) == 0) {
         <tbody>
 
 <?php
-        while($row = mysqli_fetch_array($result)){
+        while($row = mysqli_fetch_array($result_course)){
 ?>
           <tr>
             <th scope="row"><?php echo $row['course_id'] ?></th>
