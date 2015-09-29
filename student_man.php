@@ -1,4 +1,5 @@
 <?php include("includes/header.php"); ?>
+<?php echo '<div>' . $course_student_delete . '</div>'; ?>
  <a href="student_reg.php">Add a new student</a><br>
       <table>
         <thead>
@@ -10,8 +11,6 @@
           </tr>
         </thead>
         <tbody>
- 
-<?php echo '<div>' . $student_display_message . '</div>'; ?>
 <?php
  while($row = mysqli_fetch_array($result_student)){
 ?>
