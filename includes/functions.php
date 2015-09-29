@@ -401,10 +401,26 @@ $query = "DELETE FROM student
 WHERE student.student_id=$student_id_delete"; 
 
 $query.=";"."DELETE FROM course_student
-WHERE course_student.student_id=$student_id_delete"; 
+WHERE course_student.student_id=$student_id_delete";
+ 
+$delet_student_from_db = mysqli_multi_query($con, $query);
 
-if (mysqli_multi_query($con, $query)) {
+if ($delet_student_from_db) {
+	
     $course_student_delete = "Student deleted successfully";
+	
+	$query = "SELECT * FROM student ORDER BY student_id ASC";
+ 
+$result_student = mysqli_query($con, $query);
+ 
+if (!$result_student) {
+    $student_display_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+}
+ 
+if (mysqli_num_rows($result_student) == 0) {
+    $student_display_message = "No students found, nothing to print.";
+}
+	
 } else {
     $course_student_delete = "Error deleting record: " . mysqli_error($con);
 }
