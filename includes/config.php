@@ -1,10 +1,18 @@
 <?php
 
-/*------connection to mysql------------*/
+/*------Connection variables------------*/
 
-$con = mysqli_connect('localhost','72945079','password','registration');
+$servername = "localhost";
+$username = "72945079";
+$password = "password";
+$database = "registration";
 
-// Check connection
+/*------Connection to mysql------------*/
+
+$con = mysqli_connect($servername, $username, $password,$database);
+
+/*------Check connection------------*/
+
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
