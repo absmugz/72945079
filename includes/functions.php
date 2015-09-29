@@ -12,7 +12,7 @@ include('includes/config.php');
 $course_message = "";
 $student_display_message = "";
 $course_student_delete = "";
-$message = "";
+$student_success_message = "";
 
 /*----- COURSE CRUD STARTS HERE -----*/
 
@@ -52,7 +52,7 @@ $student_cell = '';
 $email = '';
 
 /*------Error variables-----*/
-
+$registration_error = '';
 $surnameError = '';
 $initialsError = '';
 $nameError = '';
@@ -76,13 +76,17 @@ $emailError ="";
 $coursesError = '';
 $courses = array();
 
+
 /*------Course variables-----*/
 
-/*-----Insert Data into student table-----*/
 
+
+/*-----Insert Data into student table-----*/
+/*-----if register starts here -----*/
 if(isset($_POST['register'])){
 
-/*-----student form data----*/
+
+$registration_error = false;
 
 /*------Course data-----*/
 $courses = $_POST['courses'];
@@ -103,33 +107,13 @@ $student_telw = $_POST['student_telw'];
 $student_cell = $_POST['student_cell'];
 $email = $_POST['email'];
 
-
-/*-----student form data-----*/
-	
 /*-----student form validation-----*/
-
-$error = false;
-$isChecked = false;
-
-/*-----course form validation-----*/
-
-if(empty($_POST['courses']) || count($_POST['courses']) < 1)
-		{
-			$coursesError = "Please select at least 1 course";
-			$isChecked = true;
-            $courses = array();
-		}
-else{
-$courses = $_POST['courses'];
-}
-
-/*-----course form validation-----*/
 
 /*-----surname validation-----*/
 
 if (empty($_POST["surname"])) {
 $surnameError = "Surname is required";
-$error=true;
+$registration_error=true;
 } else {
 $surname = test_input($_POST["surname"]);
 // check name only contains letters and whitespace
@@ -144,7 +128,7 @@ $surnameError = "Only letters and white space allowed";
 
 if (empty($_POST["initials"])) {
 $initialsError = "Intials is required";
-$error=true;
+$registration_error=true;
 } else {
 $initials = test_input($_POST["initials"]);
 // check name only contains letters and whitespace
@@ -160,7 +144,7 @@ $initialsError = "Only letters allowed";
 
 if (empty($_POST["student_name"])) {
 $nameError = "Name is required";
-$error=true;
+$registration_error=true;
 } else {
 $name = test_input($_POST["student_name"]);
 // check name only contains letters and whitespace
@@ -175,7 +159,7 @@ $nameError = "Only letters and white space allowed";
 
 if (empty($_POST["gender"])) {
 $genderError = "Gender is required";
-$error=true;
+$registration_error=true;
 } else {
 $gender = test_input($_POST["gender"]);
 }
@@ -183,7 +167,7 @@ $gender = test_input($_POST["gender"]);
 /*-----title validation-----*/
 if (empty($_POST["title"])) {
 $titleError = "Title is required";
-$error=true;
+$registration_error=true;
 } else {
 $title = test_input($_POST["title"]);
 }
@@ -194,7 +178,7 @@ $title = test_input($_POST["title"]);
 /*-----language validation-----*/
 if (empty($_POST["language"])) {
 $languageError = "Language is required";
-$error=true;
+$registration_error=true;
 } else {
 $language = test_input($_POST["language"]);
 }
@@ -206,7 +190,7 @@ $language = test_input($_POST["language"]);
 
 if (empty($_POST["email"])) {
 $emailError = "Email is required";
-$error=true;
+$registration_error=true;
 } else {
 $email = test_input($_POST["email"]);
 // check if e-mail address syntax is valid or not
@@ -218,20 +202,20 @@ $emailError = "Invalid email format";
 
 /*-----student form validation-----*/
 
+/*-----if all student form validation has passed -----*/
 
-/*-----if statement to insert data-----*/
-if(!$error) {
-
-if ($student_id>0){
+if(!$registration_error) {
 
 /*-----updating student and course data into the database-----*/
+
+if ($student_id>0){
 
 /*-----editing and deleting student courses data in the database-----*/
 
 /*-----deleting the old selected courses -----*/
 
 $query = "DELETE FROM course_student
-                  WHERE student_id = $student_id";
+WHERE student_id = $student_id";
 mysqli_query($con,$query);
 
 /*-----deleting the old selected courses -----*/
@@ -239,10 +223,15 @@ mysqli_query($con,$query);
 /*-----inserting the new selected courses -----*/
 
 foreach ($courses as $course_id) {
+	
    $query="INSERT INTO course_student(student_id, course_id)
                  VALUES($student_id, $course_id)";
    mysqli_query($con, $query);
+   
 }
+
+/*-----inserting the new selected courses -----*/
+
 /*-----editing and deleting student courses data in the database-----*/
 
 /*-----query to update data into the database-----*/
@@ -277,9 +266,8 @@ $student_success_message = "Error! Student details for " . $student_name . " " .
 /*-----editing student data into the database-----*/
 
 /*-----editing data into the database-----*/
-
-/*-----updating if ends here-----*/
 }
+/*-----updating if ends here-----*/
 /*-----updating if ends here-----*/
 else{
 /*-----query to insert data into the database-----*/
@@ -306,9 +294,10 @@ $query='INSERT INTO student(student_sname,student_initials,student_title,student
 
 if (mysqli_query($con, $query)) {
     $last_id = mysqli_insert_id($con);
-    $message = "New student record for " . $student_name . " " . $surname . " has bee created successfully!";
+    $student_success_message = "New student record for " . $student_name . " " . $surname . " has bee created successfully!";
+	 //$message = "New student record for" . $student_name . " " . $surname . " has bee created successfully. Last inserted ID is: " . $last_id;
 } else {
-   $message = "Error: " . $sql . "<br>" . mysqli_error($con);
+   $student_success_message = "Error: " . $sql . "<br>" . mysqli_error($con);
 }
 
 foreach ($courses as $course_id) {
@@ -316,25 +305,15 @@ foreach ($courses as $course_id) {
                  VALUES($last_id, $course_id)";
    mysqli_query($con, $query);
 }
-
 /*-----insert data into the database-----*/
-
-/*-----else ends here -----*/
 }
 /*-----else ends here -----*/
-		
-/*-----else insert data-----*/
-
 }
-/*-----else insert data-----*/
-
-/*-----end of if register if statement-----*/
+/*-----if all student form validation has passed -----*/
 }
-/*-----end of if register if statement-----*/
+/*-----if register ends here -----*/
 
-/*-----Insert Data into student table-----*/
 
-/*-----retrieving data from student table-----*/
 
 $query = "SELECT * FROM student ORDER BY student_id ASC";
 
@@ -349,6 +328,69 @@ if (mysqli_num_rows($result_student) == 0) {
 }
 
 /*-----retrieving data from student table-----*/
+
+/*-----editing data from student table-----*/
+if (isset($_GET['student_edit'])) {
+
+$student_id_edit = $_GET['student_edit'];
+		  
+$query = "SELECT * FROM student
+WHERE student.student_id = $student_id_edit";
+
+$result_student = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_array($result_student)){ 
+
+$student_id = $row['student_id'];
+$surname = $row['student_sname'];
+$initials = $row['student_initials'];
+$title = $row['student_title'];
+$student_name = $row['student_fname'];
+$gender = $row['student_gender'];
+$email = $row['student_email'];
+$language = $row['student_lang'];
+$identity_number = $row['student_id_no'];
+$student_telh = $row['student_telh'];
+$student_telw = $row['student_telw'];
+$student_cell = $row['student_cell'];
+$address = $row['student_address'];
+
+}
+
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+}
+
+$query = "SELECT course_student.course_id, course_student.student_id, course.course_name, course.course_id
+FROM course_student
+INNER JOIN course
+ON course_student.course_id=course.course_id
+WHERE course_student.student_id = $student_id_edit";
+
+$registered_result_course = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_array($registered_result_course)){
+	$courses[] = $row['course_id'];
+}
+
+if (!$registered_result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+}
+if (mysqli_num_rows($registered_result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+}
+/*-----errors and updating student, deleting courses and inserting new courses-----*/
+}
+/*-----editing data from student table-----*/
 
 /*----- student delete -----*/
 
@@ -372,6 +414,21 @@ if (mysqli_multi_query($con, $query)) {
 /*----- student delete -----*/
 
 /*----- STUDENT CRUD ENDS HERE -----*/
+
+/*------functions-----*/
+
+/*------validation function-----*/
+
+function test_input($data) {
+$data = trim($data);
+$data = stripslashes($data);
+$data = htmlspecialchars($data);
+return $data;
+}
+
+/*------validation function-----*/
+
+/*------functions-----*/
 
 ?> 
 
