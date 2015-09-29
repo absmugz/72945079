@@ -53,6 +53,7 @@ $email = '';
 
 /*------Error variables-----*/
 $registration_error = '';
+$CourseIsChecked  = '';
 $surnameError = '';
 $initialsError = '';
 $nameError = '';
@@ -87,6 +88,7 @@ if(isset($_POST['register'])){
 
 
 $registration_error = false;
+$CourseIsChecked = false;
 
 /*------Course data-----*/
 $courses = $_POST['courses'];
@@ -108,6 +110,18 @@ $student_cell = $_POST['student_cell'];
 $email = $_POST['email'];
 
 /*-----student form validation-----*/
+
+/*-----course form validation-----*/
+
+if(empty($_POST['courses']) || count($_POST['courses']) < 1)
+{
+			$coursesError = "Please select at least 1 course";
+			$CourseIsChecked = true;
+            $courses = array();
+}
+else{
+$courses = $_POST['courses'];
+}
 
 /*-----surname validation-----*/
 
