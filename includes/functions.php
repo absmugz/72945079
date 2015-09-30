@@ -95,13 +95,13 @@ $email = $_POST['email'];
 /*-----student form validation-----*/
 
 /*-----course form validation-----*/
-
-if(empty($_POST['courses']) || count($_POST['courses']) < 1)
-{
+ 
+if (empty($_POST['courses']))
+		{
 			$coursesError = "Please select at least 1 course";
 			$CourseIsChecked = true;
             $courses = array();
-}
+		}
 else{
 $courses = $_POST['courses'];
 }
@@ -203,7 +203,7 @@ $emailError = "Invalid email format";
 
 /*-----if all student form validation has passed -----*/
 
-if(!$registration_error) {
+if(!$registration_error && !$CourseIsChecked) {
 
 /*-----updating student and course data into the database-----*/
 
