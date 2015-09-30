@@ -1,5 +1,5 @@
 <?php include("includes/header.php"); ?>
-<form name="filter" method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">   
+<form name="filter" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">   
 <select name="courseselect">
       <option value="nothing" selected>Select course to show students</option>
 <?php
