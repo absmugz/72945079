@@ -16,6 +16,7 @@ $student_success_message = "";
 $course_delete  = "";
 $filter_message  = "";
 $filterQuery  = "";
+$delete_student_id_from_course_student_from_db_message  = "";
 
 /*----- STUDENT CRUD STARTS HERE -----*/
 
