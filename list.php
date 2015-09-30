@@ -1,5 +1,5 @@
 <?php include("includes/header.php"); ?>
-<form name="filter" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">   
+<form name="filter" method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">   
 <select name="courseselect">
       <option value="nothing" selected>Select course to show students</option>
 <?php
@@ -22,6 +22,7 @@ $name = $row['course_name'];
  <?php
  
 echo '<div>' . $filter_message . '</div>';
+echo '<div>' . $delete_student_id_from_course_student_from_db_message . '</div>';
  
 if($filterQuery){
 
