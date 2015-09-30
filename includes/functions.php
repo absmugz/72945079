@@ -741,8 +741,7 @@ $Course_StudentResult = mysqli_query($con, $query);
 if(!$error) {
 	
 while($row = mysqli_fetch_array($Course_StudentResult)){
-var_dump($row['student_email']);
-
+//var_dump($row['student_email']);
 $to = $row['student_email'];
 $subject = $subject_mail;
 $txt = $message_mail;
