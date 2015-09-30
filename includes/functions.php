@@ -17,6 +17,8 @@ $course_delete  = "";
 $filter_message  = "";
 $filterQuery  = "";
 $delete_student_id_from_course_student_from_db_message  = "";
+$mail_message  = "";
+$mailQuery  = "";
 
 /*----- STUDENT CRUD STARTS HERE -----*/
 
@@ -66,6 +68,17 @@ $courses = array();
 
 /*------Course variables-----*/
 
+/*------send mail variables-----*/
+
+$subject_mail = '';
+$message_mail = '';
+
+/*------send error variables-----*/
+
+$subject_mailError  = '';
+$message_mailError  = '';
+
+/*------send mail variables-----*/
 
 
 /*-----Insert Data into student table-----*/
@@ -660,6 +673,111 @@ if ($delete_student_id_from_course_student_from_db) {
 }
 
 /*-----delete student from selected course-----*/
+
+/*-----send mail to students-----*/
+
+/*-----send mail to students from localhost-----*/
+
+require("phpmailer/PHPMailerAutoload.php"); // path to the PHPMailer class
+ 
+$mail = new PHPMailer();  
+ 
+$mail->IsSMTP();  // telling the class to use SMTP
+$mail->Mailer = "smtp";
+$mail->Host = "ssl://smtp.gmail.com";
+$mail->Port = 465;
+$mail->SMTPAuth = true; // turn on SMTP authentication
+$mail->Username = "absmugz09@gmail.com"; // SMTP username
+$mail->Password = "makabongwe@01"; // SMTP password 
+
+/*-----send mail to students from localhost-----*/
+
+if(isset($_POST['sendmail'])){
+
+$error = false;
+$subject_mail = $_POST["subject"];
+$message_mail = $_POST["message"];
+
+/*-----subject validation-----*/
+
+if (empty($_POST["subject"])) {
+$subject_mailError = "Subject is required";
+$error=true;
+} else {
+$subject_mail = test_input($_POST["subject"]);
+}
+
+/*-----subject validation-----*/
+
+/*-----message validation-----*/
+
+if (empty($_POST["message"])) {
+$message_mailError = "Message is required";
+$error=true;
+} else {
+$message_mail = test_input($_POST["message"]);
+}
+
+/*-----message validation-----*/
+
+$mailQuery = true;
+$selected_val = $_POST['courseselect'];
+
+if($selected_val == "nothing"){
+   $message =  "You have not selected a course to send mail to students"; // Displaying Selected Value
+   $mailQuery = false;
+}
+
+
+if ($mailQuery) {
+
+$query = "SELECT student.student_fname, student_sname, student_email
+                FROM student, course_student
+                WHERE student.student_id = course_student.student_id 
+                AND $selected_val = course_student.course_id";
+				
+$Course_StudentResult = mysqli_query($con, $query);
+
+if(!$error) {
+	
+while($row = mysqli_fetch_array($Course_StudentResult)){
+var_dump($row['student_email']);
+
+$to = $row['student_email'];
+$subject = $subject_mail;
+$txt = $message_mail;
+
+$mail->From = "absmugz09@gmail.com";
+$mail->AddAddress($to);  
+ 
+$mail->Subject  = $subject;
+$mail->Body     = $txt;
+$mail->WordWrap = 50;  
+ 
+if(!$mail->Send()) {
+echo 'Message was not sent.';
+echo 'Mailer error: ' . $mail->ErrorInfo;
+} else {
+echo 'Message has been sent.';
+}
+
+
+}
+
+$mail_message = "The email has been successful sent to students";
+
+}
+
+}
+else
+{
+$mail_message;
+}
+
+}
+
+/*-----send mail to students-----*/
+
 
 /*------functions-----*/
 

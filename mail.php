@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); ?>
-<?php echo '<div>' . $message . '</div>';
-if($runQuery){
+<?php echo '<div>' . $mail_message . '</div>';
+if($mailQuery){
 
 
 if (!$Course_StudentResult) {
