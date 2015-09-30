@@ -651,12 +651,13 @@ if (isset($_GET['student_delete_from_course'])) {
 $selected_val = $_GET['course_id'];
 $student_delete_from_course = $_GET['student_delete_from_course'];
 
-var_dump($selected_val);die();
+//var_dump($selected_val);die();
 
 //echo $student_delete_from_course;die();
 
 $query = "DELETE FROM course_student
-WHERE student_id=$student_delete_from_course"; 
+WHERE student_id=$student_delete_from_course AND course_id=$selected_val"; 
+
 
 $delete_student_id_from_course_student_from_db = mysqli_query($con, $query);
 
@@ -669,6 +670,8 @@ if ($delete_student_id_from_course_student_from_db) {
     $delete_student_id_from_course_student_from_db_message = "Error deleting record: " . mysqli_error($con);
 	
 }
+
+
 
 }
 
