@@ -1,6 +1,5 @@
 <?php include("includes/header.php"); ?>
-
-
+<?php echo '<div>' . $course_delete . '</div>'; ?>
 <?php
 
 if(isset($_GET['add']) || isset($_GET['course_edit']))
@@ -49,7 +48,7 @@ else
 <?php
 }/*------end main if-----*/
 ?>
-<?php echo '<div>' . $course_message . '</div>'; ?>
+
 <table>
         <thead>
           <tr>

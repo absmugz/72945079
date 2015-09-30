@@ -1,5 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php echo '<div>' . $course_student_delete . '</div>'; ?>
+<?php echo '<div>' . $student_display_message . '</div>'; ?>
  <a href="student_reg.php">Add a new student</a><br>
       <table>
         <thead>

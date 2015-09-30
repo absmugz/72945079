@@ -13,6 +13,7 @@ $course_message = "";
 $student_display_message = "";
 $course_student_delete = "";
 $student_success_message = "";
+$course_delete  = "";
 
 /*----- STUDENT CRUD STARTS HERE -----*/
 
@@ -402,7 +403,13 @@ mysqli_query($con, $query);
 $query = "DELETE FROM student
 WHERE student.student_id=$student_id_delete";
 
-mysqli_query($con, $query);
+$delete_student_from_db = mysqli_query($con, $query);
+
+if ($delete_student_from_db) {
+    $course_student_delete = "Record deleted successfully";
+} else {
+    $course_student_delete = "Error deleting record: " . mysqli_error($con);
+}
 
 $query = "SELECT * FROM student ORDER BY student_id ASC";
 
@@ -528,13 +535,17 @@ if (isset($_GET['delete'])) {
 
 $delete_course = $_GET['delete'];
 
+$query = "DELETE FROM course_student
+WHERE course_id=$delete_course"; 
+
+mysqli_query($con, $query);
+
 $query = "DELETE FROM course
 WHERE course_id=$delete_course"; 
 
-$query.=";"."DELETE FROM course_student
-WHERE course_id=$delete_course"; 
+$delete_course_from_db = mysqli_query($con, $query);
 
-if (mysqli_multi_query($con, $query)) {
+if ($delete_course_from_db) {
     $course_delete = "Record deleted successfully";
 } else {
     $course_delete = "Error deleting record: " . mysqli_error($con);
