@@ -391,30 +391,23 @@ if (mysqli_num_rows($registered_result_course) == 0) {
 /*----- student delete -----*/
 
 if (isset($_GET['student_delete'])) { 
+
 $student_id_delete = $_GET['student_delete'];
 
-$query = "DELETE FROM student
-WHERE student.student_id=$student_id_delete"; 
-
-$query.=";"."DELETE FROM course_student
+$query = "DELETE FROM course_student
 WHERE course_student.student_id=$student_id_delete";
- 
-$delet_student_from_db = mysqli_multi_query($con, $query);
 
-if ($delet_student_from_db) {
-	
-    $course_student_delete = "Student deleted successfully";
-	
-} else {
-    $course_student_delete = "Error deleting record: " . mysqli_error($con);
-}
+mysqli_query($con, $query);
+
+$query = "DELETE FROM student
+WHERE student.student_id=$student_id_delete";
+
+mysqli_query($con, $query);
 
 $query = "SELECT * FROM student ORDER BY student_id ASC";
 
 $result_student = mysqli_query($con, $query);
 
-var_dump(mysqli_num_rows($result_student));die();
- 
 if (!$result_student) {
     $student_display_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
 }
