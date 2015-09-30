@@ -106,6 +106,8 @@ else{
 $courses = $_POST['courses'];
 }
 
+
+
 /*-----surname validation-----*/
 
 if (empty($_POST["surname"])) {
@@ -470,11 +472,19 @@ $querycourse='INSERT INTO course(course_name
 }
 
 		 
- if(mysqli_query($con,$querycourse)){
-		echo mysql_error();
+mysqli_query($con,$querycourse);
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
 }
 
-/*-----to avoid records from duplicating after insertion-----*/
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+}
 
 }
 
@@ -517,13 +527,22 @@ if (mysqli_query($con, $query )) {
     $course_delete =  "Error deleting record: " . mysqli_error($con);
 }
 
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+}
+
 
 
 }
 
-}else{
-			//echo "course not deleted";
-			$course_delete = "Data not deleted" . mysqli_error($con);
 }
 
 }

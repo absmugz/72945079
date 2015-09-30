@@ -1,5 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php echo '<div>' . $course_delete . '</div>'; ?>
+<?php echo '<div>' . $course_message . '</div>'; ?>
 <?php
 
 if(isset($_GET['add']) || isset($_GET['course_edit']))
