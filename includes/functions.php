@@ -648,7 +648,7 @@ else
 /*-----delete student from selected course-----*/
 
 if (isset($_GET['student_delete_from_course'])) {
-$selected_val = $_POST['courseselect'];
+$selected_val = $_GET['course_id'];
 $student_delete_from_course = $_GET['student_delete_from_course'];
 
 var_dump($selected_val);die();
