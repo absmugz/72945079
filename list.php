@@ -49,7 +49,7 @@ while($row = mysqli_fetch_array($Course_StudentResult)){
 ?>
           <tr>
             <td><?php echo $row['student_fname'] . " " . $row['student_sname']?></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?delete_id='.$row['student_id']?>">Delete</a></td>
+            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?student_delete_from_course='.$row['student_id']?>">Delete</a></td>
           </tr>
           <?php
 }

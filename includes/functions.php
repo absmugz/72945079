@@ -613,7 +613,7 @@ if ($filterQuery) {
 	
 	
 
-$query = "SELECT student.student_fname, student_sname
+$query = "SELECT student.student_id, student_fname, student_sname
                 FROM student, course_student
                 WHERE student.student_id = course_student.student_id 
                 AND $selected_val = course_student.course_id";
