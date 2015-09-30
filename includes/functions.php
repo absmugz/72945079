@@ -14,6 +14,8 @@ $student_display_message = "";
 $course_student_delete = "";
 $student_success_message = "";
 $course_delete  = "";
+$filter_message  = "";
+$filterQuery  = "";
 
 /*----- STUDENT CRUD STARTS HERE -----*/
 
@@ -593,6 +595,41 @@ if (mysqli_num_rows($result_course) == 0) {
 /*-----deleting data from course table-----*/
 
 /*----- COURSE CRUD ENDS HERE -----*/
+
+/*-----Filter course_student and show students in a certain course table-----*/
+
+if(isset($_POST['filter'])){
+
+$filterQuery = true;
+$selected_val = $_POST['courseselect'];
+
+if($selected_val == "nothing"){
+   $filter_message =  "You have not selected a course to filter students"; // Displaying Selected Value
+   $filterQuery = false;
+}
+
+
+if ($filterQuery) {
+	
+	
+
+$query = "SELECT student.student_fname, student_sname
+                FROM student, course_student
+                WHERE student.student_id = course_student.student_id 
+                AND $selected_val = course_student.course_id";
+				
+$Course_StudentResult = mysqli_query($con, $query);
+
+
+}
+else
+{
+  $filter_message;
+}
+
+}
+
+/*-----Filter course_student and show students in a certain course table-----*/
 
 /*------functions-----*/
 

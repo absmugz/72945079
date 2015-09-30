@@ -21,9 +21,9 @@ $name = $row['course_name'];
 
  <?php
  
-echo '<div>' . $message . '</div>';
+echo '<div>' . $filter_message . '</div>';
  
-if($runQuery){
+if($filterQuery){
 
 
 if (!$Course_StudentResult) {
