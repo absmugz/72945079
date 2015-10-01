@@ -369,6 +369,19 @@ $student_id = $row['student_id'];
 $surname = $row['student_sname'];
 $initials = $row['student_initials'];
 $title = $row['student_title'];
+
+//dob processing
+
+$student_dob = $row['student_dob'];
+$dateStr = $student_dob;
+$dob = date_parse_from_format('Y-m-d"', $dateStr);
+
+$day = $dob['day'];
+$month = $dob['month'];
+$year = $dob['year'];
+
+//dob processing
+
 $student_name = $row['student_fname'];
 $gender = $row['student_gender'];
 $email = $row['student_email'];
