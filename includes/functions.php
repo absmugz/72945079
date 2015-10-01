@@ -38,6 +38,9 @@ $student_telh = '';
 $student_telw = '';
 $student_cell = '';
 $email = '';
+$day = '';
+$month = '';
+$year = '';
 
 /*------Error variables-----*/
 $registration_error = '';
@@ -98,7 +101,11 @@ $surname = $_POST['surname'];
 $initials = $_POST["initials"];
 $student_name = $_POST['student_name'];
 $title = $_POST['title'];
-$dob = $_POST['dob'];
+$day = $_POST['day'];
+$month = $_POST['month'];
+$year = $_POST['year'];
+$dob = date("Y-m-d", mktime(0,0,0,$month, $day, $year));
+//$dob = $_POST['dob'];
 $gender = $_POST['gender'];
 $language = $_POST['language'];
 $identity_number = $_POST['identity_number'];
@@ -255,6 +262,7 @@ foreach ($courses as $course_id) {
        student_sname="'.$surname.'",
 	   student_initials="'.$initials.'",
 	   student_title="'.$title.'",
+	   student_dob="'.$dob.'",
        student_fname="'.$student_name.'",
        student_gender="'.$gender.'",
        student_email="'.$email.'",
@@ -286,12 +294,13 @@ $student_success_message = "Error! Student details for " . $student_name . " " .
 /*-----updating if ends here-----*/
 else{
 /*-----query to insert data into the database-----*/
-
-$query='INSERT INTO student(student_sname,student_initials,student_title,student_fname,student_gender,student_email,student_lang,student_id_no,student_telh,student_telw,student_cell,student_address
+//var_dump($dob);die();
+$query='INSERT INTO student(student_sname,student_initials,student_title,student_dob,student_fname,student_gender,student_email,student_lang,student_id_no,student_telh,student_telw,student_cell,student_address
        )VALUES(
        "'.$surname.'",
 	   "'.$initials.'",
 	   "'.$title.'",
+	   "'.$dob.'",
        "'.$student_name.'",
        "'.$gender.'",
        "'.$email.'",
