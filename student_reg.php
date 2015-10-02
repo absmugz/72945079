@@ -66,6 +66,7 @@ $month_array = array( "January", "February", "March", "April", "May", "June",
                       "July", "August", "September", "October", "November", "December");
 
 echo "<select name=\"day\">";
+echo "<option value=\"\" selected=\"selected\">day</option>";
 $i = 1;
 while ( $i <= 31 ) {
    echo "<option value=".$i."", $i == $day ? ' selected ' : '', ">".$i."</option>";
@@ -74,6 +75,7 @@ while ( $i <= 31 ) {
 echo "</select>";
 
 echo "<select name=\"month\">";
+echo "<option value=\"\" selected=\"selected\">month</option>";
 $i = 0;
 while ( $i <= 11 ) {
 echo "<option value=".$i."", $i == $month ? ' selected ' : ' ', ">".$month_array[$i]."</option>";
@@ -82,6 +84,7 @@ echo "<option value=".$i."", $i == $month ? ' selected ' : ' ', ">".$month_array
 echo "</select>";
 
 echo "<select name=\"year\">";
+echo "<option value=\"\" selected=\"selected\">year</option>";
 $i = 1900;
 while ( $i <= 2007 ) {    
     echo "<option value=".$i."", $i == $year ? ' selected ' : '', ">".$i."</option>";  
@@ -90,7 +93,7 @@ while ( $i <= 2007 ) {
 echo "</select>";
 
 ?>
-
+<span class="error"> * <?php echo empty($dobError) ? "" : $dobError; ?></span>
 <br>
 Surname:
 <br>

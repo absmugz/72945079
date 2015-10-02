@@ -50,6 +50,9 @@ $initialsError = '';
 $nameError = '';
 $titleError = '';
 $dobError = '';
+$dayError = '';
+$monthError = '';
+$yearError = '';
 $genderError = '';
 $languageError = '';
 $identity_numberError = '';
@@ -196,6 +199,30 @@ $title = test_input($_POST["title"]);
 
 /*-----title validation-----*/
 
+
+/*-----dob validation-----*/
+if (empty($_POST["day"])) {
+$dobError = "All date of birth fields are required";
+$registration_error=true;
+} else {
+$day = test_input($_POST["day"]);
+}
+
+if (empty($_POST["month"])) {
+$dobError = "All date of birth fields are required";
+$registration_error=true;
+} else {
+$month = test_input($_POST["month"]);
+}
+
+if (empty($_POST["year"])) {
+$dobError = "All date of birth fields are required";
+$registration_error=true;
+} else {
+$year = test_input($_POST["year"]);
+}
+
+/*-----dob validation-----*/
 
 /*-----language validation-----*/
 if (empty($_POST["language"])) {
