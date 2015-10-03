@@ -86,6 +86,10 @@ $message_mailError  = '';
 
 /*------send mail variables-----*/
 
+$coursename  = '';
+$course_descr  = '';
+$course_cost  = '';
+$course_duration  = '';
 
 /*-----Insert Data into student table-----*/
 /*-----if register starts here -----*/
@@ -582,20 +586,29 @@ if (isset($_POST['submitcourse']))
 {
 /*-----setting variables for course form data-----*/
 $coursename=$_POST['coursename'];
+$course_descr=$_POST['course_descr'];
+$course_cost=$_POST['course_cost'];
+$course_duration=$_POST['course_duration'];
 
 if ($_POST['item_id']>0)
 {
 /*-----update data into the database-----*/
 $querycourse='UPDATE course SET
-course_name = "'.$coursename.'"
+course_name = "'.$coursename.'",
+course_descr = "'.$course_descr.'",
+course_cost = "'.$course_cost.'",
+course_duration = "'.$course_duration.'"
 WHERE course_id = "'.$_POST['item_id'].'"
 ';
 
 }else{
 		/*-----inserting data into the database-----*/
-$querycourse='INSERT INTO course(course_name
+$querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_duration
        )VALUES(
-       "'.$coursename.'"
+       "'.$coursename.'",
+	   "'.$course_descr.'",
+	   "'.$course_cost.'",
+	   "'.$course_duration.'"
          )';
 }
 

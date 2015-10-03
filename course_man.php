@@ -17,6 +17,10 @@ $result = mysqli_query($con, $query);
 $row = mysqli_fetch_array($result);
 $item_id=$row['course_id'];
 $editcoursename=$row['course_name'];
+$course_descr=$row['course_descr'];
+$course_cost=$row['course_cost'];
+$course_duration=$row['course_duration'];
+
 }
 
 ?>
@@ -27,10 +31,22 @@ $editcoursename=$row['course_name'];
 <form name="addcourse" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 <INPUT TYPE = "hidden" VALUE ="<?PHP echo $item_id ; ?>" NAME = "item_id">
 
-<table width="589" border="0" cellspacing="0" cellpadding="2">
+<table width="100%" cellspacing="20" cellpadding="20">
   <tr>
-    <td width="91">Course name :</td>
-    <td width="478"><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"></td>
+    <td>Course name :</td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"></td>
+  </tr>
+  <tr>
+    <td>Course description :</td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_descr ?>" NAME = "course_descr"></td>
+  </tr>
+  <tr>
+    <td>Course cost :</td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_cost ?>" NAME = "course_cost"></td>
+  </tr>
+  <tr>
+    <td>Course duration :</td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -50,7 +66,7 @@ else
 }/*------end main if-----*/
 ?>
 
-<table>
+<table width="100%" cellspacing="20" cellpadding="20" border="0">
         <thead>
           <tr>
             <th>#</th>

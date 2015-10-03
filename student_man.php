@@ -2,7 +2,7 @@
 <?php echo '<div>' . $course_student_delete . '</div>'; ?>
 <?php echo '<div>' . $student_display_message . '</div>'; ?>
  <a href="student_reg.php">Add a new student</a><br>
-      <table>
+      <table width="100%" cellspacing="20" cellpadding="20">
         <thead>
           <tr>
             <th>#</th>
