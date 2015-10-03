@@ -76,7 +76,7 @@ echo "</select>";
 
 echo "<select name=\"month\">";
 echo "<option value=\"\" selected=\"selected\">month</option>";
-$i = 0;
+$i = 1;
 while ( $i <= 11 ) {
 echo "<option value=".$i."", $i == $month ? ' selected ' : ' ', ">".$month_array[$i]."</option>";
    $i++;

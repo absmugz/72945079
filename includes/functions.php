@@ -96,7 +96,8 @@ $registration_error = false;
 $CourseIsChecked = false;
 
 /*------Course data-----*/
-$courses = $_POST['courses'];
+//$courses = $_POST['courses'];
+$courses = isset($_POST['courses']) ? $_POST['courses'] : '';
 /*------Course data-----*/
 
 $student_id = $_POST['student_id'];
@@ -104,12 +105,19 @@ $surname = $_POST['surname'];
 $initials = $_POST["initials"];
 $student_name = $_POST['student_name'];
 $title = $_POST['title'];
-$day = $_POST['day'];
-$month = $_POST['month'];
-$year = $_POST['year'];
+
+//$day = $_POST['day'];
+//$month = $_POST['month'];
+//$year = $_POST['year'];
+
+$day = intval($_POST['day']);
+$month = intval($_POST['month']);
+$year = intval($_POST['year']);
+
 $dob = date("Y-m-d", mktime(0,0,0,$month, $day, $year));
 //$dob = $_POST['dob'];
-$gender = $_POST['gender'];
+//$gender = $_POST['gender'];
+$gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 $language = $_POST['language'];
 $identity_number = $_POST['identity_number'];
 $address = $_POST['address'];
@@ -233,6 +241,61 @@ $language = test_input($_POST["language"]);
 }
 
 /*-----language validation-----*/
+
+/*-----student id validation-----*/
+
+if (empty($_POST["identity_number"])) {
+$identity_numberError = "ID number is required";
+$registration_error=true;
+} else {
+$identity_number = test_input($_POST["identity_number"]);
+}
+
+/*-----student id validation-----*/
+
+/*-----student home tele number validation-----*/
+
+if (empty($_POST["student_telh"])) {
+$student_telhError = "student home telephone number is required";
+$registration_error=true;
+} else {
+$student_telh = test_input($_POST["student_telh"]);
+}
+
+/*-----student home tele number validation-----*/
+
+/*-----student work tele number validation-----*/
+
+if (empty($_POST["student_telw"])) {
+$student_telwError = "student work telephone number is required";
+$registration_error=true;
+} else {
+$student_telh = test_input($_POST["student_telw"]);
+}
+
+/*-----student work tele number validation-----*/
+
+/*-----student work cell number validation-----*/
+
+if (empty($_POST["student_cell"])) {
+$student_cellError = "student cell number is required";
+$registration_error=true;
+} else {
+$student_cell = test_input($_POST["student_cell"]);
+}
+
+/*-----student work cell number validation-----*/
+
+/*-----student address validation-----*/
+
+if (empty($_POST["address"])) {
+$addressError = "address is required";
+$registration_error=true;
+} else {
+$address = test_input($_POST["address"]);
+}
+
+/*-----student address validation-----*/
 
 
 /*-----email validation-----*/
