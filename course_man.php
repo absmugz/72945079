@@ -34,19 +34,19 @@ $course_duration=$row['course_duration'];
 <table width="100%" cellspacing="20" cellpadding="20">
   <tr>
     <td>Course name :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"><span class="error"> * <?php echo empty($coursenameError) ? "" : $coursenameError; ?></span></td>
   </tr>
   <tr>
     <td>Course description :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_descr ?>" NAME = "course_descr"></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_descr ?>" NAME = "course_descr"><span class="error"> * <?php echo empty($course_descrError) ? "" : $course_descrError; ?></span></td>
   </tr>
   <tr>
     <td>Course cost :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_cost ?>" NAME = "course_cost"></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_cost ?>" NAME = "course_cost"><span class="error"> * <?php echo empty($course_costError) ? "" : $course_costError; ?></span></td>
   </tr>
   <tr>
     <td>Course duration :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"><span class="error"> * <?php echo empty($course_durationError) ? "" : $course_durationError; ?></span></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
