@@ -276,7 +276,7 @@ $registration_error=true;
 $student_telh = test_input($_POST["student_telh"]);
 // check name only contains letters and whitespace
 
-if (!filter_var($identity_number, FILTER_VALIDATE_INT) === false) {
+if (!filter_var($student_telh, FILTER_VALIDATE_INT) === false) {
     $student_telh = test_input($_POST["student_telh"]);
 } else {
     $student_telhError = "Only numbers allowed";
@@ -295,7 +295,7 @@ $registration_error=true;
 $student_telw = test_input($_POST["student_telw"]);
 // check name only contains letters and whitespace
 
-if (!filter_var($identity_number, FILTER_VALIDATE_INT) === false) {
+if (!filter_var($student_telw, FILTER_VALIDATE_INT) === false) {
     $student_telw = test_input($_POST["student_telw"]);
 } else {
     $student_telwError = "Only numbers allowed";
