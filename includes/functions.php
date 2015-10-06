@@ -248,80 +248,72 @@ $language = test_input($_POST["language"]);
 
 /*-----student id validation-----*/
 
-
-
-if (empty($_POST["identity_number"])) {
-$identity_numberError = "ID number is required";
-$registration_error=true;
-} else {
-$identity_number = test_input($_POST["identity_number"]);
-// check name only contains letters and whitespace
-
-if (!filter_var($identity_number, FILTER_VALIDATE_INT) === false) {
-    $identity_number = test_input($_POST["identity_number"]);
-} else {
-    $identity_numberError = "Only numbers allowed";
-	$registration_error=true;
-}
-}
+ if (empty($_POST["identity_number"])) {
+     $identity_numberError = "ID number is required";
+     $registration_error = true;
+ 
+   } else {
+       $identity_number = test_input($_POST["identity_number"]);
+       // check if cell number is entered in the correct format specified.
+     if (!preg_match("/^[0-9]{10}$/",$identity_number)) {
+	$identity_numberError = "Only 10 digits and NO white space are allowed.";
+	$registration_error = true;	
+   }
+   }
 
 /*-----student id validation-----*/
 
 /*-----student home tele number validation-----*/
 
-if (empty($_POST["student_telh"])) {
-$student_telhError = "student home telephone number is required";
-$registration_error=true;
-} else {
-$student_telh = test_input($_POST["student_telh"]);
-// check name only contains letters and whitespace
 
-if (!filter_var($student_telh, FILTER_VALIDATE_INT) === false) {
-    $student_telh = test_input($_POST["student_telh"]);
-} else {
-    $student_telhError = "Only numbers allowed";
-	$registration_error=true;
-}
-}
+ if (empty($_POST["student_telh"])) {
+     $student_telhError = "student home telephone number is required";
+     $registration_error = true;
+ 
+   } else {
+       $student_telh = test_input($_POST["student_telh"]);
+       // check if cell number is entered in the correct format specified.
+     if (!preg_match("/^[0-9]{10}$/",$student_telh)) {
+	$student_telhError = "Only 10 digits and NO white space are allowed.";
+	$registration_error = true;	
+   }
+   }
 
 
 /*-----student home tele number validation-----*/
 
 /*-----student work tele number validation-----*/
-if (empty($_POST["student_telw"])) {
-$student_telwError = "student home telephone number is required";
-$registration_error=true;
-} else {
-$student_telw = test_input($_POST["student_telw"]);
-// check name only contains letters and whitespace
 
-if (!filter_var($student_telw, FILTER_VALIDATE_INT) === false) {
-    $student_telw = test_input($_POST["student_telw"]);
-} else {
-    $student_telwError = "Only numbers allowed";
-	$registration_error=true;
-}
-}
+ if (empty($_POST["student_telw"])) {
+     $student_telwError = "student work telephone number is required";
+     $registration_error = true;
+ 
+   } else {
+       $student_telw = test_input($_POST["student_telw"]);
+       // check if cell number is entered in the correct format specified.
+     if (!preg_match("/^[0-9]{10}$/",$student_telh)) {
+	$student_telwError = "Only 10 digits and NO white space are allowed.";
+	$registration_error = true;	
+   }
+   }
 
 /*-----student work tele number validation-----*/
 
 /*-----student work cell number validation-----*/
 
-if (empty($_POST["student_cell"])) {
-$student_cellError = "student home telephone number is required";
-$registration_error=true;
-} else {
-$student_cell = test_input($_POST["student_cell"]);
-// check name only contains letters and whitespace
 
-if (!filter_var($student_cell, FILTER_VALIDATE_INT) === false) {
-    $student_cell = test_input($_POST["student_cell"]);
-} else {
-    $student_cellError = "Only numbers allowed";
-	$registration_error=true;
-}
-}
-
+ if (empty($_POST["student_cell"])) {
+     $student_cellError = "student cell number is required";
+     $registration_error = true;
+ 
+   } else {
+       $student_cell = test_input($_POST["student_cell"]);
+       // check if cell number is entered in the correct format specified.
+     if (!preg_match("/^[0-9]{10}$/",$student_cell)) {
+	$student_cellError = "Only 10 digits and NO white space are allowed.";
+	$registration_error = true;	
+   }
+   }
 
 /*-----student work cell number validation-----*/
 
@@ -625,6 +617,19 @@ $course_descr=$_POST['course_descr'];
 $course_cost=$_POST['course_cost'];
 $course_duration=$_POST['course_duration'];
 
+$registration_error = false;
+
+/*-----course name validation-----*/
+if (empty($_POST["coursename"])) {
+$coursenameError = "course name is required";
+$registration_error=true;
+} else {
+$coursename = test_input($_POST["coursename"]);
+}
+/*-----course name validation-----*/
+
+if(!$registration_error) {
+
 if ($_POST['item_id']>0)
 {
 /*-----update data into the database-----*/
@@ -646,7 +651,7 @@ $querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_dur
 	   "'.$course_duration.'"
          )';
 }
-
+}
 		 
 mysqli_query($con,$querycourse);
 
