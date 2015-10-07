@@ -3,9 +3,18 @@
 <?php echo '<div>' . $course_message . '</div>'; ?>
 <?php
 
-if(isset($_GET['add']) || isset($_GET['course_edit']))
+$course_costError = "";
+$course_descrError = "";
+$course_durationError = "";
+$coursenameError = "";
+
+
+if(isset($_GET['add']) || isset($_GET['course_edit']) || $registration_error )
 
 	{
+
+$registration_error = false;
+
 
 	/*------set default values-----*/
 	$item_id=0;
@@ -21,6 +30,52 @@ $course_descr=$row['course_descr'];
 $course_cost=$row['course_cost'];
 $course_duration=$row['course_duration'];
 
+}else if ($registration_error) {
+
+
+/*-----setting variables for course form data-----*/
+$coursename = test_input($_POST['coursename']);
+$course_descr = test_input($_POST['course_descr']);
+$course_cost = test_input($_POST['course_cost']);
+$course_duration = test_input($_POST['course_duration']);
+ 
+ 
+/*-----course name validation-----*/
+
+if (empty($coursename)) {
+$coursenameError = "course name is required";
+$registration_error=true;
+} 
+
+/*-----course name validation-----*/
+ 
+/*-----course descr validation-----*/
+
+if (empty($course_descr)) {
+$course_descrError = "course description is required";
+$registration_error=true;
+} 
+
+/*-----course descr validation-----*/
+ 
+/*-----course cost validation-----*/
+
+if (empty($course_cost)) {
+$course_costError = "course cost is required";
+$registration_error=true;
+} 
+
+/*-----course cost validation-----*/
+ 
+/*-----course duration validation-----*/
+
+if (empty($course_duration)) {
+$course_durationError = "course duration is required";
+$registration_error=true;
+} 
+
+/*-----course duration validation-----*/
+
 }
 
 ?>
@@ -34,19 +89,19 @@ $course_duration=$row['course_duration'];
 <table width="100%" cellspacing="20" cellpadding="20">
   <tr>
     <td>Course name :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"><span class="error"> * <?php echo empty($coursenameError) ? "" : $coursenameError; ?></span></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"><span class="error"> * <?php echo $coursenameError; ?></span></td>
   </tr>
   <tr>
     <td>Course description :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_descr ?>" NAME = "course_descr"><span class="error"> * <?php echo empty($course_descrError) ? "" : $course_descrError; ?></span></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_descr ?>" NAME = "course_descr"><span class="error"> * <?php echo $course_descrError; ?></span></td>
   </tr>
   <tr>
     <td>Course cost :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_cost ?>" NAME = "course_cost"><span class="error"> * <?php echo empty($course_costError) ? "" : $course_costError; ?></span></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_cost ?>" NAME = "course_cost"><span class="error"> * <?php echo $course_costError; ?></span></td>
   </tr>
   <tr>
     <td>Course duration :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"><span class="error"> * <?php echo empty($course_durationError) ? "" : $course_durationError; ?></span></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"><span class="error"> * <?php $course_durationError; ?></span></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
