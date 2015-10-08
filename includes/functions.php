@@ -608,69 +608,6 @@ if (mysqli_num_rows($result_course) == 0) {
 
 /*-----checking if course button has been clicked and adding form data-----*/
 
-
-if (isset($_POST['submitcourse']))
-{
-/*-----setting variables for course form data-----*/
-$coursename=$_POST['coursename'];
-$course_descr=$_POST['course_descr'];
-$course_cost=$_POST['course_cost'];
-$course_duration=$_POST['course_duration'];
-
-$registration_error = false;
-
-/*-----course name validation-----*/
-if (empty($_POST["coursename"])) {
-$coursenameError = "course name is required";
-$registration_error=true;
-} else {
-$coursename = test_input($_POST["coursename"]);
-}
-/*-----course name validation-----*/
-
-if(!$registration_error) {
-
-if ($_POST['item_id']>0)
-{
-/*-----update data into the database-----*/
-$querycourse='UPDATE course SET
-course_name = "'.$coursename.'",
-course_descr = "'.$course_descr.'",
-course_cost = "'.$course_cost.'",
-course_duration = "'.$course_duration.'"
-WHERE course_id = "'.$_POST['item_id'].'"
-';
-
-}else{
-		/*-----inserting data into the database-----*/
-$querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_duration
-       )VALUES(
-       "'.$coursename.'",
-	   "'.$course_descr.'",
-	   "'.$course_cost.'",
-	   "'.$course_duration.'"
-         )';
-}
-}
-		 
-mysqli_query($con,$querycourse);
-
-$query = "SELECT * FROM course ORDER BY course_id ASC";
-
-$result_course = mysqli_query($con, $query);
-
-if (!$result_course) {
-    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
-}
-
-if (mysqli_num_rows($result_course) == 0) {
-    $course_message = "No courses found, nothing to print.";
-}
-
-}
-
-/*-----editing data from course table-----*/
-
 /*-----deleting data from course table-----*/
 
 if (isset($_GET['course_delete'])) {

@@ -9,11 +9,10 @@ $course_durationError = "";
 $coursenameError = "";
 
 
-if(isset($_GET['add']) || isset($_GET['course_edit']) || $registration_error )
+if(isset($_GET['add']) || isset($_GET['course_edit']) || isset($_POST['submitcourse']) )
 
 	{
 
-$registration_error = false;
 
 
 	/*------set default values-----*/
@@ -25,14 +24,15 @@ $query='SELECT * FROM course WHERE course_id = "'.$_GET['course_edit'].'"';
 $result = mysqli_query($con, $query); 
 $row = mysqli_fetch_array($result);
 $item_id=$row['course_id'];
-$editcoursename=$row['course_name'];
+$coursename=$row['course_name'];
 $course_descr=$row['course_descr'];
 $course_cost=$row['course_cost'];
 $course_duration=$row['course_duration'];
 
-}else if ($registration_error) {
+}else if (isset($_POST['submitcourse'])) {
 
 
+$registration_error = false;
 /*-----setting variables for course form data-----*/
 $coursename = test_input($_POST['coursename']);
 $course_descr = test_input($_POST['course_descr']);
@@ -74,6 +74,46 @@ $course_durationError = "course duration is required";
 $registration_error=true;
 } 
 
+if(!$registration_error) {
+
+if ($_POST['item_id']>0)
+{
+/*-----update data into the database-----*/
+$querycourse='UPDATE course SET
+course_name = "'.$coursename.'",
+course_descr = "'.$course_descr.'",
+course_cost = "'.$course_cost.'",
+course_duration = "'.$course_duration.'"
+WHERE course_id = "'.$_POST['item_id'].'"
+';
+
+}else{
+		/*-----inserting data into the database-----*/
+$querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_duration
+       )VALUES(
+       "'.$coursename.'",
+	   "'.$course_descr.'",
+	   "'.$course_cost.'",
+	   "'.$course_duration.'"
+         )';
+}
+}
+		 
+mysqli_query($con,$querycourse);
+
+$query = "SELECT * FROM course ORDER BY course_id ASC";
+
+$result_course = mysqli_query($con, $query);
+
+if (!$result_course) {
+    $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
+}
+
+if (mysqli_num_rows($result_course) == 0) {
+    $course_message = "No courses found, nothing to print.";
+}
+
+
 /*-----course duration validation-----*/
 
 }
@@ -89,7 +129,7 @@ $registration_error=true;
 <table width="100%" cellspacing="20" cellpadding="20">
   <tr>
     <td>Course name :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $editcoursename ?>" NAME = "coursename"><span class="error"> * <?php echo $coursenameError; ?></span></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $coursename ?>" NAME = "coursename"><span class="error"> * <?php echo $coursenameError; ?></span></td>
   </tr>
   <tr>
     <td>Course description :</td>
@@ -101,7 +141,7 @@ $registration_error=true;
   </tr>
   <tr>
     <td>Course duration :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"><span class="error"> * <?php $course_durationError; ?></span></td>
+    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"><span class="error"> * <?php echo $course_durationError; ?></span></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
