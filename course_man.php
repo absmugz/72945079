@@ -1,6 +1,5 @@
 <?php include("includes/header.php"); ?>
-<?php echo '<div>' . $course_delete . '</div>'; ?>
-<?php echo '<div>' . $course_message . '</div>'; ?>
+
 <?php
 
 $course_costError = "";
@@ -99,7 +98,16 @@ $querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_dur
 }
 }
 		 
-mysqli_query($con,$querycourse);
+
+
+if (mysqli_query($con,$querycourse)) {
+	
+   $course_create_success_message = "Course has been successfully created";
+ 
+} else {
+   $course_create_success_message = "Error: " . $sql . "<br>" . mysqli_error($con);
+}
+
 
 $query = "SELECT * FROM course ORDER BY course_id ASC";
 
@@ -109,9 +117,11 @@ if (!$result_course) {
     $course_message = "Could not successfully run query ($sql) from DB: " . mysqli_error($con);
 }
 
-if (mysqli_num_rows($result_course) == 0) {
+else if (mysqli_num_rows($result_course) == 0) {
     $course_message = "No courses found, nothing to print.";
 }
+
+
 
 
 /*-----course duration validation-----*/
@@ -160,6 +170,10 @@ else
 <?php
 }/*------end main if-----*/
 ?>
+
+<?php echo '<div>' . $course_delete . '</div>'; ?>
+<?php echo '<div>' . $course_message . '</div>'; ?>
+<?php echo '<div>' . $course_create_success_message . '</div>'; ?>
 
 <table width="100%" cellspacing="20" cellpadding="20" border="0">
         <thead>
