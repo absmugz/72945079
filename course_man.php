@@ -7,12 +7,14 @@ $course_descrError = "";
 $course_durationError = "";
 $coursenameError = "";
 
+$formSubmitted = false;
+
 
 if(isset($_GET['add']) || isset($_GET['course_edit']) || isset($_POST['submitcourse']) )
 
 	{
 
-
+$CourseformSubmitted = false;
 
 	/*------set default values-----*/
 	$item_id=0;
@@ -75,6 +77,8 @@ $registration_error=true;
 
 if(!$registration_error) {
 
+$formSubmitted = true;
+
 if ($_POST['item_id']>0)
 {
 /*-----update data into the database-----*/
@@ -132,35 +136,38 @@ else if (mysqli_num_rows($result_course) == 0) {
 
 
 <!--forms is below-->
+<?php 
+if (!$formSubmitted) {
+echo "<form name=\"addcourse\" method=\"POST\" action=\"\">
+<INPUT TYPE = \"hidden\" VALUE =\"<?PHP echo $item_id ; ?>\" NAME = \"item_id\">
 
-<form name="addcourse" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-<INPUT TYPE = "hidden" VALUE ="<?PHP echo $item_id ; ?>" NAME = "item_id">
-
-<table width="100%" cellspacing="20" cellpadding="20">
+<table width=\"100%\" cellspacing=\"20\" cellpadding=\"20\">
   <tr>
     <td>Course name :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $coursename ?>" NAME = "coursename"><span class="error"> * <?php echo $coursenameError; ?></span></td>
+    <td><INPUT TYPE = \"Text\" VALUE =\" $coursename \" NAME = \"coursename\"><span class=\"error\"> *$coursenameError</span></td>
   </tr>
   <tr>
     <td>Course description :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_descr ?>" NAME = "course_descr"><span class="error"> * <?php echo $course_descrError; ?></span></td>
+    <td><INPUT TYPE = \"Text\" VALUE =\" $course_descr \" NAME = \"course_descr\"><span class=\"error\"> * $course_descrError </span></td>
   </tr>
   <tr>
     <td>Course cost :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_cost ?>" NAME = "course_cost"><span class="error"> * <?php echo $course_costError; ?></span></td>
+    <td><INPUT TYPE = \"Text\" VALUE =\" $course_cost \" NAME = \"course_cost\"><span class=\"error\"> * $course_costError </span></td>
   </tr>
   <tr>
     <td>Course duration :</td>
-    <td><INPUT TYPE = "Text" VALUE ="<?PHP echo $course_duration ?>" NAME = "course_duration"><span class="error"> * <?php echo $course_durationError; ?></span></td>
+    <td><INPUT TYPE = \"Text\" VALUE =\" $course_duration \" NAME = \"course_duration\"><span class=\"error\"> * $course_durationError </span></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><INPUT TYPE = "Submit" Name = "submitcourse" VALUE = "add course"></td>
+    <td><INPUT TYPE = \"Submit\" Name = \"submitcourse\" VALUE = \"add course\"></td>
   </tr>
 
 </table>
 
-</form>
+</form>";
+}
+?>
 <?php
 }
 else
