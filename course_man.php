@@ -6,6 +6,8 @@ $course_costError = "";
 $course_descrError = "";
 $course_durationError = "";
 $coursenameError = "";
+$course_create_success_message = "";
+$querycourse = "";
 
 $formSubmitted = false;
 
@@ -109,7 +111,7 @@ if (mysqli_query($con,$querycourse)) {
    $course_create_success_message = "Course has been successfully created";
  
 } else {
-   $course_create_success_message = "Error: " . $sql . "<br>" . mysqli_error($con);
+   $course_create_success_message = "Error:<br>" . mysqli_error($con);
 }
 
 

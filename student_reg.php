@@ -92,7 +92,7 @@ $month_array = array( "","January", "February", "March", "April", "May", "June",
                       "July", "August", "September", "October", "November", "December");
 echo "<option value='' selected>month</option>";				  
 for ($count = 1; $count < count($month_array); $count++) {
-			echo "<option value='$count'",  in_array($month, $count) ? ' selected ' : '', ">$month_array[$count]</option>";
+			echo "<option value='$count'",  $count == $month ? ' selected ' : '', ">$month_array[$count]</option>";
 		}
 echo '</select>';
 ?>
