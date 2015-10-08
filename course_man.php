@@ -166,6 +166,8 @@ echo "<form name=\"addcourse\" method=\"POST\" action=\"\">
 </table>
 
 </form>";
+} else {
+	echo "<a href=\"?add=1\">Add a new course</a><br />";
 }
 ?>
 <?php
