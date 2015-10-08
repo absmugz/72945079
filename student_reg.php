@@ -60,11 +60,12 @@ foreach($titleOptions as $item){
 <br>
 Date of birth
 <br>
-<?php
 
+<?php
+/*
 $month_array = array( "January", "February", "March", "April", "May", "June",
                       "July", "August", "September", "October", "November", "December");
-
+*/
 echo "<select name=\"day\">";
 echo "<option value=\"\" selected=\"selected\">day</option>";
 $i = 1;
@@ -73,7 +74,7 @@ while ( $i <= 31 ) {
    $i++;
 }
 echo "</select>";
-
+/*
 echo "<select name=\"month\">";
 echo "<option value=\"\" selected=\"selected\">month</option>";
 $i = 0;
@@ -82,7 +83,20 @@ echo "<option value=".$i."", $i == $month ? ' selected ' : ' ', ">".$month_array
    $i++;
 }
 echo "</select>";
+*/
+?>
 
+<select name="month">
+<?php
+$month_array = array( "","January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December");
+echo "<option value='' selected>month</option>";				  
+for ($count = 1; $count < count($month_array); $count++) {
+			echo "<option value='$count'",  in_array($month, $count) ? ' selected ' : '', ">$month_array[$count]</option>";
+		}
+echo '</select>';
+?>
+<?php
 echo "<select name=\"year\">";
 echo "<option value=\"\" selected=\"selected\">year</option>";
 $i = 1900;
