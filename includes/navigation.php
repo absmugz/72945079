@@ -1,3 +1,4 @@
+<div class="horizontal">
 <ul>
             <li><a href="student_reg.php">Register a student</a></li>
             <li><a href="student_man.php">Manage students</a></li>
@@ -7,3 +8,4 @@
             
 </ul>
 
+</div>

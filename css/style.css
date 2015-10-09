@@ -9,7 +9,9 @@ span.error {
 	color:#FF0000;
 }
 
-@import "http://fonts.googleapis.com/css?family=Droid+Serif";
+html, body {
+    font-family: Verdana,sans-serif;
+}
 /* Above line is to import Google font style */
 .container{
 margin:0 auto;
@@ -25,7 +27,7 @@ height:70px;
 text-shadow:2px 2px 2px #cfcfcf;
 font-size:16px;
 text-align:center;
-font-family:'Droid Serif',serif
+font-family: Verdana,sans-serif;
 }
 .form_div{
 width:70%;
@@ -36,7 +38,7 @@ width:100%;
 border:1px dashed #ccc;
 padding:10px 30px 40px;
 background-color:#f0f8ff;
-font-family:'Droid Serif',serif
+font-family: Verdana,sans-serif;
 }
 form h2{
 text-align:center;
@@ -96,4 +98,41 @@ table {
 
 table, td, th {
     border: 1px solid black;
+}
+
+div.horizontal {
+    background-color: #1f8dd6;
+    height: 30px;
+    width: 100%;
+}
+
+div.horizontal ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+div.horizontal li {
+    float: left;
+}
+
+div.horizontal a:link, div.horizontal a:visited {
+    background-color: #1f8dd6;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+
+
+div.horizontal a:hover, div.horizontal a:active {
+    background-color: #2ea7f7;
+}
+
+div.horizontal a {
+    display: block;
+    width: 100%;
 }
