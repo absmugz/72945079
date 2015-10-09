@@ -104,12 +104,15 @@ div.horizontal {
     background-color: #1f8dd6;
     height: 30px;
     width: 100%;
+	 text-align: center;
 }
 
 div.horizontal ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+	display: inline-block;
+
 }
 
 div.horizontal li {
