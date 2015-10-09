@@ -1,7 +1,7 @@
 <?php include("includes/header.php"); ?>
 <?php echo '<div>' . $course_student_delete . '</div>'; ?>
 <?php echo '<div>' . $student_display_message . '</div>'; ?>
- <a href="student_reg.php">Add a new student</a><br>
+ <a class="linkButton" href="student_reg.php">Add a new student</a><br>
       <table width="100%" cellspacing="20" cellpadding="20">
         <thead>
           <tr>
@@ -18,8 +18,8 @@
           <tr>
             <th scope="row"><?php echo $row['student_id'] ?></th>
             <td><?php echo $row['student_fname'] . " " . $row['student_sname']?></td>
-            <td><a href="<?php echo "student_reg.php?student_edit=".$row['student_id']; ?>">Edit</a></td>
-             <td><a href="<?php echo $_SERVER['PHP_SELF'].'?student_delete='.$row['student_id']?>">Delete</a></td>
+            <td><a class="linkButton" href="<?php echo "student_reg.php?student_edit=".$row['student_id']; ?>">Edit</a></td>
+             <td><a class="linkButton" href="<?php echo $_SERVER['PHP_SELF'].'?student_delete='.$row['student_id']?>">Delete</a></td>
           </tr>
           <?php
 }

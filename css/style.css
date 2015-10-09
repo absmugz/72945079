@@ -65,14 +65,14 @@ margin-bottom:20px
 }
 .submit{
 color:#fff;
-border-radius:3px;
+/*border-radius:3px;*/
 background:#1F8DD6;
 padding:5px;
 margin-top:40px;
 border:none;
 /*width:100px;*/
 height:30px;
-box-shadow:0 0 1px 2px #123456;
+/*box-shadow:0 0 1px 2px #123456;*/
 font-size:16px
 }
 .error{
@@ -102,7 +102,7 @@ table, td, th {
 
 div.horizontal {
     background-color: #1f8dd6;
-    height: 30px;
+    height:auto;
     width: 100%;
 	 text-align: center;
 }
@@ -123,7 +123,7 @@ div.horizontal a:link, div.horizontal a:visited {
     background-color: #1f8dd6;
     color: #ffffff;
     font-weight: bold;
-    padding: 4px;
+    padding: 20px 20px 20px 20px;
     text-align: center;
     text-decoration: none;
 
@@ -137,5 +137,19 @@ div.horizontal a:hover, div.horizontal a:active {
 
 div.horizontal a {
     display: block;
-    width: 100%;
+    /*width: 100%;*/
+}
+
+a.linkButton {
+    /*border: 2px solid #006600;*/
+    background-color: #1f8dd6;
+    color: #ffffff;
+    text-decoration: none;
+    margin : 20px;
+    padding: 10px 20px 10px 20px;
+    display: inline-block;
+}
+a.linkButton:hover {
+    /*border: 2px solid #009900;*/
+    background-color: #2ea7f7;
 }

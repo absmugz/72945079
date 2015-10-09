@@ -177,7 +177,7 @@ echo "<form name=\"addcourse\" method=\"POST\" action=\"\">
 else
 {
 ?>
-<a href="<?php $_SERVER['PHP_SELF'] ?>?add=1">Add a new course</a><br />
+<a class="linkButton" href="<?php $_SERVER['PHP_SELF'] ?>?add=1">Add a new course</a><br />
 <?php
 }/*------end main if-----*/
 ?>
@@ -203,8 +203,8 @@ else
           <tr>
             <th scope="row"><?php echo $row['course_id'] ?></th>
             <td><?php echo $row['course_name'] ?></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?course_edit='.$row['course_id']?>">Edit</a></td>
-            <td><a href="<?php echo $_SERVER['PHP_SELF'].'?course_delete='.$row['course_id']?>">Delete</a></td>
+            <td><a class="linkButton" href="<?php echo $_SERVER['PHP_SELF'].'?course_edit='.$row['course_id']?>">Edit</a></td>
+            <td><a class="linkButton" href="<?php echo $_SERVER['PHP_SELF'].'?course_delete='.$row['course_id']?>">Delete</a></td>
           </tr>
 <?php
 }
