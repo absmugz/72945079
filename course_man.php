@@ -140,36 +140,27 @@ else if (mysqli_num_rows($result_course) == 0) {
 <!--forms is below-->
 <?php 
 if (!$formSubmitted) {
-echo "<form name=\"addcourse\" method=\"POST\" action=\"\">
+echo "<div class=\"form_div\"><form name=\"addcourse\" method=\"POST\" action=\"\">
 <INPUT TYPE = \"hidden\" VALUE =\"<?PHP echo $item_id ; ?>\" NAME = \"item_id\">
 
-<table width=\"100%\" cellspacing=\"20\" cellpadding=\"20\">
-  <tr>
-    <td>Course name :</td>
-    <td><INPUT TYPE = \"Text\" VALUE =\" $coursename \" NAME = \"coursename\"><span class=\"error\"> *$coursenameError</span></td>
-  </tr>
-  <tr>
-    <td>Course description :</td>
-    <td><INPUT TYPE = \"Text\" VALUE =\" $course_descr \" NAME = \"course_descr\"><span class=\"error\"> * $course_descrError </span></td>
-  </tr>
-  <tr>
-    <td>Course cost :</td>
-    <td><INPUT TYPE = \"Text\" VALUE =\" $course_cost \" NAME = \"course_cost\"><span class=\"error\"> * $course_costError </span></td>
-  </tr>
-  <tr>
-    <td>Course duration :</td>
-    <td><INPUT TYPE = \"Text\" VALUE =\" $course_duration \" NAME = \"course_duration\"><span class=\"error\"> * $course_durationError </span></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><INPUT TYPE = \"Submit\" Name = \"submitcourse\" VALUE = \"add course\"></td>
-  </tr>
 
-</table>
-
-</form>";
+Course name :</br>
+   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $coursename \" NAME = \"coursename\"><span class=\"error\"> *$coursenameError</span>
+  </br>
+   Course description :</br>
+    <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $course_descr \" NAME = \"course_descr\"><span class=\"error\"> * $course_descrError </span>
+  </br>
+  
+    Course cost :</br>
+   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $course_cost \" NAME = \"course_cost\"><span class=\"error\"> * $course_costError </span>
+  </br>
+   Course duration :</br>
+   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $course_duration \" NAME = \"course_duration\"><span class=\"error\"> * $course_durationError </span>
+  </br>
+<INPUT class=\"submit\" TYPE = \"Submit\" Name = \"submitcourse\" VALUE = \"add course\"></br>
+</form></div>";
 } else {
-	echo "<a href=\"?add=1\">Add a new course</a><br />";
+	echo "<a class=\"linkButton\" href=\"?add=1\">Add a new course</a><br />";
 }
 ?>
 <?php
