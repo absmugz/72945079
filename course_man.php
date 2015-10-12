@@ -94,10 +94,10 @@ WHERE course_id = "'.$_POST['item_id'].'"
 
 if (mysqli_query($con,$querycourse)) {
 	
-   $course_create_success_message = "Course has been successfully created";
+   $course_create_success_message = '<div class="success_message">' . "Course has been successfully updated" . '</div>';
  
 } else {
-   $course_create_success_message = "Error:<br>" . mysqli_error($con);
+   $course_create_success_message = '<div class="success_message">' . "Error:<br>" . mysqli_error($con) . '</div>';
 }
 
 }else{
@@ -112,10 +112,10 @@ $querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_dur
 		 
 if (mysqli_query($con,$querycourse)) {
 	
-   $course_create_success_message = "Course has been successfully created";
+   $course_create_success_message = '<div class="success_message">' . "Course has been successfully created" . '</div>';
  
 } else {
-   $course_create_success_message = "Error:<br>" . mysqli_error($con);
+   $course_create_success_message = '<div class="success_message">' . "Error:<br>" . mysqli_error($con) . '</div>';
 }
 
 }

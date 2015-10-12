@@ -402,9 +402,9 @@ foreach ($courses as $course_id) {
 
 if(mysqli_query($con,$query))
 {			
-$student_success_message = "Success! Thank you. Student records for " . $student_name . " " . $surname . " have been successfully updated";
+$student_success_message = '<div class="success_message">' . "Success! Thank you. Student records for " . $student_name . " " . $surname . " have been successfully updated".'</div>';
 }else{
-$student_success_message = "Error! Student details for " . $student_name . " " . $surname . " have not been updated, please try again!";
+$student_error_message = '<div class="error_message">'."Error! Student details for " . $student_name . " " . $surname . " have not been updated, please try again!".'</div>';
 }
 
 /*-----editing student data into the database-----*/
@@ -439,10 +439,12 @@ $query='INSERT INTO student(student_sname,student_initials,student_title,student
 
 if (mysqli_query($con, $query)) {
     $last_id = mysqli_insert_id($con);
-    $student_success_message = "New student record for " . $student_name . " " . $surname . " has bee created successfully!";
+    //$student_success_message = "New student record for " . $student_name . " " . $surname . " has bee created successfully!";
+	$student_success_message = '<div class="success_message">' . "Success! Thank you. Student records for " . $student_name . " " . $surname . " have been successfully updated".'</div>';
 	 //$message = "New student record for" . $student_name . " " . $surname . " has bee created successfully. Last inserted ID is: " . $last_id;
 } else {
-   $student_success_message = "Error: " . $sql . "<br>" . mysqli_error($con);
+   //$student_error_message = "Error: " . $sql . "<br>" . mysqli_error($con);
+   $student_error_message = '<div class="error_message">'."Error! Student details for " . $student_name . " " . $surname . " have not been inserted, please try again!".'</div>';
 }
 
 foreach ($courses as $course_id) {
