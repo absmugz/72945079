@@ -97,7 +97,7 @@ if (mysqli_query($con,$querycourse)) {
    $course_create_success_message = '<div class="success_message">' . "Course has been successfully updated" . '</div>';
  
 } else {
-   $course_create_success_message = '<div class="success_message">' . "Error:<br>" . mysqli_error($con) . '</div>';
+   $course_create_success_message = '<div class="error_message">' . "Error:<br>" . mysqli_error($con) . '</div>';
 }
 
 }else{
@@ -115,7 +115,7 @@ if (mysqli_query($con,$querycourse)) {
    $course_create_success_message = '<div class="success_message">' . "Course has been successfully created" . '</div>';
  
 } else {
-   $course_create_success_message = '<div class="success_message">' . "Error:<br>" . mysqli_error($con) . '</div>';
+   $course_create_success_message = '<div class="error_message">' . "Error:<br>" . mysqli_error($con) . '</div>';
 }
 
 }
