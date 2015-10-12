@@ -92,6 +92,14 @@ course_duration = "'.$course_duration.'"
 WHERE course_id = "'.$_POST['item_id'].'"
 ';
 
+if (mysqli_query($con,$querycourse)) {
+	
+   $course_create_success_message = "Course has been successfully created";
+ 
+} else {
+   $course_create_success_message = "Error:<br>" . mysqli_error($con);
+}
+
 }else{
 		/*-----inserting data into the database-----*/
 $querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_duration
@@ -101,17 +109,19 @@ $querycourse='INSERT INTO course(course_name,course_descr,course_cost,course_dur
 	   "'.$course_cost.'",
 	   "'.$course_duration.'"
          )';
-}
-}
 		 
-
-
 if (mysqli_query($con,$querycourse)) {
 	
    $course_create_success_message = "Course has been successfully created";
  
 } else {
    $course_create_success_message = "Error:<br>" . mysqli_error($con);
+}
+
+}
+
+
+
 }
 
 
