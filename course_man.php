@@ -182,7 +182,7 @@ else
 <?php
 }/*------end main if-----*/
 ?>
-
+<?php echo '<div>' . $archive . ' '. $archive_delete . '</div>'; ?>
 <?php echo '<div>' . $course_delete . '</div>'; ?>
 <?php echo '<div>' . $course_message . '</div>'; ?>
 <?php echo '<div>' . $course_create_success_message . '</div>'; ?>

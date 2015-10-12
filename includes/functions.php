@@ -569,9 +569,9 @@ WHERE student.student_id=$student_id_delete";
 $delete_student_from_db = mysqli_query($con, $query);
 
 if ($delete_student_from_db) {
-    $course_student_delete = "Record deleted successfully";
+    $course_student_delete = '<div class="success_message">' . "Record deleted successfully" . '</div>';
 } else {
-    $course_student_delete = "Error deleting record: " . mysqli_error($con);
+    $course_student_delete = '<div class="error_message">' . "Error deleting record: " . mysqli_error($con) . '</div>';
 }
 
 $query = "SELECT * FROM student ORDER BY student_id ASC";
@@ -633,8 +633,8 @@ if($result)
             //var_dump($row["COUNT(course_id)"]);die();
 			if ($row["COUNT(course_id)"] > 0) {
 				
-				echo '<a href="">Archive</a><br>';
-				echo '<a href="' . $_SERVER['PHP_SELF'] . '?delete=' . $delete_course . ' "'.$delete_course.'"">Delete</a>';
+				$archive = '<a class="linkButton" href="">Archive</a>';
+				$archive_delete = '<a class="linkButton" href="' . $_SERVER['PHP_SELF'] . '?delete=' . $delete_course . ' "'.$delete_course.'"">Delete</a>';
 				
 
 } else {
@@ -642,9 +642,9 @@ if($result)
 
 $query = "DELETE FROM course WHERE course_id=$delete_course"; 
 if (mysqli_query($con, $query )) {
-    $course_delete = "Record deleted successfully";
+    $course_delete = '<div class="success_message">' . "Record deleted successfully" . '</div>';
 } else {
-    $course_delete =  "Error deleting record: " . mysqli_error($con);
+    $course_delete =  '<div class="error_message">' . "Error deleting record: " . mysqli_error($con) . '</div>' ;
 }
 
 $query = "SELECT * FROM course ORDER BY course_id ASC";
@@ -685,9 +685,9 @@ WHERE course_id=$delete_course";
 $delete_course_from_db = mysqli_query($con, $query);
 
 if ($delete_course_from_db) {
-    $course_delete = "Record deleted successfully";
+    $course_delete = '<div class="success_message">' . "Record deleted successfully" . '</div>';
 } else {
-    $course_delete = "Error deleting record: " . mysqli_error($con);
+    $course_delete = '<div class="error_message">' . "Error deleting record: " . mysqli_error($con) . '</div>';
 }
 
 $query = "SELECT * FROM course ORDER BY course_id ASC";
@@ -767,11 +767,11 @@ $delete_student_id_from_course_student_from_db = mysqli_query($con, $query);
 
 if ($delete_student_id_from_course_student_from_db) {
 	
-    $delete_student_id_from_course_student_from_db_message = "Record deleted successfully";
+    $delete_student_id_from_course_student_from_db_message = '<div class="success_message">' . "Record deleted successfully" . '</div>';
 	
 } else {
 	
-    $delete_student_id_from_course_student_from_db_message = "Error deleting record: " . mysqli_error($con);
+    $delete_student_id_from_course_student_from_db_message = '<div class="error_message">' . "Error deleting record: " . mysqli_error($con) . '</div>';
 	
 }
 
