@@ -784,10 +784,9 @@ WHERE course_id=$selected_val";
 $result_course = mysqli_query($con, $query);
 
 while($row = mysqli_fetch_array($result_course)){
-			
-
-echo $id = $row['course_id'];
-echo $name = $row['course_name'];
+	
+$id = $row['course_id'];
+$name = $row['course_name'];
 
 }
 
