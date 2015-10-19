@@ -778,6 +778,18 @@ if ($delete_student_id_from_course_student_from_db) {
 	
 }
 
+$query = "SELECT * FROM course
+WHERE course_id=$selected_val";
+
+$result_course = mysqli_query($con, $query);
+
+while($row = mysqli_fetch_array($result_course)){
+			
+
+echo $id = $row['course_id'];
+echo $name = $row['course_name'];
+
+}
 
 
 }
