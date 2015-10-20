@@ -5,6 +5,13 @@ include('includes/config.php');
 
 /*------connection to database-----*/
 
+/*------PHPMailer variables-----*/
+
+$PHPMailerUsername = "absmugz09@gmail.com";
+$PHPMailerPassword = "makabongwe@01";
+
+/*------PHPMailer variables-----*/
+
 /*------Initialize variables-----*/
 
 /*-----retrieving data from course table-----*/
@@ -811,8 +818,8 @@ $mail->Mailer = "smtp";
 $mail->Host = "ssl://smtp.gmail.com";
 $mail->Port = 465;
 $mail->SMTPAuth = true; // turn on SMTP authentication
-$mail->Username = "absmugz09@gmail.com"; // SMTP username
-$mail->Password = "makabongwe@01"; // SMTP password 
+$mail->Username = $PHPMailerUsername; // SMTP username
+$mail->Password = $PHPMailerPassword; // SMTP password 
 
 /*-----send mail to students from localhost-----*/
 
@@ -870,7 +877,7 @@ $to = $row['student_email'];
 $subject = $subject_mail;
 $txt = $message_mail;
 
-$mail->From = "absmugz09@gmail.com";
+$mail->From = $PHPMailerUsername;
 $mail->AddAddress($to);  
  
 $mail->Subject  = $subject;
