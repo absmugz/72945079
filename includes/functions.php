@@ -787,6 +787,7 @@ while($row = mysqli_fetch_array($result_course)){
 	
 $id = $row['course_id'];
 $name = $row['course_name'];
+$courseselect = $row['course_id'];
 
 }
 
@@ -797,10 +798,6 @@ $query = "SELECT student.student_id, student_fname, student_sname
 				
 $Course_StudentResult = mysqli_query($con, $query);
 
-
-while($row = mysqli_fetch_array($Course_StudentResult)){
-	var_dump($Course_StudentResult);die();
-}
 
 
 }
