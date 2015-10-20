@@ -62,6 +62,43 @@ while($row = mysqli_fetch_array($Course_StudentResult)){
 ?>
         </tbody>
       </table>
+<? 
+if (isset($_GET['student_delete_from_course'])) {
+
+
+if (!$Course_StudentResult) {
+     echo '<div>' . "Could not successfully run query ($sql) from DB: " . mysqli_error($con) . '</div>';
+    exit;
+}
+
+if (mysqli_num_rows($Course_StudentResult) == 0) {
+    echo '<div>' . "No students found in the selected course, nothing to print." . '</div>';
+    exit;
+}
+
+
+
+echo '<table width="100%" cellspacing="20" cellpadding="20">
+<tr>
+ <th>Student Name</th>
+            <th>Delete</th>
+          </tr>
+ <tbody>';
+		
+while($row = mysqli_fetch_array($Course_StudentResult)){
+?>
+          <tr>
+            <td><?php echo $row['student_fname'] . " " . $row['student_sname']?></td>
+            <td><a class="linkButton" href="<?php echo $_SERVER['PHP_SELF'].'?student_delete_from_course='.$row['student_id'] .'&amp;'. 'course_id='.$_POST['courseselect']?>">Delete</a></td>
+            
+          </tr>
+          <?php
+}
+}
+?>
+        </tbody>
+      </table>
+
    
 <?php include("includes/footer.php"); ?>
 

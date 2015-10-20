@@ -783,12 +783,14 @@ $query = "SELECT * FROM course ORDER BY course_id ASC";
 
 $result_course = mysqli_query($con, $query);
 
+
 $query = "SELECT student.student_id, student_fname, student_sname
                 FROM student, course_student
                 WHERE student.student_id = course_student.student_id 
                 AND $selected_val = course_student.course_id";
 				
 $Course_StudentResult = mysqli_query($con, $query);
+
 
 
 
