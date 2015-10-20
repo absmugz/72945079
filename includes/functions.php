@@ -790,6 +790,18 @@ $name = $row['course_name'];
 
 }
 
+$query = "SELECT student.student_id, student_fname, student_sname
+                FROM student, course_student
+                WHERE student.student_id = course_student.student_id 
+                AND $selected_val = course_student.course_id";
+				
+$Course_StudentResult = mysqli_query($con, $query);
+
+
+while($row = mysqli_fetch_array($Course_StudentResult)){
+	var_dump($Course_StudentResult);die();
+}
+
 
 }
 
