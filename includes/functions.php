@@ -755,6 +755,7 @@ else
 /*-----delete student from selected course-----*/
 
 if (isset($_GET['student_delete_from_course'])) {
+
 $selected_val = $_GET['course_id'];
 $student_delete_from_course = $_GET['student_delete_from_course'];
 
@@ -778,18 +779,9 @@ if ($delete_student_id_from_course_student_from_db) {
 	
 }
 
-$query = "SELECT * FROM course
-WHERE course_id=$selected_val";
+$query = "SELECT * FROM course ORDER BY course_id ASC";
 
 $result_course = mysqli_query($con, $query);
-
-while($row = mysqli_fetch_array($result_course)){
-	
-$id = $row['course_id'];
-$name = $row['course_name'];
-$courseselect = $row['course_id'];
-
-}
 
 $query = "SELECT student.student_id, student_fname, student_sname
                 FROM student, course_student

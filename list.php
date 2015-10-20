@@ -3,9 +3,12 @@
 <select name="courseselect">
       <option value="nothing" selected>Select course to show students</option>
 <?php
-while($row = mysqli_fetch_array($result_course)){
-			
-$courseselect = $_POST['courseselect'];
+if (isset($_GET['student_delete_from_course'])) {
+$courseselect = $_GET['course_id'];
+} else {
+$courseselect = $_POST['courseselect'];	
+}
+while($row = mysqli_fetch_array($result_course)){		
 $id = $row['course_id'];
 $name = $row['course_name'];
 ?>
