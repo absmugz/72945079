@@ -28,6 +28,7 @@ $filter_message  = "";
 $filterQuery  = "";
 $delete_student_id_from_course_student_from_db_message  = "";
 $mail_message  = "";
+$mail_error_message = "";
 $mailQuery  = "";
 
 /*----- STUDENT CRUD STARTS HERE -----*/
@@ -885,23 +886,20 @@ $mail->Body     = $txt;
 $mail->WordWrap = 50;  
  
 if(!$mail->Send()) {
-echo 'Message was not sent.';
-echo 'Mailer error: ' . $mail->ErrorInfo;
+//echo 'Message was not sent.';
+//echo 'Mailer error: ' . $mail->ErrorInfo;
+$mail_error_message = '<div class="error_message">' . "Message was not sent. Mailer error:" . $mail->ErrorInfo . '</div>';
 } else {
-echo 'Message has been sent.';
+//echo 'Message has been sent.';
+$mail_message = '<div class="success_message">' . "The email has been successful sent to students" . '</div>';
 }
 
 
 }
 
-$mail_message = "The email has been successful sent to students";
 
 }
 
-}
-else
-{
-$mail_message;
 }
 
 }

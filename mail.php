@@ -1,5 +1,9 @@
 <?php include("includes/header.php"); ?>
-<?php echo '<div>' . $mail_message . '</div>';
+<?php
+
+echo $mail_message;
+echo $mail_error_message;
+
 if($mailQuery){
 
 
@@ -13,7 +17,7 @@ if (mysqli_num_rows($Course_StudentResult) == 0) {
     //exit;
 }
 }
-mysqli_close($con);
+//mysqli_close($con);
 ?>
 <form name="filter" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">   
 <select name="courseselect">
