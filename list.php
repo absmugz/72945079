@@ -62,7 +62,7 @@ while($row = mysqli_fetch_array($Course_StudentResult)){
 ?>
         </tbody>
       </table>
-<? 
+<?php 
 if (isset($_GET['student_delete_from_course'])) {
 
 

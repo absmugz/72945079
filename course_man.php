@@ -151,23 +151,23 @@ else if (mysqli_num_rows($result_course) == 0) {
 <?php 
 if (!$formSubmitted) {
 echo "<div class=\"form_div\"><form name=\"addcourse\" method=\"POST\" action=\"\">
-<INPUT TYPE = \"hidden\" VALUE =\"<?PHP echo $item_id ; ?>\" NAME = \"item_id\">
+<INPUT TYPE =\"hidden\" VALUE =\"$item_id\" NAME=\"item_id\">
 
 
 Course name :</br>
-   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $coursename \" NAME = \"coursename\"><span class=\"error\"> *$coursenameError</span>
+   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\"$coursename\" NAME=\"coursename\"><span class=\"error\"> *$coursenameError</span>
   </br>
    Course description :</br>
-    <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $course_descr \" NAME = \"course_descr\"><span class=\"error\"> * $course_descrError </span>
+    <INPUT class=\"input\" TYPE = \"Text\" VALUE =\"$course_descr\" NAME=\"course_descr\"><span class=\"error\"> * $course_descrError </span>
   </br>
   
     Course cost :</br>
-   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $course_cost \" NAME = \"course_cost\"><span class=\"error\"> * $course_costError </span>
+   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\"$course_cost\" NAME=\"course_cost\"><span class=\"error\"> * $course_costError </span>
   </br>
    Course duration :</br>
-   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\" $course_duration \" NAME = \"course_duration\"><span class=\"error\"> * $course_durationError </span>
+   <INPUT class=\"input\" TYPE = \"Text\" VALUE =\"$course_duration\" NAME=\"course_duration\"><span class=\"error\"> * $course_durationError </span>
   </br>
-<INPUT class=\"submit\" TYPE = \"Submit\" Name = \"submitcourse\" VALUE = \"add course\"></br>
+<INPUT class=\"submit\" TYPE = \"Submit\" Name=\"submitcourse\" VALUE =\"add course\"></br>
 </form></div>";
 } else {
 	echo "<a class=\"linkButton\" href=\"?add=1\">Add a new course</a><br />";
