@@ -1,8 +1,14 @@
 <?php include("includes/header.php"); ?>
-<?php echo '<div>' . $course_student_delete . '</div>'; ?>
-<?php echo '<div>' . $student_display_message . '</div>'; ?>
+
  <a class="linkButton" href="student_reg.php">Add a new student</a><br>
-      <table width="100%" cellspacing="20" cellpadding="20">
+<?php echo '<div>' . $course_student_delete . '</div>'; ?>
+<?php echo '<div>' . $student_display_message . '</div>'; ?> 
+
+<?php
+
+if( mysqli_fetch_array($result_student) > 0){
+	
+      echo '<table width="100%" cellspacing="20" cellpadding="20">
         <thead>
           <tr>
             <th>#</th>
@@ -11,8 +17,8 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
-<?php
+        <tbody>';
+		
  while($row = mysqli_fetch_array($result_student)){
 ?>
           <tr>
@@ -23,8 +29,10 @@
           </tr>
           <?php
 }
+ echo '</tbody>
+      </table>';
+}
 ?>
-        </tbody>
-      </table>
+      
 
   <?php include("includes/footer.php"); ?>

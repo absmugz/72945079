@@ -190,7 +190,11 @@ else
 <?php echo '<div>' . $course_message . '</div>'; ?>
 <?php echo '<div>' . $course_create_success_message . '</div>'; ?>
 
-<table width="100%" cellspacing="20" cellpadding="20" border="0">
+
+<?php
+if( mysqli_fetch_array($result_course) > 0){
+
+echo '<table width="100%" cellspacing="20" cellpadding="20" border="0">
         <thead>
           <tr>
             <th>#</th>
@@ -199,9 +203,8 @@ else
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody>';
 
-<?php
         while($row = mysqli_fetch_array($result_course)){
 ?>
           <tr>
@@ -212,9 +215,11 @@ else
           </tr>
 <?php
 }
+echo ' </tbody>
+      </table>';
+}
 ?>
-        </tbody>
-      </table>
+       
 
   <?php include("includes/footer.php"); ?>
   
