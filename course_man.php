@@ -23,6 +23,7 @@ $CourseformSubmitted = false;
 	$editcoursename='';
 	
 if (isset($_GET['course_edit'])) {	
+
 $query='SELECT * FROM course WHERE course_id = "'.$_GET['course_edit'].'"';
 $result = mysqli_query($con, $query); 
 $row = mysqli_fetch_array($result);
@@ -32,7 +33,8 @@ $course_descr=$row['course_descr'];
 $course_cost=$row['course_cost'];
 $course_duration=$row['course_duration'];
 
-}else if (isset($_POST['submitcourse'])) {
+}
+if (isset($_POST['submitcourse'])) {
 
 
 $registration_error = false;
@@ -83,6 +85,7 @@ $formSubmitted = true;
 
 if ($_POST['item_id']>0)
 {
+//var_dump($_POST['item_id']);die();
 /*-----update data into the database-----*/
 $querycourse='UPDATE course SET
 course_name = "'.$coursename.'",
