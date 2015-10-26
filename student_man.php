@@ -10,7 +10,7 @@ if( mysqli_num_rows($result_student) > 0){
       echo '<table width="100%" cellspacing="20" cellpadding="20">
         <thead>
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Student Name</th>
             <th>Edit</th>
             <th>Delete</th>
