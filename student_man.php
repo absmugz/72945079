@@ -1,12 +1,11 @@
 <?php include("includes/header.php"); ?>
 
  <a class="linkButton" href="student_reg.php">Add a new student</a><br>
-<?php echo '<div>' . $course_student_delete . '</div>'; ?>
-<?php echo '<div>' . $student_display_message . '</div>'; ?> 
+
 
 <?php
 
-if( mysqli_fetch_array($result_student) > 0){
+if( mysqli_num_rows($result_student) > 0){
 	
       echo '<table width="100%" cellspacing="20" cellpadding="20">
         <thead>
@@ -31,6 +30,10 @@ if( mysqli_fetch_array($result_student) > 0){
 }
  echo '</tbody>
       </table>';
+}
+else {
+echo '<div>' . $course_student_delete . '</div>';
+echo '<div>' . $student_display_message . '</div>';
 }
 ?>
       

@@ -187,12 +187,11 @@ else
 ?>
 <?php echo '<div>' . $archive . ' '. $archive_delete . '</div>'; ?>
 <?php echo '<div>' . $course_delete . '</div>'; ?>
-<?php echo '<div>' . $course_message . '</div>'; ?>
-<?php echo '<div>' . $course_create_success_message . '</div>'; ?>
 
 
 <?php
-if( mysqli_fetch_array($result_course) > 0){
+
+if( mysqli_num_rows($result_course) > 0){
 
 echo '<table width="100%" cellspacing="20" cellpadding="20" border="0">
         <thead>
@@ -217,6 +216,9 @@ echo '<table width="100%" cellspacing="20" cellpadding="20" border="0">
 }
 echo ' </tbody>
       </table>';
+} else {
+	echo '<div>' . $course_create_success_message . '</div>';
+	echo '<div>' . $course_message . '</div>'; 
 }
 ?>
        
